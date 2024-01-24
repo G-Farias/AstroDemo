@@ -16,17 +16,17 @@ return new class extends Migration
             $table-> string('nombre');
             $table-> string('apellido');
             $table-> bigInteger('dni')->unique();
-            $table-> date('fecha_nacimiento');
-            $table-> bigInteger('celular');
-            $table-> bigInteger('telefono');
-            $table-> string('email');
-            $table-> integer('obra_social');
-            $table-> bigInteger('numero_obraSocial');
-            $table-> mediumText('observacion');
-            $table-> string('direccion');
-            $table-> string('pais_residencia');
-            $table-> string('localidad_residencia');
-            $table-> string ('provincia_residencia');
+            $table-> date('fecha_nacimiento')->nullable();
+            $table-> bigInteger('celular')->nullable();
+            $table-> bigInteger('telefono')->nullable();
+            $table-> string('email')->nullable();
+            $table-> integer('obra_social')->nullable();
+            $table-> bigInteger('numero_obraSocial')->nullable();
+            $table-> mediumText('observacion')->nullable();
+            $table-> string('direccion')->nullable();
+            $table-> string('pais_residencia')->nullable();
+            $table-> string('localidad_residencia')->nullable();
+            $table-> string ('provincia_residencia')->nullable();
             $table->timestamps();
         });
     }

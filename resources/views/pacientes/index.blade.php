@@ -2,10 +2,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+    <x-slot name="header" class="container">
+        <h2 class="mb-2 font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Pacientes') }}
         </h2>
+        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+            <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -31,7 +34,7 @@
 
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <x-success-a href="{{ route('pacientes.show', $patient) }}">{{ __('Ver más') }}</x-success-a>
-                        <x-primary-a href="{{ route('pacientes.edit', $patient) }}">{{ __('Editar') }}</x-primary-a>
+                        <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
                         <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
                             @csrf
                             @method('DELETE')

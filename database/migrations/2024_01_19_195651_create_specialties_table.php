@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('specialties', function (Blueprint $table) {
             $table->id();
             $table-> string('nombre_especialidad');
-            $table-> integer('sobreturno');
+            $table-> integer('sobreturno')->nullable();
             $table->timestamps();
         });
     }

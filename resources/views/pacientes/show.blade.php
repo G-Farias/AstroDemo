@@ -36,16 +36,16 @@
                       <p class="card-text"><strong>Provincia : </strong>{{$patient->provincia_residencia}}</p>
                       <p class="card-text"><strong>Localidad : </strong>{{$patient->localidad_residencia}}</p>
                       <br>   
-                      <p class="card-text"><strong>Obra Social : </strong>{{$patient->obraSocial}}</p>
+                      <p class="card-text"><strong>Obra Social : </strong>{{$patient->obra_social}}</p>
                       <p class="card-text"><strong>Numero obra social : </strong>{{$patient->numero_obraSocial}}</p>
                       <br>
-                      <p class="card-text"><strong>Observación : </strong>{{$patient->obseravacion}}</p>
+                      <p class="card-text"><strong>Observación : </strong>{{$patient->observacion}}</p>
 
 
 
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <x-success-a href="{{ route('pacientes.index') }}">{{ __('Volver') }}</x-success-a>
-                        <x-primary-a href="{{ route('pacientes.edit', $patient) }}">{{ __('Editar') }}</x-primary-a>
+                        <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
                         <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
                             @csrf
                             @method('DELETE')

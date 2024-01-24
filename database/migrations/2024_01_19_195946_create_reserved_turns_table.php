@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table-> string('nombre');
             $table-> string('apellido');
-            $table-> bigInteger('celular');
+            $table-> bigInteger('celular')->nullable();
             $table-> bigInteger('dni');
             $table-> integer('obra_social');
             $table-> integer('id_horario_atencion');
-            $table-> mediumText('observacion');
+            $table-> mediumText('observacion')->nullable();
             $table-> integer('estado');
             $table->timestamps();
         });

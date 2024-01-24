@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('medical_insurences', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_obraSocial');
-            $table->string('precio_obraSocial');
-            $table->string('info_obraSocial');
+            $table->string('precio_obraSocial')->nullable();
+            $table->string('info_obraSocial')->nullable();
             $table->timestamps();
         });
     }

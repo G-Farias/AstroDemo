@@ -72,6 +72,8 @@
                           </div>
                         
                           <x-success-button>{{ __('Actualizar datos') }}</x-success-button>
+                          <x-primary-a href="{{ route('pacientes.index') }}">{{ __('Volver') }}</x-primary-a>
+
                     </form>
                 </div>
             </div>
