@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedicalInsurence extends Model
 {
-    use HasFactory;
+    protected $table = 'medical_insurences';
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MedicalInsurenceController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialistController;
@@ -52,6 +53,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/especialistas/{specialist}', [SpecialistController::class, 'destroy'])->name('especialistas.destroy');
 
 });
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/obraSocial', [MedicalInsurenceController::class, 'index'])->name('obraSocial.index');
+    Route::get('/obraSocial/create', [MedicalInsurenceController::class, 'create'])->name('obraSocial.create');
+    Route::post('/obraSocial', [MedicalInsurenceController::class, 'store'])->name('obraSocial.store');
+    Route::get('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'show'])->name('obraSocial.show');
+    Route::get('/obraSocial/{medicalInsurence}/edit', [MedicalInsurenceController::class, 'edit'])->name('obraSocial.edit');
+    Route::put('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'update'])->name('obraSocial.update');
+    Route::delete('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'destroy'])->name('obraSocial.destroy');
+
+});
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

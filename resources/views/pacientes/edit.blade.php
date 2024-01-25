@@ -72,7 +72,7 @@
                           
                           <div class="input-group mb-3">
                              <span class="input-group-text">Observación</span>
-                             <textarea class="form-control" name="observacion" id="observacion" value="{{ $patient->observacion }}" aria-label="observacion"></textarea>
+                             <textarea class="form-control" name="observacion" id="observacion" aria-label="observacion">{{ $patient->observacion }}</textarea>
                           </div>
                         
                           <x-success-button>{{ __('Actualizar datos') }}</x-success-button>

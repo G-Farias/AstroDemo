@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                         {{ __('Especialistas') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
+                        {{ __('Obras sociales / Prepagas') }}
+                    </x-nav-link>
                  
                     
             
@@ -85,6 +88,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                 {{ __('Especialistas') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
+                {{ __('Obra social / Prepagas') }}
             </x-responsive-nav-link>
         </div>
 
