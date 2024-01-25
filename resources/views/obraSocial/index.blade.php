@@ -36,7 +36,7 @@
                         <form class="mb-0 " action="{{ route('obraSocial.destroy', $medicalInsurence) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $medicalInsurence->nombre }}?')">{{ __('Eliminar') }}</x-danger-button>
+                            <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $medicalInsurence->nombre }} ?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
                       </div>
                     </div>
