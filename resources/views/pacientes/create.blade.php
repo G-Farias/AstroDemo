@@ -47,6 +47,10 @@
                           </div>
 
                           <div class="input-group mb-3">
+                            <input type="text" name="direccion" id="direccion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Dirección" aria-label="Direccion">
+                          </div>
+
+                          <div class="input-group mb-3">
                             <select name="pais" id="pais"  class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                               <option value="0" disabled>País</option>
                               <option value="Argentina" selected>Argentina</option>

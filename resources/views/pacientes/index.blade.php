@@ -38,7 +38,7 @@
                         <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <x-danger-button onclick="return confirm('Are you sure?')">{{ __('Eliminar') }}</x-danger-button>
+                            <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $patient->nombre }} {{ $patient->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
                       </div>
                     </div>
