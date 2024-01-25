@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SpecialistController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,6 +40,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
 
 });
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/especialistas', [SpecialistController::class, 'index'])->name('especialistas.index');
+    Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
+    Route::post('/especialistas', [SpecialistController::class, 'store'])->name('especialistas.store');
+    Route::get('/especialistas/{specialist}', [SpecialistController::class, 'show'])->name('especialistas.show');
+    Route::get('/especialistas/{specialist}/edit', [SpecialistController::class, 'edit'])->name('especialistas.edit');
+    Route::put('/especialistas/{specialist}', [SpecialistController::class, 'update'])->name('especialistas.update');
+    Route::delete('/especialistas/{specialist}', [SpecialistController::class, 'destroy'])->name('especialistas.destroy');
+
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
