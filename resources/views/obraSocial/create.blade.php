@@ -22,7 +22,7 @@
 
                         
                           <div class="input-group mb-3">
-                            <input type="number" name="precio_obraSocial" id="precio_obraSocial" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Monto" aria-label="Monto">
+                            <input type="number" name="precio_obraSocial" id="precio_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Monto" aria-label="Monto">
                           </div>
 
                           <div class="input-group mb-3">

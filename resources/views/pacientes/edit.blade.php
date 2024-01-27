@@ -48,13 +48,19 @@
                           <input type="mail" name="email" id="email" value="{{ $patient->email }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
                           </div>
                           
+                        
+
                           <div class="input-group mb-3">
-                            <select name="obraSocial" id="obraSocial" value="{{ $patient->obraSocial }}"  class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                              <option value="0" selected disabled>Obra social</option>
-                              <option value="a">IOMA</option>
-                              <option value="a">PAMI</option>
-                            </select>
-                            <input type="text" name="numero_obraSocial" id="numero_obraSocial" value="{{ $patient->numero_obraSocial }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número obra social" aria-label="NumeroObraSocial">                        
+                            <select class="form-control" id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                              <option disabled >Seleccione una obra social</option>
+                              <option selected value="{{ $patient->obra_social }}">{{ $patient->medicalInsurence->nombre_obraSocial }}</option>
+                                  @foreach ($medicalInsurence as $medicalInsurence)
+                                      <option value="{{$medicalInsurence->id}}">
+                                          {{$medicalInsurence->nombre_obraSocial}}
+                                      </option>
+                                  @endforeach
+                              </select>
+                              <input type="text" value="{{ $patient->numero_obraSocial }}" name="numero_obraSocial" id="numero_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número obra social" aria-label="NumeroObraSocial">                        
                           </div>
 
                           <div class="input-group mb-3">

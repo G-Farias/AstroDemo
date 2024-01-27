@@ -9,4 +9,10 @@ class Patient extends Model
 {
     protected $table = 'patients';
 
+
+    public function medicalInsurence()
+    {
+       
+        return $this->belongsTo(medicalInsurence::class, 'obra_social', 'id');
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\MedicalInsurence;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -22,7 +23,8 @@ class PatientController extends Controller
      */
     public function create()
     {
-        return view('pacientes.create');
+        $medicalInsurence= MedicalInsurence::all();
+        return view('pacientes.create', compact('medicalInsurence'));
     }
 
     /**
@@ -66,7 +68,9 @@ class PatientController extends Controller
      */
     public function edit(Patient $patient)
     {
-        return view('pacientes.edit', compact('patient'));
+        
+        $medicalInsurence= MedicalInsurence::all();
+        return view('pacientes.edit', compact('patient','medicalInsurence'));
 
     }
 
