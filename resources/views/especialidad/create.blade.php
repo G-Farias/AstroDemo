@@ -4,7 +4,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Obra Social / prepagas') }}
+            {{ __('Especialidades') }}
         </h2>
     </x-slot>
 
@@ -23,25 +23,23 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
 
-                  <form action="{{ route('obraSocial.store')}}" method="post">  
+                  <form action="{{ route('especialidad.store')}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf
                           <div class="input-group mb-3">
-                            <input type="text" name="nombre_obraSocial" id="nombre_obraSocial" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" name="nombre_especialidad" id="nombre_especialidad" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre especialidad" aria-label="Nombre especialidad">
                           </div>
 
+                          <div class="input-group mb-3">
+                            <select name="sobreturno" id="sobreturno"  class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                              <option selected disabled>¿Puede hacer sobreturnos?</option>
+                              <option value="1">SI</option>
+                              <option value="0">No</option>
+                            </select>
+                          </div>
                         
-                          <div class="input-group mb-3">
-                            <input type="number" name="precio_obraSocial" id="precio_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Monto" aria-label="Monto">
-                          </div>
-
-                          <div class="input-group mb-3">
-                            <span class="input-group-text">Información adicional</span>
-                            <textarea class="form-control" name="info_obraSocial" id="info_obraSocial" aria-label="info_obraSocial"></textarea>
-                         </div>
-                                                  
                           <x-success-button>{{ __('Guardar') }}</x-success-button>
-                          <x-primary-a href="{{ route('obraSocial.index') }}">{{ __('Volver') }}</x-primary-a>
+                          <x-primary-a href="{{ route('especialidad.index') }}">{{ __('Volver') }}</x-primary-a>
 
                     </form>
                 </div>

@@ -30,6 +30,10 @@ class MedicalInsurenceController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'nombre_obraSocial' => ['required', 'unique:medical_insurences', 'max:255'],
+        ]);
+
         $medicalInsurence = new MedicalInsurence;
 
         $medicalInsurence->nombre_obraSocial = $request->nombre_obraSocial;

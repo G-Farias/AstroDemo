@@ -4,6 +4,7 @@ use App\Http\Controllers\MedicalInsurenceController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialistController;
+use App\Http\Controllers\SpecialtyController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,6 +64,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/obraSocial/{medicalInsurence}/edit', [MedicalInsurenceController::class, 'edit'])->name('obraSocial.edit');
     Route::put('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'update'])->name('obraSocial.update');
     Route::delete('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'destroy'])->name('obraSocial.destroy');
+
+});
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/especialidad', [SpecialtyController::class, 'index'])->name('especialidad.index');
+    Route::get('/especialidad/create', [SpecialtyController::class, 'create'])->name('especialidad.create');
+    Route::post('/especialidad', [SpecialtyController::class, 'store'])->name('especialidad.store');
+    Route::get('/especialidad/{specialty}', [SpecialtyController::class, 'show'])->name('especialidad.show');
+    Route::get('/especialidad/{specialty}/edit', [SpecialtyController::class, 'edit'])->name('especialidad.edit');
+    Route::put('/especialidad/{specialty}', [SpecialtyController::class, 'update'])->name('especialidad.update');
+    Route::delete('/especialidad/{specialty}', [SpecialtyController::class, 'destroy'])->name('especialidad.destroy');
 
 });
 
