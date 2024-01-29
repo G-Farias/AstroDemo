@@ -9,4 +9,8 @@ class Specialist extends Model
 {
     protected $table = 'specialists';
 
+    public function Specialty()
+    {
+        return $this->belongsTo(Specialty::class, 'especialidad', 'id');
+    }
 }

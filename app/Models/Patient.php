@@ -12,7 +12,6 @@ class Patient extends Model
 
     public function medicalInsurence()
     {
-       
         return $this->belongsTo(medicalInsurence::class, 'obra_social', 'id');
     }
 }

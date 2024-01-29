@@ -38,11 +38,14 @@
                           </div>
                           
                           <div class="input-group mb-3">
-                            <select name="especialidad" id="especialidad"  class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                              <option value="0" selected disabled>Especialidad</option>
-                              <option value="1">Trauma</option>
-                              <option value="2">Clinico</option>
-                            </select>
+                            <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                              <option selected disabled >Especialidad</option>
+                                  @foreach ($specialty as $specialty)
+                                      <option value="{{$specialty->id}}">
+                                          {{$specialty->nombre_especialidad}}
+                                      </option>
+                                  @endforeach
+                              </select>
                           </div>
 
                           <div class="input-group mb-3">

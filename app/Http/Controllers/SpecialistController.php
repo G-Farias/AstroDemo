@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Specialist;
+use App\Models\Specialty;
 use Illuminate\Http\Request;
 
 class SpecialistController extends Controller
@@ -22,7 +23,8 @@ class SpecialistController extends Controller
      */
     public function create()
     {
-        return view('especialistas.create');
+        $specialty = Specialty::all();
+        return view('especialistas.create', compact('specialty'));
     }
 
     /**
@@ -66,7 +68,9 @@ class SpecialistController extends Controller
      */
     public function edit(Specialist $specialist)
     {
-        return view('especialistas.edit', compact('specialist'));
+        $specialty = Specialty::all();
+
+        return view('especialistas.edit', compact('specialist','specialty'));
     }
 
     /**
