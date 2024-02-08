@@ -60,6 +60,6 @@ class MedicalInsurenceSpecialistController extends Controller
      */
     public function destroy(MedicalInsurenceSpecialist $medicalInsurenceSpecialist)
     {
-        //
+    //
     }
 }

@@ -13,4 +13,10 @@ class MedicalInsurence extends Model
     {
         return $this->hasMany(Patient::class);
     }
+
+    public function medicalInsurenceSpecialist()
+    {
+        return $this->hasMany(medicalInsurenceSpecialist::class);
+    }
+    
 }

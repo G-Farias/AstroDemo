@@ -40,6 +40,8 @@
                             @method('DELETE')
                             <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $specialist->nombre }} {{ $specialist->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
+                        <x-third-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-third-a>
+
                       </div>
                     </div>
                  </div>

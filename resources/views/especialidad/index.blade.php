@@ -28,7 +28,13 @@
                     </div>
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre de la especialidad : </strong> {{ucfirst($specialty->nombre_especialidad) }}</p>
-                      <p class="card-text"><strong>¿Se pueden hacer sobreturnos? : </strong> {{ $specialty->sobreturno }}</p> 
+                      <p class="card-text"><strong>¿Se pueden hacer sobreturnos? : </strong>
+                        @if ($specialty->sobreturno == '1')
+                            Si
+                        @else
+                            No
+                        @endif
+                        </p> 
 
 
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">

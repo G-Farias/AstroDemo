@@ -13,4 +13,5 @@ class Specialist extends Model
     {
         return $this->belongsTo(Specialty::class, 'especialidad', 'id');
     }
+
 }

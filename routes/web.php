@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\MedicalInsurenceController;
+use App\Http\Controllers\MedicalInsurenceSpecialistController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\SpecialtyController;
+use App\Models\MedicalInsurenceSpecialist;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,7 +55,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/especialistas/{specialist}', [SpecialistController::class, 'update'])->name('especialistas.update');
     Route::delete('/especialistas/{specialist}', [SpecialistController::class, 'destroy'])->name('especialistas.destroy');
 
+    Route::get('especialistas/{specialist}/obras_sociales', [SpecialistController::class, 'obras_sociales'])->name('especialistas.obras_sociales');
+    Route::post('especialistas/{specialist}/store_obras_sociales', [SpecialistController::class, 'store_obras_sociales'])->name('especialistas.store_obras_sociales');
+    Route::delete('/especialistas/obra_social/{medicalInsurenceSpecialist}', [SpecialistController::class, 'destroy_obras_sociales'])->name('especialistas.obra_social_destroy');
+
 });
+
 
 Route::middleware('auth')->group(function () {
 

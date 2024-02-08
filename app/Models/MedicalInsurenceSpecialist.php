@@ -7,5 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class MedicalInsurenceSpecialist extends Model
 {
-    use HasFactory;
+    protected $table = 'medical_insurence_specialists';
+
+    public function medicalInsurence()
+    {
+        return $this->belongsTo(medicalInsurence::class, 'id_obraSocial', 'id');
+    }
+
 }
+

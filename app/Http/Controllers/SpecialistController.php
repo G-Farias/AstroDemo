@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalInsurence;
+use App\Models\MedicalInsurenceSpecialist;
 use App\Models\Specialist;
 use App\Models\Specialty;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\ExcludeIf;
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\Unique;
 
 class SpecialistController extends Controller
 {
@@ -110,5 +118,49 @@ class SpecialistController extends Controller
 
         return redirect()->route('especialistas.index')
         ->with('sucess','Especialista eliminado correctamente');
+    }
+
+    public function obras_sociales(Specialist $specialist)
+    {
+        
+        $medicalInsurence = MedicalInsurence::all();
+       // $medicalInsurenceSpecialist = MedicalInsurenceSpecialist::all();
+        $medicalInsurenceSpecialists = MedicalInsurenceSpecialist::where('id_especialista', $specialist->id)->get();
+
+
+        return view('especialistas.obras_sociales', compact('medicalInsurence', 'specialist', 'medicalInsurenceSpecialists'));
+
+    }
+
+    public function store_obras_sociales(Request $request, $id)
+    {
+        $request->validate([
+            'id_obraSocial' => [
+                'required',
+                Rule::unique('medical_insurence_specialists')->where('id_especialista', request($id))
+            ],
+          'id_especialista' => [
+                    'required',
+                    Rule::unique('medical_insurence_specialists')->where('id_obraSocial', request('id_obraSocial'))
+                ],
+        ]); 
+
+        $medicalInsurenceSpecialist = new MedicalInsurenceSpecialist();
+ 
+        $medicalInsurenceSpecialist->id_obraSocial = $request-> id_obraSocial;
+        $medicalInsurenceSpecialist->id_especialista = $request->id_especialista;
+
+        $medicalInsurenceSpecialist->save();
+
+      return back()->with('mensaje', 'Obra social / prepaga agregadas');   
+        
+    }
+
+    public function destroy_obras_sociales(MedicalInsurenceSpecialist $medicalInsurenceSpecialist)
+    {
+        $medicalInsurenceSpecialist->delete();
+
+        return redirect()->back()
+        ->with('sucess','Obra social / prepaga eliminada correctamente');
     }
 }
