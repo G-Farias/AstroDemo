@@ -27,6 +27,7 @@ return new class extends Migration
             $table-> string('pais_residencia')->nullable();
             $table-> string('localidad_residencia')->nullable();
             $table-> string ('provincia_residencia')->nullable();
+            $table-> integer('id_especialista');
             $table->timestamps();
         });
     }

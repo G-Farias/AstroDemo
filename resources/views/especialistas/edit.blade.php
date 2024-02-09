@@ -33,7 +33,7 @@
                           </div>
 
                           <div class="input-group mb-3">
-                           <input type="mail" value="{{ $specialist->mail }}" name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
+                           <input type="mail" value="{{ $specialist->email }}" name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
                            <input type="password" value="{{ $specialist->password }}" name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
 
                           </div>

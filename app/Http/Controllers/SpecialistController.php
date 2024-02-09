@@ -6,6 +6,7 @@ use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
 use App\Models\Specialist;
 use App\Models\Specialty;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rules\ExcludeIf;
@@ -13,6 +14,8 @@ use Illuminate\Validation\Rules\ExcludeIf;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules\Unique;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class SpecialistController extends Controller
 {
@@ -58,6 +61,18 @@ class SpecialistController extends Controller
         $specialist->localidad_residencia = $request->localidad_residencia;
 
         $specialist->save();
+
+        $user = new User;
+
+        $user->name = $request->nombre;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->remember_token = Str::random(60);
+        $user->level = '1';
+        $user->id_especialista = $specialist->id;
+
+        $user->save();
+
         
         return redirect()->route('especialistas.index')->with('mensaje', 'Especialista agregado');
     }
@@ -105,6 +120,14 @@ class SpecialistController extends Controller
         $specialist->localidad_residencia = $request->localidad_residencia;
 
         $specialist->save();
+
+        $user = User::where('id_especialista', $id)->first();
+
+        $user->name = $request->nombre;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
         
         return redirect()->route('especialistas.index')->with('mensaje', 'Especialista actualizado');
     }
@@ -114,6 +137,11 @@ class SpecialistController extends Controller
      */
     public function destroy(Specialist $specialist)
     {
+        User::where('id_especialista', $specialist->id)->delete(); 
+
+        MedicalInsurenceSpecialist::where('id_especialista', $specialist->id)->delete();
+
+
         $specialist->delete();
 
         return redirect()->route('especialistas.index')

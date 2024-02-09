@@ -18,8 +18,8 @@ return new class extends Migration
             $table-> bigInteger('dni')->unique();
             $table-> bigInteger('celular')->nullable();
             $table-> bigInteger('telefono')->nullable();
-            $table-> string('email')->nullable();
-            $table->string('password')->nullable();
+            $table-> string('email');
+            $table->string('password');
             $table-> integer('especialidad')->nullable();
             $table-> string('matricula')->nullable();
             $table-> string('dia_atencion')->nullable();
