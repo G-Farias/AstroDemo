@@ -4,6 +4,7 @@ use App\Http\Controllers\MedicalInsurenceController;
 use App\Http\Controllers\MedicalInsurenceSpecialistController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\SpecialtyController;
 use App\Models\MedicalInsurenceSpecialist;
@@ -58,6 +59,11 @@ Route::middleware('auth')->group(function () {
     Route::get('especialistas/{specialist}/obras_sociales', [SpecialistController::class, 'obras_sociales'])->name('especialistas.obras_sociales');
     Route::post('especialistas/{specialist}/store_obras_sociales', [SpecialistController::class, 'store_obras_sociales'])->name('especialistas.store_obras_sociales');
     Route::delete('/especialistas/obra_social/{medicalInsurenceSpecialist}', [SpecialistController::class, 'destroy_obras_sociales'])->name('especialistas.obra_social_destroy');
+
+    Route::get('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
+    Route::post('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
+    Route::post('especialistas/store_horario_atencion', [ScheduleController::class, 'store'])->name('especialistas.store_horario_atencion');
+    Route::delete('/especialistas/horario_atencion/{schedule}', [ScheduleController::class, 'destroy_horario_atencion'])->name('especialistas.horario_atencion_destroy');
 
 });
 

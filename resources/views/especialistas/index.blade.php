@@ -42,6 +42,8 @@
                         </form>
                         <x-third-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-third-a>
 
+                        <x-third-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-third-a>
+
                       </div>
                     </div>
                  </div>
