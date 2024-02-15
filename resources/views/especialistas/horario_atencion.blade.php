@@ -24,23 +24,26 @@
                 @csrf
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon1">Fecha de atención</span>
-                    <input type="date" name="date" id="date" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                    <input type="date" required name="date" id="date" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                 </div>
             
                 <div class="input-group mb-3">
                     <input type="text" hidden value="{{ $specialist->id }}" name="specialist" id="specialist">
                     <span class="input-group-text" id="basic-addon1">Horario inicio turno mañana</span>
-                    <input type="time" name="inicio_turno_mañana" id="inicio_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                    <input type="time"  name="inicio_turno_mañana" id="inicio_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                     <span class="input-group-text" id="basic-addon1">Horario finalización turno mañana</span>
-                    <input type="time" name="fin_turno_mañana" id="fin_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                    <input type="time"  name="fin_turno_mañana" id="fin_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                 </div>
-
+                    <p class="card-text text-muted mb-3">*Si posee horario de corrido,
+                         ignore completar el turno tarde
+                    </p>
                 <div class="input-group mb-3">
+        
                     <span class="input-group-text" id="basic-addon1">Horario inicio turno tarde</span>
                     <input type="time" name="inicio_turno_tarde" id="inicio_turno_tarde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                     <span class="input-group-text" id="basic-addon1">Horario finalización turno tarde</span>
-                    <input type="time" name="fin_turno_tarde" id="fin_turno_tarde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
-                </div>
+                    <input type="time"  name="fin_turno_tarde" id="fin_turno_tarde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+               </div>
 
                 <div class="input-group mb-3">
                     <select class="form-control" id="intervalo" name="intervalo" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
@@ -65,6 +68,7 @@
         </div>
     </div>
 
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
@@ -86,7 +90,9 @@
                         @foreach ($schedule as $schedule)
                             <div class="card mb-1">
                                 <div class="card-body">
-                                <h5 class="card-title">Horario : {{date("H:i",strtotime($schedule->hr_atencion))  }}</h5>
+                                <h5 class="card-title"><strong> Horario : </strong> {{date("H:i",strtotime($schedule->hr_atencion))  }}</h5>
+                                <h5 class="card-title"><strong> Fecha : </strong> {{date("d-m-y",strtotime($schedule->fecha_atencion))  }}</h5>
+
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
                                     <form class=" " action="{{ route('especialistas.horario_atencion_destroy',$schedule->id) }}" method="POST">

@@ -40,7 +40,14 @@ class ScheduleController extends Controller
 
         $inicio_turno_mañana = $request->inicio_turno_mañana;
         $fin_turno_mañana = $request->fin_turno_mañana;
+        $inicio_turno_tarde = $request->inicio_turno_tarde;
+        $fin_turno_tarde = $request->fin_turno_tarde;
+
         $intervalo = $request->intervalo;
+
+        $inicio_tarde = new DateTime($inicio_turno_tarde);
+        $fin_tarde = new DateTime($fin_turno_tarde);
+
         
         $inicio = new DateTime($inicio_turno_mañana);
         $fin = new DateTime($fin_turno_mañana);
@@ -48,6 +55,9 @@ class ScheduleController extends Controller
         $intervalo = new DateInterval('PT'.$intervalo.'M');
 
         $fechas = new DatePeriod($inicio, $intervalo, $fin);
+        $fechas_tarde = new DatePeriod($inicio_tarde, $intervalo, $fin_tarde);
+
+
 
         foreach($fechas as $fecha){
           /*  echo $fecha->format("d-m-Y H:i:s") . "<br>";
@@ -63,6 +73,21 @@ class ScheduleController extends Controller
             $schedule->save();
 
         }
+
+        foreach($fechas_tarde as $fecha_tarde){
+            /*  echo $fecha->format("d-m-Y H:i:s") . "<br>";
+              $fecha->format("d-m-Y H:i:s"); */
+  
+              $schedule_tarde = new Schedule;
+  
+              $schedule_tarde->hr_atencion = $fecha_tarde->format("H:i:s");
+              $schedule_tarde->fecha_atencion = $request->date;
+              $schedule_tarde->id_especialista = $request->specialist;
+              $schedule_tarde->estado = '0';
+  
+              $schedule_tarde->save();
+  
+          }
 
         return redirect()->route('especialistas.index')->with('mensaje', 'Horario agregado');          
 
