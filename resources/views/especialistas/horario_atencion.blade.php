@@ -29,6 +29,8 @@
             
                 <div class="input-group mb-3">
                     <input type="text" hidden value="{{ $specialist->id }}" name="specialist" id="specialist">
+                    <input type="text" hidden value="{{ $specialist->especialidad }}" name="specialty" id="specialty">
+
                     <span class="input-group-text" id="basic-addon1">Horario inicio turno mañana</span>
                     <input type="time"  name="inicio_turno_mañana" id="inicio_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                     <span class="input-group-text" id="basic-addon1">Horario finalización turno mañana</span>

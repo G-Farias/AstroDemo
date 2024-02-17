@@ -14,4 +14,10 @@ class Specialist extends Model
         return $this->belongsTo(Specialty::class, 'especialidad', 'id');
     }
 
+    public function Schedule()
+    {
+        return $this->hasMany(Schedule::class);
+
+    }
+
 }

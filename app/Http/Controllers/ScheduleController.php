@@ -68,6 +68,8 @@ class ScheduleController extends Controller
             $schedule->hr_atencion = $fecha->format("H:i:s");
             $schedule->fecha_atencion = $request->date;
             $schedule->id_especialista = $request->specialist;
+            $schedule->id_especialidad = $request->specialty;
+
             $schedule->estado = '0';
 
             $schedule->save();
@@ -83,13 +85,15 @@ class ScheduleController extends Controller
               $schedule_tarde->hr_atencion = $fecha_tarde->format("H:i:s");
               $schedule_tarde->fecha_atencion = $request->date;
               $schedule_tarde->id_especialista = $request->specialist;
+              $schedule_tarde->id_especialidad = $request->specialty;
+
               $schedule_tarde->estado = '0';
   
               $schedule_tarde->save();
   
           }
 
-        return redirect()->route('especialistas.index')->with('mensaje', 'Horario agregado');          
+        return redirect()->route('especialistas.index')->with('success', 'Horario agregado');          
 
     }
 

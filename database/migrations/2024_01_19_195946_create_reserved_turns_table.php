@@ -16,8 +16,10 @@ return new class extends Migration
             $table-> string('nombre');
             $table-> string('apellido');
             $table-> bigInteger('celular')->nullable();
+            $table-> mediumText('email')->nullable();
             $table-> bigInteger('dni');
             $table-> integer('obra_social');
+            $table-> string ('numero_obraSocial')->nullable();
             $table-> integer('id_horario_atencion');
             $table-> mediumText('observacion')->nullable();
             $table-> integer('estado');

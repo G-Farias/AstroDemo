@@ -51,7 +51,7 @@ class PatientController extends Controller
 
         $pacientes->save();
         
-        return redirect()->route('pacientes.index')->with('mensaje', 'Paciente agregada');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente agregada');
     }
 
     /**
@@ -99,7 +99,7 @@ class PatientController extends Controller
 
         $pacientes->save();
         
-        return redirect()->route('pacientes.index')->with('mensaje', 'Paciente actualizado');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente actualizado');
     }
 
     /**

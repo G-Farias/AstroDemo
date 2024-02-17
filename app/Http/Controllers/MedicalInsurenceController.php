@@ -42,7 +42,7 @@ class MedicalInsurenceController extends Controller
 
         $medicalInsurence->save();
 
-        return redirect()->route('obraSocial.index')->with('mensaje', 'Obra Social / Prepaga agregada');
+        return redirect()->route('obraSocial.index')->with('success', 'Obra Social / Prepaga agregada');
 
     }
 
@@ -75,7 +75,7 @@ class MedicalInsurenceController extends Controller
 
         $medicalInsurence->save();
 
-        return redirect()->route('obraSocial.index')->with('mensaje', 'Obra Social / Prepaga actualizadas');
+        return redirect()->route('obraSocial.index')->with('success', 'Obra Social / Prepaga actualizadas');
 
     }
 

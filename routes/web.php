@@ -4,6 +4,7 @@ use App\Http\Controllers\MedicalInsurenceController;
 use App\Http\Controllers\MedicalInsurenceSpecialistController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservedTurnController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\SpecialtyController;
@@ -64,6 +65,20 @@ Route::middleware('auth')->group(function () {
     Route::post('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
     Route::post('especialistas/store_horario_atencion', [ScheduleController::class, 'store'])->name('especialistas.store_horario_atencion');
     Route::delete('/especialistas/horario_atencion/{schedule}', [ScheduleController::class, 'destroy_horario_atencion'])->name('especialistas.horario_atencion_destroy');
+
+});
+
+Route::middleware('auth')->group(function() {
+
+    Route::get('/turno', [ReservedTurnController::class, 'index'])->name('turno.inicio');
+    Route::post('/turno/resultados', [ReservedTurnController::class, 'index'])->name('turno.index');
+
+    Route::get('/turno/{schedule}/create', [ReservedTurnController::class, 'create'])->name('turno.create');
+    Route::post('/turno', [ReservedTurnController::class, 'store'])->name('turno.store');
+    Route::get('/turno/{reservedturn}', [ReservedTurnController::class, 'show'])->name('turno.show');
+    Route::get('/turno/{reservedturn}/edit', [ReservedTurnController::class, 'edit'])->name('turno.edit');
+    Route::put('/turno/{reservedturn}', [ReservedTurnController::class, 'update'])->name('turno.update');
+    Route::delete('/turno/{reservedturn}', [ReservedTurnController::class, 'destroy'])->name('turno.destroy');    
 
 });
 

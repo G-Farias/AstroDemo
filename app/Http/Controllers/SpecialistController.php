@@ -75,7 +75,7 @@ class SpecialistController extends Controller
         $user->save();
 
         
-        return redirect()->route('especialistas.index')->with('mensaje', 'Especialista agregado');
+        return redirect()->route('especialistas.index')->with('success', 'Especialista agregado');
     }
 
     /**
@@ -130,7 +130,7 @@ class SpecialistController extends Controller
 
         $user->save();
         
-        return redirect()->route('especialistas.index')->with('mensaje', 'Especialista actualizado');
+        return redirect()->route('especialistas.index')->with('success', 'Especialista actualizado');
     }
 
     /**
@@ -181,7 +181,7 @@ class SpecialistController extends Controller
 
         $medicalInsurenceSpecialist->save();
 
-      return back()->with('mensaje', 'Obra social / prepaga agregadas');   
+      return back()->with('success', 'Obra social / prepaga agregadas');   
         
     }
 

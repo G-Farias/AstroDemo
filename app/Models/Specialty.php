@@ -13,4 +13,10 @@ class Specialty extends Model
     {
         return $this->hasMany(Specialist::class);
     }
+
+    public function Schedule()
+    {
+        return $this->hasMany(Schedule::class);
+
+    }
 }

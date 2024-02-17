@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                         {{ __('Especialidad') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
+                        {{ __('Turnos') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                         {{ __('Obras sociales / Prepagas') }}
                     </x-nav-link>
@@ -94,6 +97,9 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                 {{ __('Especialidades') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
+                {{ __('Turno') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                 {{ __('Obra social / Prepagas') }}

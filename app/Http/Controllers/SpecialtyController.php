@@ -42,7 +42,7 @@ class SpecialtyController extends Controller
         
         $specialty->save();
 
-        return redirect()->route('especialidad.index')->with('mensaje', 'Especialidad agregada');
+        return redirect()->route('especialidad.index')->with('success', 'Especialidad agregada');
     }
 
     /**
@@ -74,7 +74,7 @@ class SpecialtyController extends Controller
         
         $specialty->save();
 
-        return redirect()->route('especialidad.index')->with('mensaje', 'Especialidad actualizada');
+        return redirect()->route('especialidad.index')->with('success', 'Especialidad actualizada');
     }
 
     /**
