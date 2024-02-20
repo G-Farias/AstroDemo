@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReservedTurn extends Model
 {
-    use HasFactory;
+    protected $table = 'reserved_turns';
+
+    public function medicalInsurence()
+    {
+        return $this->belongsTo(medicalInsurence::class, 'obra_social', 'id');
+    }
 }

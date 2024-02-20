@@ -7,7 +7,7 @@
             {{ __('Turnos') }}
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('turno.index') }}">{{ __('Ver turnos reservados') }}</x-primary-a>
+            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Ver turnos reservados') }}</x-primary-a>
         </div>
     </x-slot>
 

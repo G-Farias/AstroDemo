@@ -10,6 +10,8 @@ use App\Models\Specialty;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 
+use function Ramsey\Uuid\v1;
+
 class ReservedTurnController extends Controller
 {
     /**
@@ -76,13 +78,48 @@ class ReservedTurnController extends Controller
                 
 
     }
+    public function turnos_reservados(Request $request) {
+        
+        $specialists = Specialist::all();
+
+        $medicalInsurence = MedicalInsurence::all();
+
+        $schedules = Schedule::where('id_especialista', $request->especialista)->where('fecha_atencion', $request->fecha_busqueda)->get();
+
+        $reservedTurns = ReservedTurn::all();
+
+        return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
+
+    }
+    public function turnos_reservados_update(ReservedTurn $reservedTurn, Request $request, $id){
+
+        $reservedTurn = ReservedTurn::find($id);
+
+        $reservedTurn->estado = $request->estado;
+        $reservedTurn->observacion = $request->observacion;
+
+        $reservedTurn->save();
+
+        return redirect()->back();
+
+    }
+    public function turnos_reservados_update_ob(ReservedTurn $reservedTurn, Request $request, $id){
+
+        $reservedTurn = ReservedTurn::find($id);
+
+        $reservedTurn->observacion = $request->observacion;
+
+        $reservedTurn->save();
+
+        return redirect()->back();
+
+    }
 
     /**
      * Display the specified resource.
      */
     public function show(ReservedTurn $reservedTurn)
     {
-        //
     }
 
     /**

@@ -75,6 +75,12 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/turno/{schedule}/create', [ReservedTurnController::class, 'create'])->name('turno.create');
     Route::post('/turno', [ReservedTurnController::class, 'store'])->name('turno.store');
+    
+    Route::get('/turno/reservados', [ReservedTurnController::class, 'turnos_reservados'])->name('turno.reservados');
+    Route::post('/turno/reservados', [ReservedTurnController::class, 'turnos_reservados'])->name('turno.reservados');
+    Route::post('/turno/reservados/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
+
+
     Route::get('/turno/{reservedturn}', [ReservedTurnController::class, 'show'])->name('turno.show');
     Route::get('/turno/{reservedturn}/edit', [ReservedTurnController::class, 'edit'])->name('turno.edit');
     Route::put('/turno/{reservedturn}', [ReservedTurnController::class, 'update'])->name('turno.update');

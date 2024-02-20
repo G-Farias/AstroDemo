@@ -18,5 +18,11 @@ class MedicalInsurence extends Model
     {
         return $this->hasMany(medicalInsurenceSpecialist::class);
     }
+
+    public function reservedTurn()
+    {
+        return $this->hasMany(reservedTurn::class);
+
+    }
     
 }

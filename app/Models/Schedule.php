@@ -18,4 +18,6 @@ class Schedule extends Model
     {
         return $this->belongsTo(Specialty::class, 'id_especialidad', 'id');
     }
+
 }
+

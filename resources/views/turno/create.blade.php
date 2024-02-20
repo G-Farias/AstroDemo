@@ -7,7 +7,7 @@
             {{ __('Reservar turno') }}
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
+            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Ver turnos') }}</x-primary-a>
         </div>
     </x-slot>
 
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="input-group mb-3">
-                                <select class="form-control" id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <select class="form-control" required id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                     <option selected disabled >Seleccione una obra social</option>
                                         @foreach ($medicalInsurenceSpecialist as $medicalInsurenceSpecialist)
                                             <option value="{{$medicalInsurenceSpecialist->id}}">
@@ -72,7 +72,7 @@
                                             </option>
                                         @endforeach
                                 </select>
-                                <input type="text" name="numero_obraSocial" id="numero_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número obra social" aria-label="NumeroObraSocial">                        
+                                <input type="text" required name="numero_obraSocial" id="numero_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número obra social" aria-label="NumeroObraSocial">                        
                             </div>
 
                             <div class="input-group mb-3">
