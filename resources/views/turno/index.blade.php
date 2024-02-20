@@ -11,6 +11,36 @@
         </div>
     </x-slot>
 
+    <style>
+        @media only screen and (max-width:800px) {
+            #no-more-tables tbody,
+            #no-more-tables tr,
+            #no-more-tables td {
+                display: block;
+            }
+            #no-more-tables thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            #no-more-tables td {
+                position: relative;
+                padding-left: 50%;
+                border: none;
+                border-bottom: 1px solid #eee;
+            }
+            #no-more-tables td:before {
+                content: attr(data-title);
+                position: absolute;
+                left: 6px;
+                font-weight: bold;
+            }
+            #no-more-tables tr {
+                border-bottom: 1px solid #ccc;
+            }
+        }
+    </style>
+
     @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -72,7 +102,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                         {{ __('Reservar turnos') }} 
                     </h2>
-
+                <div class="table-responsive" id="no-more-tables">
                     <table class="table">
                         <thead>
                           <tr>
@@ -87,24 +117,24 @@
                         <tbody>
                         @foreach ($schedules as $schedule)  
                           <tr>
-                            <th scope="row">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</th>
-                            <td>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-                            <td>{{ $schedule->specialist->nombre }} {{$schedule->specialist->apellido}}</td>
-                            <td>
+                            <td data-title="Fecha">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</td>
+                            <td data-title="Hora" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
+                            <td data-title="Especialista">{{ $schedule->specialist->nombre }} {{$schedule->specialist->apellido}}</td>
+                            <td data-title="Estado">
                                 @if ($schedule->estado == '0')
                                     <p>Disponible</p>
                                 @else
                                     <p>Ocupado</p>
                                 @endif
                             </td>
-                            <td>
+                            <td data-title="Reservar">
                                 @if ($schedule->estado == '0')
                                  <x-success-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-success-a>
                                 @else
                                 <x-grey-anunnce>{{__('Reservado')}}</x-grey-anunnce>
                                 @endif
                             </td>
-                            <td>@if ($schedule->specialty->sobreturno == '0')
+                            <td data-title="Sobreturno">@if ($schedule->specialty->sobreturno == '0')
                                 <x-grey-anunnce>{{__('No disponible')}}</x-grey-anunnce>
                             @else
                             <x-success-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-success-a>
@@ -113,7 +143,7 @@
                         @endforeach
                         </tbody>
                       </table>
-                      
+                    </div>
                 </div>    
             </div>
         </div>
