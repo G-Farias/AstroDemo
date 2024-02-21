@@ -65,11 +65,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Reservar turnos') }}
-                    </h2>
                     <form action="{{ route('turno.index')}}" method="post">  
                         @csrf
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        {{ __('Buscar turnos por especialidad y fecha') }} 
+                    </h2>
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
@@ -89,7 +91,29 @@
                         <x-success-button >{{ __('Buscar') }}</x-success-button>
                         </form>
                     </div>
-                      
+                </div>   
+                <div class="col-sm-6">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        {{ __('Buscar turnos por especialidad') }} 
+                    </h2>
+                    <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
+                        @csrf
+                    <div class="input-group mb-3">
+                        <div class="input-group mb-3">
+                            <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <option selected disabled >Especialidad</option>
+                                    @foreach ($specialtys as $specialty)
+                                        <option value="{{$specialty->id}}">
+                                            {{$specialty->nombre_especialidad}}
+                                        </option>
+                                    @endforeach
+                            </select>
+                        </div>
+                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                        </form>
+                    </div>
+                </div>
+            </div>
                 </div>    
             </div>
         </div>

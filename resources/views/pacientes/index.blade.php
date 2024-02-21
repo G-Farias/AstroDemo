@@ -32,7 +32,7 @@
                 @foreach ($patients as $patient)
                 <div class="card mb-1">
                     <div class="card-header">
-                        Paciente {{$patient->id}}
+                        Paciente
                     </div>
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>

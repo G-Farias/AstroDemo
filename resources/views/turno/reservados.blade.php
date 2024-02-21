@@ -8,7 +8,7 @@
             {{ __('Turnos reservados') }}
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('turno.index') }}">{{ __('Reservar turno') }}</x-primary-a>
+            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Todos los turnos') }}</x-primary-a>
         </div>
     </x-slot>
 
@@ -66,10 +66,12 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Turnos reservados') }}
-                    </h2>
-                    <form action="{{ route('turno.reservados')}}" method="post">  
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                            {{ __('Ver turnos por fecha y especialista') }} 
+                        </h2>
+                    <form action="{{ route('turno.reservados_fecha')}}" method="post">  
                         @csrf
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
@@ -87,10 +89,33 @@
                                     @endforeach
                             </select>
                         </div>
-
                         <x-success-button >{{ __('Buscar') }}</x-success-button>
                         </form>
                     </div>
+                </div>
+                    <div class="col-sm-6">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                            {{ __('Ver turnos por especialista') }} 
+                        </h2>
+                        <form action="{{ route('turno.reservados_especialidad')}}" method="post">
+                            @csrf
+                        <div class="input-group mb-3">
+
+                            <div class="input-group mb-3">
+                                <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                    <option selected disabled >Especialista</option>
+                                        @foreach ($specialists as $specialist)
+                                            <option value="{{$specialist->id}}">
+                                                <strong>{{$specialist->specialty->nombre_especialidad}} : </strong>  {{$specialist->nombre}} {{$specialist->apellido}}
+                                            </option>
+                                        @endforeach
+                                </select>
+                            </div>
+                            <x-success-button >{{ __('Buscar') }}</x-success-button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
                       
                 </div>    
             </div>
@@ -147,7 +172,6 @@
                                             Asistido
                                         @endif
                                         </option>
-                                        <option value="0">Disponible</option>
                                         <option value="1">Reservado</option>
                                         <option value="3">Asistido</option>
                                 </select>
@@ -167,14 +191,12 @@
                                 </div>
                                 </form> 
                               </td>
-                              
-                              
                               <td>
-                                <form class="mb-0 " action="" method="POST">
+                                <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <x-danger-button onclick="return confirm('¿Estás seguro que quieres cancelar el turno?')">{{ __('Cancelar') }}</x-danger-button>
-                                </form>    
+                                    <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar?')">{{ __('Eliminar') }}</x-danger-button>
+                                </form>
                               </td>
                             </tr>
                           </tbody>

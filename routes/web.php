@@ -9,6 +9,7 @@ use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\SpecialtyController;
 use App\Models\MedicalInsurenceSpecialist;
+use App\Models\ReservedTurn;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -72,19 +73,22 @@ Route::middleware('auth')->group(function() {
 
     Route::get('/turno', [ReservedTurnController::class, 'index'])->name('turno.inicio');
     Route::post('/turno/resultados', [ReservedTurnController::class, 'index'])->name('turno.index');
+    Route::post('/turno/resultados_especialidad', [ReservedTurnController::class, 'busqueda_especialidad'])->name('turno.busqueda_especialidad');
+
 
     Route::get('/turno/{schedule}/create', [ReservedTurnController::class, 'create'])->name('turno.create');
     Route::post('/turno', [ReservedTurnController::class, 'store'])->name('turno.store');
     
     Route::get('/turno/reservados', [ReservedTurnController::class, 'turnos_reservados'])->name('turno.reservados');
-    Route::post('/turno/reservados', [ReservedTurnController::class, 'turnos_reservados'])->name('turno.reservados');
+    Route::post('/turno/reservados_fecha', [ReservedTurnController::class, 'turnos_reservados_fecha'])->name('turno.reservados_fecha');
+    Route::post('/turno/reservados_especialidad', [ReservedTurnController::class, 'turnos_reservados_especialidad'])->name('turno.reservados_especialidad');
     Route::post('/turno/reservados/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 
 
     Route::get('/turno/{reservedturn}', [ReservedTurnController::class, 'show'])->name('turno.show');
     Route::get('/turno/{reservedturn}/edit', [ReservedTurnController::class, 'edit'])->name('turno.edit');
     Route::put('/turno/{reservedturn}', [ReservedTurnController::class, 'update'])->name('turno.update');
-    Route::delete('/turno/{reservedturn}', [ReservedTurnController::class, 'destroy'])->name('turno.destroy');    
+    Route::delete('/turno/{reservedTurn}', [ReservedTurnController::class, 'destroy'])->name('turno.destroy');
 
 });
 

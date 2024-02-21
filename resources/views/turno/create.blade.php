@@ -67,7 +67,7 @@
                                 <select class="form-control" required id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                     <option selected disabled >Seleccione una obra social</option>
                                         @foreach ($medicalInsurenceSpecialist as $medicalInsurenceSpecialist)
-                                            <option value="{{$medicalInsurenceSpecialist->id}}">
+                                            <option value="{{$medicalInsurenceSpecialist->id_obraSocial}}">
                                                 {{$medicalInsurenceSpecialist->medicalInsurence->nombre_obraSocial}}
                                             </option>
                                         @endforeach
