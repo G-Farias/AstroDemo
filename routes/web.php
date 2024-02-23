@@ -11,6 +11,7 @@ use App\Http\Controllers\SpecialtyController;
 use App\Models\MedicalInsurenceSpecialist;
 use App\Models\ReservedTurn;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Gate; 
 
 /*
 |--------------------------------------------------------------------------
@@ -47,11 +48,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
 
 });
-
-Route::middleware('auth')->group(function () {
-
-    Route::get('/especialistas', [SpecialistController::class, 'index'])->name('especialistas.index');
+Route::middleware('can:isAdmin')->group(function (){
     Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/especialistas', [SpecialistController::class, 'index'])->name('especialistas.index');
     Route::post('/especialistas', [SpecialistController::class, 'store'])->name('especialistas.store');
     Route::get('/especialistas/{specialist}', [SpecialistController::class, 'show'])->name('especialistas.show');
     Route::get('/especialistas/{specialist}/edit', [SpecialistController::class, 'edit'])->name('especialistas.edit');
@@ -93,7 +94,7 @@ Route::middleware('auth')->group(function() {
 });
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('can:isAdmin')->group(function () {
 
     Route::get('/obraSocial', [MedicalInsurenceController::class, 'index'])->name('obraSocial.index');
     Route::get('/obraSocial/create', [MedicalInsurenceController::class, 'create'])->name('obraSocial.create');
@@ -105,8 +106,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware('auth')->group(function () {
-
+Route::middleware('can:isAdmin')->group(function () {
     Route::get('/especialidad', [SpecialtyController::class, 'index'])->name('especialidad.index');
     Route::get('/especialidad/create', [SpecialtyController::class, 'create'])->name('especialidad.create');
     Route::post('/especialidad', [SpecialtyController::class, 'store'])->name('especialidad.store');

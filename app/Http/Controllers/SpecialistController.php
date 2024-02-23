@@ -18,6 +18,10 @@ use Illuminate\Validation\Rules\Unique;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
+
 class SpecialistController extends Controller
 {
     /**
@@ -25,7 +29,12 @@ class SpecialistController extends Controller
      */
     public function index()
     {
-        $specialists = Specialist::latest()->paginate(10);
+        if (Gate::allows('isAdmin')) {
+            $specialists = Specialist::latest()->paginate(10);
+        } else{
+            $specialists = Specialist::where('id', Auth::user()->id_especialista)->get();
+
+        }
 
         return view('especialistas.index', compact('specialists'));
     }

@@ -13,6 +13,9 @@ use DatePeriod;
 use DateInterval;
 use Illuminate\Support\Facades\Schema;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 class ScheduleController extends Controller
 {
     /**
@@ -93,7 +96,12 @@ class ScheduleController extends Controller
   
           }
 
-        return redirect()->route('especialistas.index')->with('success', 'Horario agregado');          
+        if (Gate::allows('isAdmin')) {          
+        return redirect()->route('especialistas.index')->with('success', 'Horario agregado');       
+        } else {
+        return redirect()->route('turno.inicio')->with('success', 'Horario agregado');       
+
+        }   
 
     }
 

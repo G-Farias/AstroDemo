@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Models\MedicalInsurence;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class PatientController extends Controller
 {
@@ -13,7 +15,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::latest()->paginate(10);
+        if (Gate::allows('isAdmin')) {
+            $patients = Patient::latest()->paginate(10);
+        } else{
+            $patients = Patient::where('id_especialista', Auth::user()->id_especialista)->get();
+        }
 
         return view('pacientes.index', compact('patients'));
     }
@@ -48,6 +54,7 @@ class PatientController extends Controller
         $pacientes->pais_residencia = $request->pais;
         $pacientes->localidad_residencia = $request->localidad_residencia;
         $pacientes->provincia_residencia = $request->provincia_residencia;
+        $pacientes->id_especialista = $request->user()->id_especialista;
 
         $pacientes->save();
         

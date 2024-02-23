@@ -53,7 +53,6 @@
                  </div>
                  @endforeach
 
-                 {{ $patients->links() }}
 
             </div>
         </div>

@@ -8,7 +8,11 @@
             {{ __('Turnos reservados') }}
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+        @can('isAdmin')
             <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Todos los turnos') }}</x-primary-a>
+        @elsecan('isUser')
+        <x-primary-a href="{{ route('turno.inicio') }}">{{ __('Volver') }}</x-primary-a>
+        @endcan
         </div>
     </x-slot>
 
@@ -62,6 +66,7 @@
     </div>
 @endif
 
+@can('isAdmin')
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
@@ -121,6 +126,34 @@
             </div>
         </div>
     </div>
+@elsecan('isUser')
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+            <div class="p-6 text-gray-900">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        {{ __('Ver turnos por fecha y especialista') }} 
+                    </h2>
+                <form action="{{ route('turno.reservados_fecha')}}" method="post">  
+                    @csrf
+                <div class="input-group mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
+                        <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                    </div>
+                    <x-success-button >{{ __('Buscar') }}</x-success-button>
+                    </form>
+                </div>
+            </div>
+            </div>
+                  
+            </div>    
+        </div>
+    </div>
+</div>
+@endcan
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

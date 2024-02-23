@@ -82,7 +82,7 @@
                              <span class="input-group-text">Observación</span>
                              <textarea class="form-control" name="observacion" id="observacion" aria-label="observacion"></textarea>
                           </div>
-                        
+                                                
                           <x-success-button>{{ __('Guardar') }}</x-success-button>
                           <x-primary-a href="{{ route('pacientes.index') }}">{{ __('Volver') }}</x-primary-a>
 

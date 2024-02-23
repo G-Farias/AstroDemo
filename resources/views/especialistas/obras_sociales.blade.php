@@ -41,7 +41,7 @@
                                 @if ($medicalInsurenceSpecialist->id_obraSocial == $medicalInsurence->id)
                                 <div class="mt-1 d-grid gap-2 d-md-flex justify-content-md-end">
 
-                                    <x-grey-anunnce disabled="true">{{ __('Ya guardado') }} {{$medicalInsurenceSpecialist->id}}</x-grey-anunnce>
+                                    <x-grey-anunnce disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
                                     <form class="mb-0 " action="{{ route('especialistas.obra_social_destroy',$medicalInsurenceSpecialist->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

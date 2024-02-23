@@ -21,16 +21,19 @@
                     <x-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                         {{ __('Especialistas') }}
                     </x-nav-link>
+                    @can('isAdmin')
                     <x-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                         {{ __('Especialidad') }}
                     </x-nav-link>
+                    @endcan
                     <x-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
                         {{ __('Turnos') }}
                     </x-nav-link>
+                    @can('isAdmin')
                     <x-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                         {{ __('Obras sociales / Prepagas') }}
                     </x-nav-link>
-                 
+                    @endcan
                     
             
         
@@ -95,15 +98,19 @@
             <x-responsive-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                 {{ __('Especialistas') }}
             </x-responsive-nav-link>
+            @can('isAdmin')
             <x-responsive-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                 {{ __('Especialidades') }}
             </x-responsive-nav-link>
+            @endcan
             <x-responsive-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
                 {{ __('Turno') }}
             </x-responsive-nav-link>
+            @can('isAdmin')
             <x-responsive-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                 {{ __('Obra social / Prepagas') }}
             </x-responsive-nav-link>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->

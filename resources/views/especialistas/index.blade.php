@@ -6,9 +6,11 @@
         <h2 class="mb-2 font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Especialistas') }}
         </h2>
+        @can('isAdmin')
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
             <x-primary-a href="{{ route('especialistas.create') }}">{{ __('Registrar especialista') }}</x-primary-a>
         </div>
+        @endcan
     </x-slot>
 
     <div class="py-12">
@@ -40,16 +42,15 @@
                             @method('DELETE')
                             <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $specialist->nombre }} {{ $specialist->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
-                        <x-third-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-third-a>
-
+                        <x-primary-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-primary-a>
+                        @can('isAdmin')
                         <x-third-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-third-a>
-
+                        @endcan
                       </div>
                     </div>
                  </div>
                  @endforeach
 
-                 {{ $specialists->links() }}
 
             </div>
         </div>
