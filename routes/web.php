@@ -4,11 +4,13 @@ use App\Http\Controllers\MedicalInsurenceController;
 use App\Http\Controllers\MedicalInsurenceSpecialistController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PublicUserController;
 use App\Http\Controllers\ReservedTurnController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SpecialistController;
 use App\Http\Controllers\SpecialtyController;
 use App\Models\MedicalInsurenceSpecialist;
+use App\Models\PublicUser;
 use App\Models\ReservedTurn;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate; 
@@ -28,6 +30,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/bienvenido', function(){
+    return view('welcome');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -124,5 +129,17 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
+
+    Route::get('/reservarTurno', [PublicUserController::class, 'index'])->name('reservarTurno.especialidades');
+    Route::get('/reservarTurno/{specialty}/especialista', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
+    Route::get('/reservarTurno/{specialist}/turnos', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
+    Route::post('/reservarTurno/{specialist}/turnos', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos');
+    Route::get('/reservarTurno/{schedule}/reservar',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
+    Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
+
+    Route::get('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
+    Route::post('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
+    Route::delete('/reservarTurno/{reservedTurn}', [PublicUserController::class, 'destroy'])->name('reservarTurno.destroy');
+
 
 require __DIR__.'/auth.php';

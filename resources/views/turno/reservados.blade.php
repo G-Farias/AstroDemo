@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Ver turnos por fecha y especialista') }} 
+                        {{ __('Ver turnos por fecha') }} 
                     </h2>
                 <form action="{{ route('turno.reservados_fecha')}}" method="post">  
                     @csrf
