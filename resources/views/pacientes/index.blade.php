@@ -28,7 +28,19 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white mb-2 overflow-hidden shadow-sm sm:rounded-lg"> 
+                <div class="p-6 text-gray-900">
+                    <form action="{{ route('pacientes.buscar')}}" method="post">
+                        @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" name="busqueda" id="busqueda" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Ingrese D.N.I, nombre o apellido para buscar..." aria-label="Nombre">
+                        <x-success-a href="">{{ __('Buscar') }}</x-success-a>
+                    </div>
+                    </form>
+                </div>
+            </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+                <div class="p-2 text-gray-900">
                 @foreach ($patients as $patient)
                 <div class="card mb-1">
                     <div class="card-header">
@@ -53,7 +65,7 @@
                  </div>
                  @endforeach
 
-
+                </div>
             </div>
         </div>
     </div>

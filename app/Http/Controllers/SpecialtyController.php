@@ -12,7 +12,7 @@ class SpecialtyController extends Controller
      */
     public function index()
     {
-        $specialtys = Specialty::latest()->paginate(10);
+        $specialtys = Specialty::orderBy('nombre_especialidad','ASC')->latest()->paginate(10);
 
         return view('especialidad.index', compact('specialtys'));
     }

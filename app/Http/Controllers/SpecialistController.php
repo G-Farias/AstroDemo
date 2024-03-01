@@ -30,9 +30,9 @@ class SpecialistController extends Controller
     public function index()
     {
         if (Gate::allows('isAdmin')) {
-            $specialists = Specialist::latest()->paginate(10);
+            $specialists = Specialist::orderBy('nombre','ASC')->latest()->paginate(10);
         } else{
-            $specialists = Specialist::where('id', Auth::user()->id_especialista)->get();
+            $specialists = Specialist::orderBy('nombre','ASC')->where('id', Auth::user()->id_especialista)->get();
 
         }
 
@@ -160,8 +160,9 @@ class SpecialistController extends Controller
 
     public function obras_sociales(Specialist $specialist)
     {
+     
         
-        $medicalInsurence = MedicalInsurence::all();
+        $medicalInsurence = MedicalInsurence::orderBy('nombre_obraSocial','ASC')->get();
        // $medicalInsurenceSpecialist = MedicalInsurenceSpecialist::all();
         $medicalInsurenceSpecialists = MedicalInsurenceSpecialist::where('id_especialista', $specialist->id)->get();
 

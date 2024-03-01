@@ -12,7 +12,7 @@ class MedicalInsurenceController extends Controller
      */
     public function index()
     {
-        $medicalInsurences = MedicalInsurence::latest()->paginate(10);
+        $medicalInsurences = MedicalInsurence::orderBy('nombre_obraSocial','ASC')->latest()->paginate(10);
 
         return view('obraSocial.index', compact('medicalInsurences'));
     }

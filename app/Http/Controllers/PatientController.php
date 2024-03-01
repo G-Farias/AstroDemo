@@ -16,9 +16,28 @@ class PatientController extends Controller
     public function index()
     {
         if (Gate::allows('isAdmin')) {
-            $patients = Patient::latest()->paginate(10);
+            $patients = Patient::orderBy('nombre','ASC')->latest()->paginate(10);
         } else{
-            $patients = Patient::where('id_especialista', Auth::user()->id_especialista)->get();
+            $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->get();
+        }
+
+        return view('pacientes.index', compact('patients'));
+    }
+
+    public function buscar(Request $request){
+
+        if (Gate::allows('isAdmin')) {
+            $patients = Patient::where('dni', "LIKE", "%{$request->busqueda}%")
+            ->orWhere('nombre', "LIKE", "%{$request->busqueda}%")
+            ->orWhere('apellido', "LIKE", "%{$request->busqueda}%")
+            ->orWhereRaw("concat(nombre, ' ', apellido) like '%" .$request->busqueda. "%' ")
+            ->get();
+        } else{
+
+            $patients = Patient::where('id_especialista', Auth::user()->id_especialista)
+            ->WhereRaw("concat(dni,' ', nombre, ' ', apellido) like  '%" .$request->busqueda. "%' ")
+            ->get();        
+
         }
 
         return view('pacientes.index', compact('patients'));

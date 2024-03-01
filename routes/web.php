@@ -45,6 +45,7 @@ Route::get('/pacientes', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/pacientes', [PatientController::class, 'index'])->name('pacientes.index');
+    Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
     Route::get('/pacientes/create', [PatientController::class, 'create'])->name('pacientes.create');
     Route::post('/pacientes', [PatientController::class, 'store'])->name('pacientes.store');
     Route::get('/pacientes/{patient}', [PatientController::class, 'show'])->name('pacientes.show');

@@ -108,13 +108,13 @@ class ReservedTurnController extends Controller
         if (Gate::allows('isAdmin')) {
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
-        $reservedTurns = ReservedTurn::orderBy('id_horario_atencion','desc')->get();
-        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->get();
+        $reservedTurns = ReservedTurn::get();
+        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->take(100)->get();
         }else{
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
-        $reservedTurns = ReservedTurn::orderBy('id_horario_atencion','desc')->get();
-        $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->get();           
+        $reservedTurns = ReservedTurn::get();
+        $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->take(100)->get();           
 
         }
         return view('turno.reservados', compact('specialists','reservedTurns','medicalInsurence','schedules'));
@@ -127,12 +127,12 @@ class ReservedTurnController extends Controller
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
         $schedules = Schedule::where('id_especialista', $request->especialista)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->get();
-        $reservedTurns = ReservedTurn::orderBy('id_horario_atencion','asc')->get();
+        $reservedTurns = ReservedTurn::get();
         }else{
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
         $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->get();
-        $reservedTurns = ReservedTurn::orderBy('id_horario_atencion','asc')->get();           
+        $reservedTurns = ReservedTurn::get();           
         }
         return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
     }
@@ -140,8 +140,8 @@ class ReservedTurnController extends Controller
     public function turnos_reservados_especialidad(Request $request){
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
-        $schedules = Schedule::where('id_especialista', $request->especialista)->whereDate('fecha_atencion','>=', now())->get();
-        $reservedTurns = ReservedTurn::orderBy('id_horario_atencion','asc')->get();
+        $schedules = Schedule::where('id_especialista', $request->especialista)->whereDate('fecha_atencion','>=', now())->take(130)->get();
+        $reservedTurns = ReservedTurn::get();
 
         return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
     }
