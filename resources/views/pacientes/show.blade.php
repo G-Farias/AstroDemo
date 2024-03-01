@@ -37,11 +37,11 @@
                       <p class="card-text"><strong>Teléfono : </strong>{{$patient->telefono}}</p>
                       <p class="card-text"><strong>Email : </strong>{{$patient->email}}</p>
                       <p class="card-text"><strong>Dirección : </strong>{{$patient->direccion}}</p>
-                      <p class="card-text"><strong>País : </strong>{{$patient->pais_residencia}}</p>
-                      <p class="card-text"><strong>Provincia : </strong>{{$patient->provincia_residencia}}</p>
-                      <p class="card-text"><strong>Localidad : </strong>{{$patient->localidad_residencia}}</p>
+                      <p class="card-text"><strong>País : </strong>{{ucfirst($patient->pais_residencia)}}</p>
+                      <p class="card-text"><strong>Provincia : </strong>{{ucfirst($patient->provincia_residencia)}}</p>
+                      <p class="card-text"><strong>Localidad : </strong>{{ucfirst($patient->localidad_residencia)}}</p>
                       <br>   
-                      <p class="card-text"><strong>Obra Social : </strong>{{$patient->medicalInsurence->nombre_obraSocial}}</p>
+                      <p class="card-text"><strong>Obra Social : </strong>{{ucfirst($patient->medicalInsurence->nombre_obraSocial)}}</p>
                       <p class="card-text"><strong>Numero obra social : </strong>{{$patient->numero_obraSocial}}</p>
                       <br>
                       <p class="card-text"><strong>Observación : </strong>{{$patient->observacion}}</p>

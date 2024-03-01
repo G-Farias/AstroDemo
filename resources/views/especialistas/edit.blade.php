@@ -32,8 +32,8 @@
                         @csrf
                         @method('PUT')
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ $specialist->nombre }}" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
-                            <input type="text" value="{{ $specialist->apellido }}" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
+                            <input type="text" value="{{ ucfirst($specialist->nombre) }}" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" value="{{ ucfirst($specialist->apellido) }}" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                           </div>
 
                         
@@ -55,10 +55,10 @@
                           <div class="input-group mb-3">
                             <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                               <option selected disabled >Especialidad</option>
-                              <option selected value="{{ $specialist->especialidad }}">{{ $specialist->specialty->nombre_especialidad }}</option>
+                              <option selected value="{{ $specialist->especialidad }}">{{ ucfirst($specialist->specialty->nombre_especialidad) }}</option>
                                   @foreach ($specialty as $specialty)
                                       <option value="{{$specialty->id}}">
-                                          {{$specialty->nombre_especialidad}}
+                                          {{ucfirst($specialty->nombre_especialidad)}}
                                       </option>
                                   @endforeach
                               </select>
@@ -74,8 +74,8 @@
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ $specialist->provincia_residencia }}" name="provincia_residencia" id="provincia_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
-                            <input type="text" value="{{ $specialist->localidad_residencia }}" name="localidad_residencia" id="localidad_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
+                            <input type="text" value="{{ ucfirst($specialist->provincia_residencia) }}" name="provincia_residencia" id="provincia_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
+                            <input type="text" value="{{ ucfirst($specialist->localidad_residencia) }}" name="localidad_residencia" id="localidad_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
                           </div>
                                                   
                           <x-success-button>{{ __('Guardar') }}</x-success-button>

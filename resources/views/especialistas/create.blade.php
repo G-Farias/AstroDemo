@@ -45,17 +45,17 @@
                           </div>
 
                           <div class="input-group mb-3">
-                           <input type="mail" name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                           <input type="password" name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                           <input type="mail" required name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
+                           <input type="password" required name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
 
                           </div>
                           
                           <div class="input-group mb-3">
-                            <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                            <select class="form-control" required id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                               <option selected disabled >Especialidad</option>
                                   @foreach ($specialty as $specialty)
                                       <option value="{{$specialty->id}}">
-                                          {{$specialty->nombre_especialidad}}
+                                          {{ucfirst($specialty->nombre_especialidad)}}
                                       </option>
                                   @endforeach
                               </select>
@@ -66,8 +66,8 @@
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="text" name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
-                            <input type="text" name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
+                            <input type="text" required name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
+                            <input type="text" required name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
                           </div>
 
                           <div class="input-group mb-3">

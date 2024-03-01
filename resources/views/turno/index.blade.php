@@ -88,7 +88,7 @@
                                 <option selected disabled >Especialidad</option>
                                     @foreach ($specialtys as $specialty)
                                         <option value="{{$specialty->id}}">
-                                            {{$specialty->nombre_especialidad}}
+                                            {{ucfirst($specialty->nombre_especialidad)}}
                                         </option>
                                     @endforeach
                             </select>
@@ -109,7 +109,7 @@
                                 <option selected disabled >Especialidad</option>
                                     @foreach ($specialtys as $specialty)
                                         <option value="{{$specialty->id}}">
-                                            {{$specialty->nombre_especialidad}}
+                                            {{ucfirst($specialty->nombre_especialidad)}}
                                         </option>
                                     @endforeach
                             </select>
@@ -193,7 +193,7 @@
                           <tr>
                             <td data-title="Fecha">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</td>
                             <td data-title="Hora" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-                            <td data-title="Especialista">{{ $schedule->specialist->nombre }} {{$schedule->specialist->apellido}}</td>
+                            <td data-title="Especialista">{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
                             <td data-title="Estado">
                                 @if ($schedule->estado == '0')
                                     <p>Disponible</p>

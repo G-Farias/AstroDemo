@@ -31,7 +31,7 @@
                                             <div class="card-body">
                                                 <input type="text" hidden value="{{ $medicalInsurence->id }}" name="id_obraSocial" id="id_obraSocial" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                                                 <input type="text" hidden value="{{$specialist->id}}" name="id_especialista" id="id_especialista" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                                 <h5 class="card-title">Obra social / prepaga : {{ $medicalInsurence->nombre_obraSocial }}</h5>
+                                                 <h5 class="card-title">Obra social / prepaga : {{ ucfirst($medicalInsurence->nombre_obraSocial) }}</h5>
                                                 
                                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
                                                     <x-success-button >{{ __('Guardar') }}</x-success-button>

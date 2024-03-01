@@ -38,12 +38,12 @@
                       <p class="card-text"><strong>Celular : </strong>{{$specialist->celular}}</p>
                       <p class="card-text"><strong>Teléfono : </strong>{{$specialist->telefono}}</p>
                       <p class="card-text"><strong>Email : </strong>{{$specialist->email}}</p>
-                      <p class="card-text"><strong>Provincia : </strong>{{$specialist->provincia_residencia}}</p>
-                      <p class="card-text"><strong>Localidad : </strong>{{$specialist->localidad_residencia}}</p>
+                      <p class="card-text"><strong>Provincia : </strong>{{ucfirst($specialist->provincia_residencia)}}</p>
+                      <p class="card-text"><strong>Localidad : </strong>{{ucfirst($specialist->localidad_residencia)}}</p>
                       <br>   
                       <p class="card-text"><strong>Días de atención : </strong>{{$specialist->dia_atencion}}</p>
                       <p class="card-text"><strong>Horario de atención : </strong>{{$specialist->hr_atencion}}</p>
-                      <p class="card-text"><strong>Especialidad : </strong>{{$specialist->especialidad}}</p>
+                      <p class="card-text"><strong>Especialidad : </strong>{{ucfirst($specialist->especialidad)}}</p>
                       
 
 

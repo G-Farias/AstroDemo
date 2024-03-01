@@ -33,7 +33,7 @@
                         @csrf
                         @method('PUT')
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ $medicalInsurence->nombre_obraSocial }}" name="nombre_obraSocial" id="nombre_obraSocial" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" value="{{ ucfirst($medicalInsurence->nombre_obraSocial) }}" name="nombre_obraSocial" id="nombre_obraSocial" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
                           </div>
 
                         

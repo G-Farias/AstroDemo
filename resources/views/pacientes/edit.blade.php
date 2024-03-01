@@ -33,8 +33,8 @@
                         @csrf
                         @method('PUT')
                           <div class="input-group mb-3">
-                            <input type="text" name="nombre" id="nombre" value="{{ $patient->nombre }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
-                            <input type="text" name="apellido" id="apellido" value="{{ $patient->apellido }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
+                            <input type="text" name="nombre" id="nombre" value="{{ ucfirst($patient->nombre) }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" name="apellido" id="apellido" value="{{ ucfirst($patient->apellido) }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                           </div>
 
                         
@@ -58,10 +58,10 @@
                           <div class="input-group mb-3">
                             <select class="form-control" id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                               <option disabled >Seleccione una obra social</option>
-                              <option selected value="{{ $patient->obra_social }}">{{ $patient->medicalInsurence->nombre_obraSocial }}</option>
+                              <option selected value="{{ $patient->obra_social }}">{{ ucfirst($patient->medicalInsurence->nombre_obraSocial) }}</option>
                                   @foreach ($medicalInsurence as $medicalInsurence)
                                       <option value="{{$medicalInsurence->id}}">
-                                          {{$medicalInsurence->nombre_obraSocial}}
+                                          {{ucfirst($medicalInsurence->nombre_obraSocial)}}
                                       </option>
                                   @endforeach
                               </select>
@@ -77,8 +77,8 @@
                               <option value="0" disabled>País</option>
                               <option value="Argentina" selected>Argentina</option>
                             </select>
-                            <input type="text" name="provincia_residencia" id="provincia_residencia" value="{{ $patient->provincia_residencia }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
-                            <input type="text" name="localidad_residencia" id="localidad_residencia" value="{{ $patient->localidad_residencia }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
+                            <input type="text" name="provincia_residencia" id="provincia_residencia" value="{{ ucfirst($patient->provincia_residencia) }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
+                            <input type="text" name="localidad_residencia" id="localidad_residencia" value="{{ ucfirst($patient->localidad_residencia) }}" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
                           </div>
                           
                           <div class="input-group mb-3">

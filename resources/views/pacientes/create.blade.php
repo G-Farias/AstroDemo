@@ -58,7 +58,7 @@
                               <option selected disabled >Seleccione una obra social</option>
                                   @foreach ($medicalInsurence as $medicalInsurence)
                                       <option value="{{$medicalInsurence->id}}">
-                                          {{$medicalInsurence->nombre_obraSocial}}
+                                          {{ucfirst($medicalInsurence->nombre_obraSocial)}}
                                       </option>
                                   @endforeach
                               </select>
