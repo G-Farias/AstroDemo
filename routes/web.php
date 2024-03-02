@@ -33,14 +33,21 @@ Route::get('/', function () {
 Route::get('/bienvenido', function(){
     return view('welcome');
 });
+/*
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-
+*/
 
 Route::get('/pacientes', function () {
     return view('pacientes\pacientes');
 })->middleware(['auth', 'verified'])->name('pacientes');
+
+Route::middleware('auth')->group(function() {
+    Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
+    Route::post('/dashboard/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
+
+});
 
 Route::middleware('auth')->group(function () {
 
