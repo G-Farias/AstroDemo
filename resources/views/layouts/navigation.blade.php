@@ -56,10 +56,16 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        @can('isAdmin')
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
-
+                        @endcan
+                        @can('isUser')
+                        <x-dropdown-link :href="route('especialistas.edit', Auth::user()->id_especialista)">
+                            {{__('Editar perfil')}}
+                        </x-dropdown-link>
+                        @endcan
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -119,10 +125,17 @@
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
             </div>
             <div class="mt-3 space-y-1">
+                @can('isAdmin')
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Perfil') }}
                 </x-responsive-nav-link>
+                @endcan
 
+                @can('isUser')
+                <x-responsive-nav-link :href="route('especialistas.edit', Auth::user()->id_especialista)">
+                    {{__('Editar perfil')}}
+                </x-responsive-nav-link>
+                @endcan
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

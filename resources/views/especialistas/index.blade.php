@@ -41,7 +41,7 @@
                         </form>
                         <x-primary-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-primary-a>
                         @can('isAdmin')
-                        <x-third-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-third-a>
+                        <x-primary-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-primary-a>
                         @endcan
                       </div>
                     </div>

@@ -26,34 +26,45 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-
+                  <header class="mb-3">
+                  <h2 class="text-lg font-medium text-gray-900">
+                    {{ __('Información del perfil') }}
+                </h2>
+        
+                <p class="mt-1 text-sm text-gray-600">
+                    {{ __("Actualiza la información personal.") }}
+                </p>
+                  </header>
                   <form action="{{ route('especialistas.update' ,$specialist )}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf
                         @method('PUT')
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ ucfirst($specialist->nombre) }}" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
-                            <input type="text" value="{{ ucfirst($specialist->apellido) }}" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
+                            <input type="text" value="{{ ucfirst($specialist->nombre) }}" name="nombre" id="nombre" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" value="{{ ucfirst($specialist->apellido) }}" name="apellido" id="apellido" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                           </div>
 
                         
                           <div class="input-group mb-3">
-                            <input type="number" value="{{ $specialist->dni }}" name="dni" id="dni" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="DNI" aria-label="Dni">
+                            <label class="input-group-text">D.N.I</label>
+                            <input type="number" value="{{ $specialist->dni }}" name="dni" id="dni" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="DNI" aria-label="Dni">
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="number" value="{{ $specialist->celular }}" name="celular" id="celular" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="celular">
-                            <input type="number" value="{{ $specialist->telefono }}" name="telefono" id="telefono" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Teléfono" aria-label="Telefono">
+                            <label class="input-group-text">Celular</label>
+                            <input type="number" value="{{ $specialist->celular }}" name="celular" id="celular" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="celular">
+                            <label class="input-group-text">Teléfono</label>
+                            <input type="number" value="{{ $specialist->telefono }}" name="telefono" id="telefono" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Teléfono" aria-label="Telefono">
                           </div>
 
                           <div class="input-group mb-3">
-                           <input type="mail" value="{{ $specialist->email }}" name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                           <input type="password" value="{{ $specialist->password }}" name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                           <input type="mail" value="{{ $specialist->email }}" name="email" id="email" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
+                           <input type="password" value="{{ $specialist->password }}" name="password" id="password" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
 
                           </div>
                           
                           <div class="input-group mb-3">
-                            <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                            <select class="form-control" id="especialidad" name="especialidad" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
                               <option selected disabled >Especialidad</option>
                               <option selected value="{{ $specialist->especialidad }}">{{ ucfirst($specialist->specialty->nombre_especialidad) }}</option>
                                   @foreach ($specialty as $specialty)
@@ -65,17 +76,21 @@
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ $specialist->matricula }}" name="matricula" id="matricula" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Matricula" aria-label="matricula">
+                            <label class="input-group-text">Matricula</label>
+                            <input type="text" value="{{ $specialist->matricula }}" name="matricula" id="matricula" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Matricula" aria-label="matricula">
+                          </div>
+
+                          <p class="mb-3 text-sm text-gray-600">
+                            {{ __("La información del día y horario de atención será mostrada al publico, procura que esté correcta.") }}
+                          </p>
+                          <div class="input-group mb-3">
+                            <input type="text" value="{{ $specialist->dia_atencion }}" name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
+                            <input type="text" value="{{ $specialist->hr_atencion }}" name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="text" value="{{ $specialist->dia_atencion }}" name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
-                            <input type="text" value="{{ $specialist->hr_atencion }}" name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
-                          </div>
-
-                          <div class="input-group mb-3">
-                            <input type="text" value="{{ ucfirst($specialist->provincia_residencia) }}" name="provincia_residencia" id="provincia_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
-                            <input type="text" value="{{ ucfirst($specialist->localidad_residencia) }}" name="localidad_residencia" id="localidad_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
+                            <input type="text" value="{{ ucfirst($specialist->provincia_residencia) }}" name="provincia_residencia" id="provincia_residencia" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
+                            <input type="text" value="{{ ucfirst($specialist->localidad_residencia) }}" name="localidad_residencia" id="localidad_residencia" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
                           </div>
                                                   
                           <x-success-button>{{ __('Guardar') }}</x-success-button>
