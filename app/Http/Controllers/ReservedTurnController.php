@@ -164,6 +164,15 @@ class ReservedTurnController extends Controller
         return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
     }
 
+    public function turnos_reservados_dni(Request $request){
+        $specialists = Specialist::all();
+        $medicalInsurence = MedicalInsurence::all();
+        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->take(130)->get();
+        $reservedTurns = ReservedTurn::where('dni', $request->dni)->get();
+
+        return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
+    }
+
     public function turnos_reservados_update(ReservedTurn $reservedTurn, Request $request, $id){
 
         $reservedTurn = ReservedTurn::find($id);
@@ -187,6 +196,7 @@ class ReservedTurnController extends Controller
         return redirect()->back();
 
     }
+
 
     /**
      * Display the specified resource.

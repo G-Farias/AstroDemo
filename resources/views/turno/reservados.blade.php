@@ -123,6 +123,22 @@
                     </div>
                 </div>
                       
+                <div class="col-sm-6">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        {{ __('Buscar turnos por DNI del paciente') }} 
+                    </h2>
+                <form action="{{ route('turno.reservados_dni')}}" method="post">  
+                    @csrf
+                <div class="input-group mb-3">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
+                        <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                    </div>
+                    <x-success-button >{{ __('Buscar') }}</x-success-button>
+                    </form>
+                </div>
+            </div>
+
                 </div>    
             </div>
         </div>
@@ -148,8 +164,23 @@
                     </form>
                 </div>
             </div>
+            <div class="col-sm-6">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                    {{ __('Buscar turnos por DNI del paciente') }} 
+                </h2>
+            <form action="{{ route('turno.reservados_dni')}}" method="post">  
+                @csrf
+            <div class="input-group mb-3">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
+                    <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                </div>
+                <x-success-button >{{ __('Buscar') }}</x-success-button>
+                </form>
             </div>
-                  
+        </div>    
+        </div>
+
             </div>    
         </div>
     </div>
