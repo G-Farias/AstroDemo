@@ -87,7 +87,7 @@
                                     <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
                                     <x-success-button >{{ __('Buscar') }}</x-success-button>
                                 </div>
-                            </form>
+                                </form>
 
                         @foreach ($schedule as $schedule)
                             <div class="card mb-1">
@@ -101,7 +101,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
-                                </form>
+                                    </form>
                                 </div>
                                 </div>
                             </div>
