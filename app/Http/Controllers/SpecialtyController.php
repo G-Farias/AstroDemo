@@ -32,6 +32,9 @@ class SpecialtyController extends Controller
     {
         $request->validate([
             'nombre_especialidad' => ['required', 'unique:specialties', 'max:255'],
+        ],
+        [
+            'nombre_especialidad.unique' => 'El nombre de la especialidad ya se encuentra registrada.',
         ]);
 
         $specialty = new Specialty;

@@ -57,6 +57,14 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'dni' => ['required', 'unique:patients', 'max:255'],
+        ],
+        [
+            'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+        ]);
+
         $pacientes = new Patient;
 
         $pacientes->nombre = $request->nombre;

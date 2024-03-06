@@ -32,6 +32,9 @@ class MedicalInsurenceController extends Controller
     {
         $request->validate([
             'nombre_obraSocial' => ['required', 'unique:medical_insurences', 'max:255'],
+        ],
+        [
+            'nombre_obraSocial.unique' => 'El nombre de la obra social ya se encuentra registrada.',
         ]);
 
         $medicalInsurence = new MedicalInsurence;

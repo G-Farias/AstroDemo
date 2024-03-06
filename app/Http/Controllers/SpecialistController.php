@@ -53,6 +53,15 @@ class SpecialistController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'dni' => ['required', 'unique:specialists', 'max:255'],
+            'email' => ['required', 'unique:specialists', 'max:255'],
+        ],
+        [
+            'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+            'email.unique' => 'El Email ya se encuentra registrado.'
+        ]);
+
         $specialist = new Specialist;
  
         $specialist->nombre = $request->nombre;
