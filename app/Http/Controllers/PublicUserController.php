@@ -11,6 +11,7 @@ use App\Models\MedicalInsurenceSpecialist;
 use App\Models\ReservedTurn;
 use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 use PhpParser\Node\Stmt\Return_;
 
 class PublicUserController extends Controller
@@ -63,8 +64,8 @@ class PublicUserController extends Controller
 
     public function store(Request $request)
     {
-
-        if ($request->dni == $request->dni_rep && $request->estado == '0') {
+      
+       if ($request->dni == $request->dni_rep && $request->estado == '0') {
        
 
         $reservedTurn = new ReservedTurn;
@@ -90,8 +91,8 @@ class PublicUserController extends Controller
 
         } else {
             return back()->with('danger', 'D.N.I / Pasaporte no coinciden');
-        }
-                
+        } 
+                    
 
     }
 
