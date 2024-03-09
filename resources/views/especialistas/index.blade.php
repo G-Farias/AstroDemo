@@ -17,14 +17,32 @@
         {{ session('success') }}
     </div>
 @endif
-    <div class="py-12">
+@if (session('danger'))
+    <div class="alert alert-danger">
+          {{ session('danger') }}
+    </div>
+@endif
+@can('isAdmin')
+<div class="py-4">
+    <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+        <div class="p-4 text-gray-900">
+            <div class="font-semibold text-gray-800 leading-tight">
+                <p>Cantidad de especialistas registrados: {{$q_specialist}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endcan
+@can('isAdmin')
+    <div class="py-3">
+@elsecan('isUser')
+<div class="py-12">
+
+@endcan
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 @foreach ($specialists as $specialist)
                 <div class="card mb-1">
-                    <div class="card-header">
-                        Especialista
-                    </div>
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</p>
                       <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $specialist->dni }}</p> 

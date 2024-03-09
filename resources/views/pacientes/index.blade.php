@@ -40,12 +40,10 @@
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                <div class="p-2 text-gray-900">
+                <div class=" text-gray-900">
                 @foreach ($patients as $patient)
                 <div class="card mb-1">
-                    <div class="card-header">
-                        Paciente
-                    </div>
+                   
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>
                       <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $patient->dni }}</p> 

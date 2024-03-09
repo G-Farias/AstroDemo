@@ -31,12 +31,14 @@ class SpecialistController extends Controller
     {
         if (Gate::allows('isAdmin')) {
             $specialists = Specialist::orderBy('nombre','ASC')->latest()->paginate(10);
+            $q_specialist = Specialist::count();
+
         } else{
             $specialists = Specialist::orderBy('nombre','ASC')->where('id', Auth::user()->id_especialista)->get();
-
+            $q_specialist = Specialist::count();
         }
 
-        return view('especialistas.index', compact('specialists'));
+        return view('especialistas.index', compact('specialists','q_specialist'));
     }
 
     /**
@@ -53,6 +55,11 @@ class SpecialistController extends Controller
      */
     public function store(Request $request)
     {
+        $q_specialist = Specialist::count();
+
+        if($q_specialist < 5){
+
+        
         $request->validate([
             'dni' => ['required', 'unique:specialists', 'max:255'],
             'email' => ['required', 'unique:specialists', 'max:255'],
@@ -91,6 +98,10 @@ class SpecialistController extends Controller
         $user->id_especialista = $specialist->id;
 
         $user->save();
+    
+    } else {
+        return redirect()->route('especialistas.index')->with('danger', '¡Alcanzaste el limite de registro de especialistas!');
+    }
 
         
         return redirect()->route('especialistas.index')->with('success', 'Especialista agregado');
