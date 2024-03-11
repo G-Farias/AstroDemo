@@ -30,10 +30,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 @foreach ($medicalInsurences as $medicalInsurence)
-                <div class="card mb-1">
-                    <div class="card-header">
-                        Obra Social / Prepaga
-                    </div>
+                <div class="card border-light">
+        
                     <div class="card-body">
                       <p class="card-text"><strong>Obra social / Prepaga : </strong> {{ucfirst($medicalInsurence->nombre_obraSocial) }}</p>
                       <p class="card-text"><strong>Monto : </strong> {{ $medicalInsurence->precio_obraSocial }}</p> 

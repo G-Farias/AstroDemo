@@ -32,9 +32,14 @@
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('pacientes.buscar')}}" method="post">
                         @csrf
+                        <header class="mb-3">
+                            <h2 class="text-lg font-medium text-gray-900">
+                              {{ __('Buscar paciente') }}
+                            </h2>
+                          </header>
                     <div class="input-group mb-3">
                         <input type="text" name="busqueda" id="busqueda" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Ingrese D.N.I, nombre o apellido para buscar..." aria-label="Nombre">
-                        <x-success-a href="">{{ __('Buscar') }}</x-success-a>
+                        <x-success-button href="">{{ __('Buscar') }}</x-success-button>
                     </div>
                     </form>
                 </div>
@@ -42,7 +47,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class=" text-gray-900">
                 @foreach ($patients as $patient)
-                <div class="card mb-1">
+                <div class="card border-light">
                    
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>

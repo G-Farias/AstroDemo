@@ -27,7 +27,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-
+                  <header class="mb-3">
+                    <h2 class="text-lg font-medium text-gray-900">
+                      {{ __('Registrar especialidad.') }}
+                    </h2>
+                    <p class="mt-1 text-sm text-gray-600">
+                      {{ __("Ingrese la información de la especialidad.") }}
+                    </p>
+                  </header>
                   <form action="{{ route('especialidad.store')}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf

@@ -19,7 +19,18 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-
+                    <header class="mb-3">
+                        <h2 class="text-lg font-medium text-gray-900">
+                          {{ __('Registrar turno de atención') }}
+                        </h2>
+                        <p class="mb-2 text-sm text-gray-600">
+                          {{ __("Seleccione el día, horario de atención y el intervalo de cada turno.") }}
+                        </p>
+                        <p class="text-sm text-gray-600">
+                            {{$specialist->nombre}} {{$specialist->apellido}} </br>
+                            {{$specialist->dia_atencion}} </br> {{$specialist->hr_atencion}}
+                        </p>
+                      </header>
                 <form action="{{ route('especialistas.store_horario_atencion')}}" method="post">  
                 @csrf
                 <div class="input-group mb-3">
@@ -36,7 +47,7 @@
                     <span class="input-group-text" id="basic-addon1">Horario finalización turno mañana</span>
                     <input type="time"  name="fin_turno_mañana" id="fin_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                 </div>
-                    <p class="card-text text-muted mb-3">*Si posee horario de corrido,
+                    <p class="card-text text-muted mb-2">*Si posee horario de corrido,
                          ignore completar el turno tarde
                     </p>
                 <div class="input-group mb-3">
@@ -71,13 +82,15 @@
     </div>
 
 
-    <div class="py-12">
+    <div class="py-1 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Ver o eliminar horarios') }}
-                    </h2>
+                    <header class="mb-2">
+                        <h2 class="text-lg font-medium text-gray-900">
+                          {{ __('Ver o eliminar turno de atención') }}
+                        </h2>
+                      </header>
                     <div class ="mb-3">
                         
                                 <form action="{{ route('especialistas.horario_atencion',$specialist)}}" method="post">  

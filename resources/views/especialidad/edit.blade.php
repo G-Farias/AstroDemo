@@ -27,7 +27,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-
+                  <header class="mb-3">
+                    <h2 class="text-lg font-medium text-gray-900">
+                      {{ __('Modificar especialidad.') }}
+                    </h2>
+                  </header>
                   <form action="{{ route('especialidad.update', $specialty )}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf

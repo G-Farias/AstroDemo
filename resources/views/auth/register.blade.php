@@ -1,4 +1,9 @@
 <x-guest-layout>
+    @if (session('danger'))
+    <div class="alert alert-danger py-2" style="color: red">
+          {{ session('danger') }}
+    </div>
+    @endif
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
@@ -45,7 +50,7 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Resitrar') }}
+                {{ __('Registrar') }}
             </x-primary-button>
         </div>
     </form>

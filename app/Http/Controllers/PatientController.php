@@ -85,7 +85,7 @@ class PatientController extends Controller
 
         $pacientes->save();
         
-        return redirect()->route('pacientes.index')->with('success', 'Paciente agregada');
+        return redirect()->route('pacientes.index')->with('success', 'Paciente agregado');
     }
 
     /**

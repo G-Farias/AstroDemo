@@ -30,6 +30,11 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $admin = User::where('level', null)->count();
+
+        if($admin < 2){
+
+            
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
@@ -45,7 +50,10 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
         return redirect(RouteServiceProvider::HOME);
+
+        } else {
+            return redirect()->route('register')->with('danger', 'Alcanzó el limite máximo de registros administrativos');
+        }
     }
 }

@@ -29,6 +29,14 @@
                   <form action="{{ route('especialistas.store')}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf
+                        <header class="mb-3">
+                          <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Registrar especialista') }}
+                          </h2>
+                          <p class="mt-1 text-sm text-gray-600">
+                            {{ __("Ingrese la información del paciente.") }}
+                          </p>
+                        </header>
                           <div class="input-group mb-3">
                             <input type="text" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
                             <input type="text" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
@@ -44,10 +52,12 @@
                             <input type="number" name="telefono" id="telefono" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Teléfono" aria-label="Telefono">
                           </div>
 
+                          <p class="mb-2 text-sm text-gray-600">
+                            {{ __("El email y la contraseña se utilizará para que el especialista pueda acceder.") }}
+                          </p>
                           <div class="input-group mb-3">
                            <input type="mail" required name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
                            <input type="password" required name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
-
                           </div>
                           
                           <div class="input-group mb-3">
@@ -65,6 +75,9 @@
                             <input type="text" name="matricula" id="matricula" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Matricula" aria-label="matricula">
                           </div>
 
+                          <p class="mb-2 text-sm text-gray-600">
+                            {{ __("La información del día y horario de atención será mostrada al publico, procura que esté correcta.") }}
+                          </p>
                           <div class="input-group mb-3">
                             <input type="text" required name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
                             <input type="text" required name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">

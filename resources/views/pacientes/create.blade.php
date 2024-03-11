@@ -31,12 +31,19 @@
                   <form action="{{ route('pacientes.store')}}" method="post">  
                     <div class="input-group mb-3">
                         @csrf
+                        <header class="mb-3">
+                          <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Registrar paciente') }}
+                          </h2>
+                          <p class="mt-1 text-sm text-gray-600">
+                            {{ __("Ingrese la información del especialista.") }}
+                          </p>
+                        </header>
                           <div class="input-group mb-3">
                             <input type="text" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
                             <input type="text" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                           </div>
 
-                        
                           <div class="input-group mb-3">
                             <input type="number" name="dni" id="dni" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="DNI" aria-label="Dni">
                             <span class="input-group-text" id="basic-addon1">Fecha de nacimiento</span>

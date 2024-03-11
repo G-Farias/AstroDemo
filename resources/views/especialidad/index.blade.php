@@ -30,10 +30,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 @foreach ($specialtys as $specialty)
-                <div class="card mb-1">
-                    <div class="card-header">
-                        Especialidad
-                    </div>
+                <div class="card border-light">
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre de la especialidad : </strong> {{ucfirst($specialty->nombre_especialidad) }}</p>
                       <p class="card-text"><strong>¿Se pueden hacer sobreturnos? : </strong>
@@ -46,7 +43,6 @@
 
 
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <x-success-a href="{{ route('especialidad.show', $specialty) }}">{{ __('Ver más') }}</x-success-a>
                         <x-third-a href="{{ route('especialidad.edit', $specialty) }}">{{__('Editar')}}</x-third-a>
                         <form class="mb-0 " action="{{ route('especialidad.destroy', $specialty) }}" method="POST">
                             @csrf

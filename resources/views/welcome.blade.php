@@ -6,6 +6,9 @@
 
         <title>Sistema ASTRO</title>
 
+     <!-- Favicon -->
+     <link rel="shortcut icon" sizes="114x114" href="{{ asset('resources/img/favicon.ico') }}">
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -32,6 +35,12 @@
                         @endif
                     @endauth
                 </div>
+            @endif
+
+            @if (session('danger'))
+            <div class="alert alert-danger">
+                  {{ session('danger') }}
+            </div>
             @endif
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">

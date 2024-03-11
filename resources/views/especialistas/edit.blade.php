@@ -29,11 +29,10 @@
                   <header class="mb-3">
                   <h2 class="text-lg font-medium text-gray-900">
                     {{ __('Información del perfil') }}
-                </h2>
-        
-                <p class="mt-1 text-sm text-gray-600">
+                  </h2>
+                  <p class="mt-1 text-sm text-gray-600">
                     {{ __("Actualiza la información personal.") }}
-                </p>
+                  </p>
                   </header>
                   <form action="{{ route('especialistas.update' ,$specialist )}}" method="post">  
                     <div class="input-group mb-3">
