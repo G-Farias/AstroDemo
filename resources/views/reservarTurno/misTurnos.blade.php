@@ -34,7 +34,7 @@
                             {{ __('Ver mis turnos') }} 
                         </h2>
                         <p class="mb-2 text-muted font-semibold leading-tight">
-                            Ingrese su D.N.I o pasaporte para poder ver sus turnos.
+                            Ingrese su D.N.I o pasaporte sin puntos ni guiones para poder ver sus turnos.
                         </p>
                     <form action="{{ route('reservarTurno.misTurnos')}}" method="post">  
                         @csrf
@@ -58,7 +58,7 @@
                         @foreach ($reservedTurns as $reservedTurn)
                         @foreach ($schedules as $schedule)
                         @if ($schedule->id == $reservedTurn->id_horario_atencion)
-                        <div class="card mb-1">
+                        <div class="card border-light">
                             <div class="card-body">
                               <h2 class="card-tittle font-semibold text-xl text-gray-800 leading-tight">
                               </h2>

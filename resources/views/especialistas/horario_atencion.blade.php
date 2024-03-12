@@ -103,7 +103,7 @@
                                 </form>
 
                         @foreach ($schedule as $schedule)
-                            <div class="card mb-1">
+                            <div class="card border-light">
                                 <div class="card-body">
                                 <h5 class="card-title"><strong> Horario : </strong> {{date("H:i",strtotime($schedule->hr_atencion))  }}</h5>
                                 <h5 class="card-title"><strong> Fecha : </strong> {{date("d-m-y",strtotime($schedule->fecha_atencion))  }}</h5>

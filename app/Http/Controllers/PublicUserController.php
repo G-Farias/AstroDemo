@@ -64,7 +64,7 @@ class PublicUserController extends Controller
 
     public function store(Request $request)
     {
-      
+
        if ($request->dni == $request->dni_rep && $request->estado == '0') {
        
 
@@ -98,7 +98,7 @@ class PublicUserController extends Controller
 
     public function mis_turnos(Request $request){
 
-        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->get();
+        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
         $reservedTurns = ReservedTurn::where('dni', $request->dni)->get();
 
         return view('reservarTurno.misTurnos', compact('reservedTurns','schedules'));

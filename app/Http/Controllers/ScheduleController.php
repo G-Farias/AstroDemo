@@ -39,7 +39,8 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-
+    
+        
 
         $inicio_turno_mañana = $request->inicio_turno_mañana;
         $fin_turno_mañana = $request->fin_turno_mañana;
@@ -61,28 +62,42 @@ class ScheduleController extends Controller
         $fechas_tarde = new DatePeriod($inicio_tarde, $intervalo, $fin_tarde);
 
 
-
         foreach($fechas as $fecha){
           /*  echo $fecha->format("d-m-Y H:i:s") . "<br>";
             $fecha->format("d-m-Y H:i:s"); */
 
-            $schedule = new Schedule;
+            $horario = Schedule::where('hr_atencion', $fecha->format("H:i:s"))
+            ->where('fecha_atencion', $request->date)
+            ->where('id_especialista', $request->specialist)->count();
 
-            $schedule->hr_atencion = $fecha->format("H:i:s");
-            $schedule->fecha_atencion = $request->date;
-            $schedule->id_especialista = $request->specialist;
-            $schedule->id_especialidad = $request->specialty;
+            if($horario == '1'){
+                return redirect()->route('especialistas.index')->with('danger', 'Ya hay registro de horario para ese día, si quiere agregar más, agregue los faltantes o elimine los anteriores!');   
+            } else {
+               
+                $schedule = new Schedule;
 
-            $schedule->estado = '0';
-
-            $schedule->save();
-
+                $schedule->hr_atencion = $fecha->format("H:i:s");
+                $schedule->fecha_atencion = $request->date;
+                $schedule->id_especialista = $request->specialist;
+                $schedule->id_especialidad = $request->specialty;
+    
+                $schedule->estado = '0';
+    
+                $schedule->save();
+            }
+            
         }
 
         foreach($fechas_tarde as $fecha_tarde){
-            /*  echo $fecha->format("d-m-Y H:i:s") . "<br>";
-              $fecha->format("d-m-Y H:i:s"); */
-  
+
+            $horario = Schedule::where('hr_atencion', $fecha_tarde->format("H:i:s"))
+            ->where('fecha_atencion', $request->date)
+            ->where('id_especialista', $request->specialist)->count();
+
+            if($horario == '1'){
+                return redirect()->route('especialistas.index')->with('danger', 'Ya hay registro de horario para ese día, si quieres agregar más elimina los anteriores!');   
+            } else {
+
               $schedule_tarde = new Schedule;
   
               $schedule_tarde->hr_atencion = $fecha_tarde->format("H:i:s");
@@ -93,17 +108,17 @@ class ScheduleController extends Controller
               $schedule_tarde->estado = '0';
   
               $schedule_tarde->save();
-  
+            }
           }
 
         if (Gate::allows('isAdmin')) {          
         return redirect()->route('especialistas.index')->with('success', 'Horario agregado');       
         } else {
         return redirect()->route('turno.inicio')->with('success', 'Horario agregado');       
-
-        }   
-
-    }
+            
+        }    
+       
+    } 
 
     public function destroy_horario_atencion(Schedule $schedule)
     {

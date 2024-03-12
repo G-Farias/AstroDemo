@@ -58,7 +58,7 @@ class ReservedTurnController extends Controller
         if (Gate::allows('isAdmin')) {
             $reservedTurn = ReservedTurn::latest()->paginate(10);
             $specialtys = Specialty::all();
-            $schedules = Schedule::where('id_especialidad', $request->especialidad)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
+            $schedules = Schedule::where('id_especialidad', $request->especialidad)->whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
 
         }else{
             $reservedTurn = ReservedTurn::latest()->paginate(10);

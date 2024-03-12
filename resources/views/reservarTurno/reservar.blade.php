@@ -66,11 +66,16 @@
                         <input type="text"  name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido/s" aria-label="Apellido">
                     </div>
 
+                    <p class="mb-2 text-sm text-gray-600">
+                        {{ __("Ingrese el DNI o pasaporte sin puntos ni guiones.") }}
+                      </p>
                     <div class="input-group mb-3">
                         <input type="number"  name="dni" id="dni" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="D.N.I / Pasaporte" aria-label="">
                         <input type="number"  name="dni_rep" id="dni_rep" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Repetir D.N.I / Pasaporte" aria-label="">
                     </div>
-
+                    <p class="mb-2 text-sm text-gray-600">
+                        {{ __("El email y celular se utilizará como medio de contacto.") }}
+                      </p>
                     <div class="input-group mb-3">
                         <input type="number" required  name="celular" id="celular" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="">
                         <input type="mail" required name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="">
@@ -78,7 +83,8 @@
 
                     <div class="input-group mb-3">
                         <select class="form-control" required id="obra_social" name="obra_social" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                            <option selected disabled >Seleccione una obra social</option>
+                            <option disabled selected >Seleccione una obra social</option>
+                              
                                 @foreach ($medicalInsurenceSpecialist as $medicalInsurenceSpecialist)
                                     <option value="{{$medicalInsurenceSpecialist->id_obraSocial}}">
                                         {{ucfirst($medicalInsurenceSpecialist->medicalInsurence->nombre_obraSocial)}}

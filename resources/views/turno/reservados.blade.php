@@ -220,7 +220,7 @@
                               <td data-title="Especialista"> <strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br> {{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
                               <td data-title="Paciente">{{ $reservedTurn->nombre }} {{$reservedTurn->apellido}} <br>{{$reservedTurn->dni}} </td>
                               <td data-title="Contacto">{{ $reservedTurn->celular }}</td>
-                              <td data-title="Obra social"><strong>{{ ucfirst($reservedTurn->medicalInsurence->nombre_obraSocial)}}</strong> <br> {{ $reservedTurn->numero_obraSocial }} </td>
+                              <td data-title="Obra social"><strong>{{ ucfirst($reservedTurn->medicalInsurence?->nombre_obraSocial)}}</strong> <br> {{ $reservedTurn->numero_obraSocial }} </td>
                                <td data-title="Estado">
                                 <form action="{{ route('turno.actualizar', $reservedTurn ) }}" method="post">
                                 <div class="input-group mb-3">
