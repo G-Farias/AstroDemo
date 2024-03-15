@@ -38,7 +38,7 @@
                       <p class="card-text"><strong>Provincia : </strong>{{ucfirst($patient->provincia_residencia)}}</p>
                       <p class="card-text"><strong>Localidad : </strong>{{ucfirst($patient->localidad_residencia)}}</p>
                       <br>   
-                      <p class="card-text"><strong>Obra Social : </strong>{{ucfirst($patient->medicalInsurence->nombre_obraSocial)}}</p>
+                      <p class="card-text"><strong>Obra Social : </strong>{{ucfirst($patient->medicalInsurence?->nombre_obraSocial)}}</p>
                       <p class="card-text"><strong>Numero obra social : </strong>{{$patient->numero_obraSocial}}</p>
                       <br>
                       <p class="card-text"><strong>Observación : </strong>{{$patient->observacion}}</p>

@@ -23,7 +23,7 @@ return new class extends Migration
             $table-> integer('id_horario_atencion');
             $table-> mediumText('observacion')->nullable();
             $table-> integer('estado');
-            $table-> integer('notificacion');
+            $table-> integer('notificacion')->nullable();
             $table->timestamps();
         });
     }

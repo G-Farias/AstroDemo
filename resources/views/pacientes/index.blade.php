@@ -58,6 +58,7 @@
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <x-success-a href="{{ route('pacientes.show', $patient) }}">{{ __('Ver más') }}</x-success-a>
                         <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
+
                         <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
                             @csrf
                             @method('DELETE')

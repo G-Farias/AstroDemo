@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
+use App\Models\Patient;
 use App\Models\ReservedTurn;
 use App\Models\Specialist;
 use App\Models\Specialty;
 use App\Models\Schedule;
+use Dotenv\Store\File\Paths;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -113,6 +115,25 @@ class ReservedTurnController extends Controller
 
         $schedule->save();
 
+        //Agregar paciente al reservar turno
+        if (Patient::where('dni', $request->dni)->first()) {
+            // It exists
+        } else {
+            $patient = new Patient;
+
+            $patient->nombre = $request->nombre;
+            $patient->apellido = $request->apellido;
+            $patient->dni = $request->dni;
+            $patient->celular = $request->celular;
+            $patient->email = $request->email;
+            $patient->obra_social = $request->obra_social;
+            $patient->numero_obraSocial = $request->numero_obraSocial;
+   
+            $patient->save();
+
+        }
+        //-----------------
+        
         return redirect()->route('turno.inicio')->with('success', 'Turno reservado');
 
         } else {

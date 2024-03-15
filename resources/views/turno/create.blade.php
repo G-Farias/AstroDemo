@@ -53,6 +53,10 @@
                                 <input type="text"  name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                             </div>
 
+                            
+                          <p class="mb-2 text-sm text-gray-600">
+                            {{ __("El D.N.I se utilizará como ID del turno para poder gestionarlo, tambien para almacenar el paciente si no existe, escribir correctamente.") }}
+                          </p>
                             <div class="input-group mb-3">
                                 <input type="number"  name="dni" id="dni" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="D.N.I / Pasaporte" aria-label="">
                                 <input type="number"  name="dni_rep" id="dni_rep" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Repetir D.N.I / Pasaporte" aria-label="">

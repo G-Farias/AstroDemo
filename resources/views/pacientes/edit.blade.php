@@ -67,7 +67,7 @@
                           <div class="input-group mb-3">
                             <select class="form-control" id="obra_social" name="obra_social" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
                               <option disabled >Seleccione una obra social</option>
-                              <option selected value="{{ $patient->obra_social }}">{{ ucfirst($patient->medicalInsurence->nombre_obraSocial) }}</option>
+                              <option selected value="{{ $patient->obra_social }}">{{ ucfirst($patient->medicalInsurence?->nombre_obraSocial) }}</option>
                                   @foreach ($medicalInsurence as $medicalInsurence)
                                       <option value="{{$medicalInsurence->id}}">
                                           {{ucfirst($medicalInsurence->nombre_obraSocial)}}
