@@ -198,6 +198,7 @@
                         <table class="table text-center">
                         <thead>
                           <tr>
+                            <th scope="col">Notificación</th>
                             <th scope="col">Fecha y hora</th>
                             <th scope="col">Especialista</th>
                             <th scope="col">Paciente</th>
@@ -216,6 +217,12 @@
                          <tbody>
                             <tr>
                               <input type="text" name="id" id="id" hidden value="{{ $reservedTurn->id }}">
+                            <td data-title="Notificación">                         
+                            @if ($reservedTurn->notificacion == null)
+                                <p>No</p>
+                            @else
+                                <p>Si</p>
+                            @endif</td>
                               <td data-title="Fecha y hora">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
                               <td data-title="Especialista"> <strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br> {{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
                               <td data-title="Paciente">{{ $reservedTurn->nombre }} {{$reservedTurn->apellido}} <br>{{$reservedTurn->dni}} </td>

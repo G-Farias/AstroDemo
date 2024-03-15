@@ -12,8 +12,14 @@ use App\Http\Controllers\SpecialtyController;
 use App\Models\MedicalInsurenceSpecialist;
 use App\Models\PublicUser;
 use App\Models\ReservedTurn;
+use Illuminate\Broadcasting\Channel;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Gate; 
+use App\Notifications\turnMail;
+
+use App\Models\Schedule;
+use Illuminate\Support\Facades\Schema;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +33,46 @@ use Illuminate\Support\Facades\Gate;
 */
 
 Route::get('/', function () {
+    
     return view('welcome');
 });
 
 Route::get('/bienvenido', function(){
     return view('welcome');
+});
+
+Route::get('/notificar', function(){
+
+    //ELIMINAR PASADO
+    $eliminarTurnos = Schedule::whereDate('fecha_atencion', '<', now()->subDays(1))->get();
+    foreach($eliminarTurnos as $eliminarTurno){
+
+    ReservedTurn::where('id_horario_atencion', $eliminarTurno->id)->delete();
+    }
+    Schedule::whereDate('fecha_atencion', '<', now()->subDays(1))->delete();
+    
+    //-------------------------------------------------
+
+    //NOTIFICAR TURNO POR MAIL
+    $turns = Schedule::where('estado','1')->whereDate('fecha_atencion','=', now()->addDays(2))->get();
+
+    foreach($turns as $turn){
+        $reservedTurns = ReservedTurn::where('id_horario_atencion', $turn->id)->where('notificacion', null)->get();
+
+        foreach($reservedTurns as $reservedTurn){
+            Notification::route('mail',$reservedTurn->email)->notify(new turnMail($reservedTurn));
+            
+            $turnoReservado = ReservedTurn::find($reservedTurn->id);
+            $turnoReservado->notificacion = '1';
+            $turnoReservado->save();
+            
+        }
+    
+    }
+    //---------------------------------------------------
+
+
+
 });
 /*
 Route::get('/dashboard', function () {
@@ -59,6 +100,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/pacientes/{patient}/edit', [PatientController::class, 'edit'])->name('pacientes.edit');
     Route::put('/pacientes/{patient}', [PatientController::class, 'update'])->name('pacientes.update');
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
+
 
 });
 Route::middleware('can:isAdmin')->group(function (){
