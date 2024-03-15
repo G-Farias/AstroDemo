@@ -127,7 +127,7 @@ class ReservedTurnController extends Controller
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
         $reservedTurns = ReservedTurn::get();
-        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(100)->get();
+        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->orderBy('hr_atencion','desc')->take(100)->get();
         }else{
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();

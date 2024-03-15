@@ -14,7 +14,7 @@ return [
     */
 
     'failed' => 'Los datos no coinciden con los almacenados.',
-    'password' => 'La contraseña es incorrecta..',
+    'password' => 'La contraseña es incorrecta.',
     'throttle' => 'Demasiados intentos, por favor intente de nuevo en :seconds segundos.',
 
 ];

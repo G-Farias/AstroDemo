@@ -15,7 +15,7 @@ return [
 
     'reset' => 'Su contraseña fué cambiada.',
     'sent' => 'Enviamos un correo de reseteo de contraseña.',
-    'throttled' => 'Please wait before retrying.',
+    'throttled' => 'Espere para volver a intentarlo.',
     'token' => 'El token de reseteo de contraseña no es correcto.',
     'user' => "No pudimos encontrar un usuario con esa dirección de email.",
 

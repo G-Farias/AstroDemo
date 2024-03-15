@@ -38,6 +38,7 @@ class turnMail extends Notification
     {
 
         return (new MailMessage)
+                    ->subject('Notificación de su próximo turno')
                     ->line(ucfirst($this->ReservedTurn->nombre) .' '. ucfirst($this->ReservedTurn->apellido) . ' faltan 2 días para tu turno.')
                     ->action('Ver mis turnos', url('/reservarTurno/misTurnos'))
                     ->line('¡Esperamos tu asistencia! En caso contrario, puedes cancelarlo o comunicarte con nosotros');

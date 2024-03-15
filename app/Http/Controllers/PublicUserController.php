@@ -37,7 +37,7 @@ class PublicUserController extends Controller
     {
 
         $specialists = Specialist::where('id', $specialist)->get();
-        $schedules = Schedule::where('id_especialista',$specialist->id)->whereDate('fecha_atencion','>=', now())->take(20)->get();
+        $schedules = Schedule::where('id_especialista',$specialist->id)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(20)->get();
         
         return view('reservarTurno.turnos', compact('specialists','schedules','specialist'));
     }
@@ -46,7 +46,7 @@ class PublicUserController extends Controller
 
         
         $specialists = Specialist::where('id', $specialist)->get();
-        $schedules = Schedule::where('id_especialista',$specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->get();
+        $schedules = Schedule::where('id_especialista',$specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->orderBy('hr_atencion','asc')->get();
         
         return view('reservarTurno.turnos', compact('specialists','schedules','specialist'));
     }
