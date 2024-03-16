@@ -66,6 +66,9 @@
                             {{__('Editar perfil')}}
                         </x-dropdown-link>
                         @endcan
+                        <x-dropdown-link :href="route('ayuda')">
+                            {{ __('Ayuda') }}
+                        </x-dropdown-link>
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -136,6 +139,9 @@
                     {{__('Editar perfil')}}
                 </x-responsive-nav-link>
                 @endcan
+                <x-responsive-nav-link :href="route('ayuda')">
+                    {{__('Ayuda')}}
+                </x-responsive-nav-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -41,6 +41,10 @@ Route::get('/bienvenido', function(){
     return view('welcome');
 });
 
+Route::get('/ayuda', function () {
+    return view('help');
+})->middleware(['auth', 'verified'])->name('ayuda');
+
 Route::get('/notificar', function(){
 
     //ELIMINAR PASADO
@@ -69,11 +73,8 @@ Route::get('/notificar', function(){
         }
     
     }
-    //---------------------------------------------------
-
-
-
-});
+})->middleware(['auth', 'verified'])->name('notificar');
+        //---------------------------------------------------
 /*
 Route::get('/dashboard', function () {
     return view('dashboard');
