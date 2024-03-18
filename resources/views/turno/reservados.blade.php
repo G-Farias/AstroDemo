@@ -9,7 +9,7 @@
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
         @can('isAdmin')
-            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Todos los turnos') }}</x-primary-a>
+            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Ver todos los turnos') }}</x-primary-a>
             <x-primary-a href="{{ route('turno.inicio') }}">{{ __('Volver') }}</x-primary-a>
         @elsecan('isUser')
         <x-primary-a href="{{ route('turno.inicio') }}">{{ __('Volver') }}</x-primary-a>

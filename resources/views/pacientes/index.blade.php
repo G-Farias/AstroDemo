@@ -25,10 +25,15 @@
        {{ session('success') }}
     </div>
   @endif
+  @if (session('danger'))
+  <div class="alert alert-danger">
+        {{ session('danger') }}
+  </div>
+@endif
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white mb-2 overflow-hidden shadow-sm sm:rounded-lg"> 
+            <div class="bg-white mb-1 overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <form action="{{ route('pacientes.buscar')}}" method="post">
                         @csrf
@@ -42,6 +47,15 @@
                         <x-success-button href="">{{ __('Buscar') }}</x-success-button>
                     </div>
                     </form>
+                </div>
+            </div>
+            <div class="py-1 mb-1">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+                    <div class="p-4 text-gray-900">
+                        <div class="font-semibold text-gray-800 leading-tight">
+                            <p>Cantidad de pacientes registrados: {{$q_patients}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 

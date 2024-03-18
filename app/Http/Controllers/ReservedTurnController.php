@@ -128,6 +128,7 @@ class ReservedTurnController extends Controller
             $patient->email = $request->email;
             $patient->obra_social = $request->obra_social;
             $patient->numero_obraSocial = $request->numero_obraSocial;
+            $patient->id_especialista = $request->user()->id_especialista;
    
             $patient->save();
 

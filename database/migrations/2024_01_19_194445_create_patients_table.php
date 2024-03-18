@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table-> string('nombre');
             $table-> string('apellido');
-            $table-> bigInteger('dni')->unique();
+            $table-> bigInteger('dni');
             $table-> date('fecha_nacimiento')->nullable();
             $table-> bigInteger('celular')->nullable();
             $table-> bigInteger('telefono')->nullable();

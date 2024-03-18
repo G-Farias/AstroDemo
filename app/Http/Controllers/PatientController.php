@@ -7,6 +7,7 @@ use App\Models\MedicalInsurence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Validation\Rule;
 
 class PatientController extends Controller
 {
@@ -17,11 +18,13 @@ class PatientController extends Controller
     {
         if (Gate::allows('isAdmin')) {
             $patients = Patient::orderBy('nombre','ASC')->latest()->paginate(10);
+            $q_patients = Patient::count();
         } else{
             $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->get();
+            $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
         }
 
-        return view('pacientes.index', compact('patients'));
+        return view('pacientes.index', compact('patients','q_patients'));
     }
 
     public function buscar(Request $request){
@@ -57,33 +60,76 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        if (Gate::allows('isAdmin')) {
+            $patients = Patient::where('dni', $request->dni)->count();
 
+            if($patients >= 1){
+                return redirect()->route('pacientes.index')->with('danger', 'Paciente ya existente.');
+
+            } else { 
+
+            $pacientes = new Patient;
+
+            $pacientes->nombre = $request->nombre;
+            $pacientes->apellido = $request->apellido;
+            $pacientes->dni = $request->dni;
+            $pacientes->fecha_nacimiento = $request->fecha_nacimiento;
+            $pacientes->celular = $request->celular;
+            $pacientes->telefono = $request->telefono;
+            $pacientes->email = $request->email;
+            $pacientes->obra_social = $request->obra_social;
+            $pacientes->numero_obraSocial = $request->numero_obraSocial;
+            $pacientes->observacion = $request->observacion;
+            $pacientes->direccion = $request->direccion;
+            $pacientes->pais_residencia = $request->pais;
+            $pacientes->localidad_residencia = $request->localidad_residencia;
+            $pacientes->provincia_residencia = $request->provincia_residencia;
+            $pacientes->id_especialista = $request->user()->id_especialista;
+    
+            $pacientes->save();
+        }
+        } else {
+            $patients = Patient::where('dni', $request->dni)->where('id_especialista', Auth::user()->id_especialista)->count();
+      
+            if($patients >= 1){
+                return redirect()->route('pacientes.index')->with('danger', 'Paciente ya existente.');
+            } else {
+
+            $pacientes = new Patient;
+
+            $pacientes->nombre = $request->nombre;
+            $pacientes->apellido = $request->apellido;
+            $pacientes->dni = $request->dni;
+            $pacientes->fecha_nacimiento = $request->fecha_nacimiento;
+            $pacientes->celular = $request->celular;
+            $pacientes->telefono = $request->telefono;
+            $pacientes->email = $request->email;
+            $pacientes->obra_social = $request->obra_social;
+            $pacientes->numero_obraSocial = $request->numero_obraSocial;
+            $pacientes->observacion = $request->observacion;
+            $pacientes->direccion = $request->direccion;
+            $pacientes->pais_residencia = $request->pais;
+            $pacientes->localidad_residencia = $request->localidad_residencia;
+            $pacientes->provincia_residencia = $request->provincia_residencia;
+            $pacientes->id_especialista = $request->user()->id_especialista;
+    
+            $pacientes->save();
+            }
+        }
+
+
+        
+
+        /*
         $request->validate([
             'dni' => ['required', 'unique:patients', 'max:255'],
         ],
         [
             'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
         ]);
+*/
 
-        $pacientes = new Patient;
 
-        $pacientes->nombre = $request->nombre;
-        $pacientes->apellido = $request->apellido;
-        $pacientes->dni = $request->dni;
-        $pacientes->fecha_nacimiento = $request->fecha_nacimiento;
-        $pacientes->celular = $request->celular;
-        $pacientes->telefono = $request->telefono;
-        $pacientes->email = $request->email;
-        $pacientes->obra_social = $request->obra_social;
-        $pacientes->numero_obraSocial = $request->numero_obraSocial;
-        $pacientes->observacion = $request->observacion;
-        $pacientes->direccion = $request->direccion;
-        $pacientes->pais_residencia = $request->pais;
-        $pacientes->localidad_residencia = $request->localidad_residencia;
-        $pacientes->provincia_residencia = $request->provincia_residencia;
-        $pacientes->id_especialista = $request->user()->id_especialista;
-
-        $pacientes->save();
         
         return redirect()->route('pacientes.index')->with('success', 'Paciente agregado');
     }
