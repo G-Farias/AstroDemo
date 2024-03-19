@@ -21,6 +21,8 @@ use App\Notifications\turnMail;
 use App\Models\Schedule;
 use Illuminate\Support\Facades\Schema;
 
+use App\Http\Controllers\PDFController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +33,11 @@ use Illuminate\Support\Facades\Schema;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/generate-patient-pdf', [PDFController::class, 'generatePDF'])->name('generate-patient-pdf');
+
+Route::get('/generate-turn-pdf', [PDFController::class, 'generateTurnPDF'])->name('generate-turn-pdf');
+Route::get('/generate-turn-hoy', [PDFController::class, 'generateTurnTodayPDF'])->name('generate-turn-hoy');
+
 
 Route::get('/', function () {
     

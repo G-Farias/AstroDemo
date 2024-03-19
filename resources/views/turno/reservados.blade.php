@@ -191,9 +191,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Turnos reservados') }} 
-                    </h2>
+                    <div class="row mb-3">
+                        <div class="col">
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
+                              {{ __('Turnos reservados') }} 
+                            </h2>
+                        </div>
+                        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+                            <x-primary-a  href="{{ route('generate-turn-pdf') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Imprimir') }}</i></x-primary-a>
+                        </div>
+                    </div>
                     <div class="table-responsive" id="no-more-tables">
                         <table class="table text-center">
                         <thead>
