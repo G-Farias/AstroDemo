@@ -66,4 +66,16 @@ class PDFController extends Controller
         return $pdf->stream(); /* ->download('document.pdf');*/
     }
 
+    public function generateComprobante(Schedule $schedule, Request $request)
+    {
+
+        $reservedTurn = ReservedTurn::find($schedule->id);
+
+        $data = ['title' => 'Comprobante del turno'];
+        $pdf = PDF::loadView('pdf.comprobante',$data,compact('schedule','reservedTurn'));
+        $pdf->set_paper("A4", "portrait");
+
+
+        return $pdf->stream();
+    }
 }

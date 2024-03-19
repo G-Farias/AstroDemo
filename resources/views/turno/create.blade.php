@@ -84,10 +84,11 @@
                                 <textarea name="observacion" id="observacion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"></textarea>
                             </div>
                             
+
                             <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
                                 <x-success-button>{{ __('Reservar') }}</x-success-button>
                             </div>
-                            </form>
+                                </form>
                         </div>
                     </div>
                 </div>

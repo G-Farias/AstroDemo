@@ -92,6 +92,8 @@ class ReservedTurnController extends Controller
     public function store(Request $request)
     {
 
+
+
         if ($request->dni == $request->dni_rep) {
   
 

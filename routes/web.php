@@ -33,10 +33,16 @@ use App\Http\Controllers\PDFController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/generate-patient-pdf', [PDFController::class, 'generatePDF'])->name('generate-patient-pdf');
 
-Route::get('/generate-turn-pdf', [PDFController::class, 'generateTurnPDF'])->name('generate-turn-pdf');
-Route::get('/generate-turn-hoy', [PDFController::class, 'generateTurnTodayPDF'])->name('generate-turn-hoy');
+Route::middleware('auth')->group(function() {
+
+    Route::get('/generate-patient-pdf', [PDFController::class, 'generatePDF'])->name('generate-patient-pdf');
+    Route::get('/generate-turn-pdf', [PDFController::class, 'generateTurnPDF'])->name('generate-turn-pdf');
+    Route::get('/generate-turn-hoy', [PDFController::class, 'generateTurnTodayPDF'])->name('generate-turn-hoy');
+   
+    Route::get('/generate-comprobante/{schedule}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
+
+});
 
 
 Route::get('/', function () {
