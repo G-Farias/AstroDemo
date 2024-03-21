@@ -37,6 +37,8 @@
             <th scope="col">Obra social</th>
             <th scope="col">Numero afilíado</th>
             <th scope="col">Fecha y hora</th>
+            <th scope="col">Especialista</th>
+            <th scope="col">Especialidad</th>
           </tr>
         </thead>
         <tbody>
@@ -52,8 +54,9 @@
           <td>{{$turn->email}}</td>
           <td>{{ucfirst($turn->medicalInsurence?->nombre_obraSocial)}}</td>
           <td>{{$turn->numero_obraSocial}}</td>
-          <td data-title="Fecha y hora">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-
+          <td>{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
+          <td>{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
+          <td>{{ucfirst($schedule->specialty->nombre_especialidad)}}</td>
         </tr>
 
             @endif

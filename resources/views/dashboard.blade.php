@@ -50,6 +50,7 @@
                         </div>
                         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
                             <x-primary-a  href="{{ route('generate-turn-hoy') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Imprimir turnos de hoy') }}</i></x-primary-a>
+                        
                         </div>
                     </div>
                     <div class="table-responsive" id="no-more-tables">

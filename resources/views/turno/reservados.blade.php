@@ -199,6 +199,8 @@
                         </div>
                         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
                             <x-primary-a  href="{{ route('generate-turn-pdf') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Imprimir') }}</i></x-primary-a>
+                            <x-primary-a  href="{{ route('export-turn') }}" target="_blank"><i class="bi bi-file-earmark-excel"> {{ __('Exportar excel') }}</i></x-primary-a>
+
                         </div>
                     </div>
                     <div class="table-responsive" id="no-more-tables">

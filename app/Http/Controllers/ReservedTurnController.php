@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ReservedTurnsExport;
 use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
 use App\Models\Patient;
@@ -14,6 +15,9 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+
+use App\Exports\ReservedTurnExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 use Illuminate\Support\Facades\DB;
 use function Ramsey\Uuid\v1;
@@ -261,5 +265,11 @@ class ReservedTurnController extends Controller
         return redirect()->back()
             ->with('success', 'Turno cancelado correctamente.');
     }
+
+    public function export() 
+    {
+        return Excel::download(new ReservedTurnsExport, 'turnos.xlsx');
+    }
+
 
 }

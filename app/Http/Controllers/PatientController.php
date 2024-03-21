@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PatientsExport;
 use App\Models\Patient;
 use App\Models\MedicalInsurence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
+
+use App\Exports\PatientsExportsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PatientController extends Controller
 {
@@ -192,4 +196,10 @@ class PatientController extends Controller
         return redirect()->route('pacientes.index')
             ->with('success', 'Paciente eliminado correctamente.');
     }
+
+    public function export() 
+    {
+        return Excel::download(new PatientsExport, 'patients.xlsx');
+    }
+
 }

@@ -34,6 +34,7 @@ use App\Http\Controllers\PDFController;
 |
 */
 
+
 Route::middleware('auth')->group(function() {
 
     Route::get('/generate-patient-pdf', [PDFController::class, 'generatePDF'])->name('generate-patient-pdf');
@@ -42,6 +43,11 @@ Route::middleware('auth')->group(function() {
    
     Route::get('/generate-comprobante/{schedule}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
 
+    /* EXPORTAR EXCEL */ 
+    Route::get('patients/export/', [PatientController::class, 'export'])->name('export-patient');
+    Route::get('reservedTurn/export/', [ReservedTurnController::class, 'export'])->name('export-turn');
+   
+    /*--------------*/ 
 });
 
 
