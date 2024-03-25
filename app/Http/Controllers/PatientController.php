@@ -34,12 +34,14 @@ class PatientController extends Controller
     public function buscar(Request $request){
 
         if (Gate::allows('isAdmin')) {
+            $q_patients = Patient::count();
             $patients = Patient::where('dni', "LIKE", "%{$request->busqueda}%")
             ->orWhere('nombre', "LIKE", "%{$request->busqueda}%")
             ->orWhere('apellido', "LIKE", "%{$request->busqueda}%")
             ->orWhereRaw("concat(nombre, ' ', apellido) like '%" .$request->busqueda. "%' ")
             ->get();
         } else{
+            $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
 
             $patients = Patient::where('id_especialista', Auth::user()->id_especialista)
             ->WhereRaw("concat(dni,' ', nombre, ' ', apellido) like  '%" .$request->busqueda. "%' ")
@@ -47,7 +49,7 @@ class PatientController extends Controller
 
         }
 
-        return view('pacientes.index', compact('patients'));
+        return view('pacientes.index', compact('patients','q_patients'));
     }
 
     /**

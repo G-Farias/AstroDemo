@@ -141,8 +141,7 @@
                         <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
                         <input type="date" name="date" id="date" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                     </div>
-
-                    <x-success-button >{{ __('Buscar') }}</x-success-button>
+                    <x-success-button>{{ __('Buscar') }}</x-success-button>
                     </form>
                 </div>
             </div>   
@@ -151,9 +150,9 @@
                     {{ __('Ver todos los turnos disponibles') }} 
                 </h2>
                 <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
-                    @csrf
+                    @csrf 
                 <div class="input-group mb-3">
-                    <x-success-button >{{ __('Ver todos') }}</x-success-button>
+                    <x-success-button>{{ __('Ver todos') }}</x-success-button>
                 </form>
                 </div>
             </div>

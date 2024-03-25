@@ -85,7 +85,13 @@
                             </div>
                             
 
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">  
+                                <div class="form-check mr-2 mt-1">
+                                    <input class="form-check-input" type="checkbox" value="1" name="guardarPaciente" id="guardarPaciente" checked>
+                                    <label class="form-check-label" for="flexCheckChecked">
+                                      Guardar paciente al reservar turno
+                                    </label>
+                                  </div>                                                   
                                 <x-success-button>{{ __('Reservar') }}</x-success-button>
                             </div>
                                 </form>

@@ -122,9 +122,13 @@ class ReservedTurnController extends Controller
         $schedule->save();
 
         //Agregar paciente al reservar turno
+
+
         if (Patient::where('dni', $request->dni)->first()) {
             // It exists
         } else {
+            if($request->guardarPaciente == '1'){ 
+
             $patient = new Patient;
 
             $patient->nombre = $request->nombre;
@@ -136,8 +140,10 @@ class ReservedTurnController extends Controller
             $patient->numero_obraSocial = $request->numero_obraSocial;
             $patient->id_especialista = $request->user()->id_especialista;
    
-            $patient->save();
+                $patient->save();
+            } else {
 
+            }
         }
         //-----------------
         
