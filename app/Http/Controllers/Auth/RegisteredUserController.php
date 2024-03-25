@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $admin = User::where('level', null)->count();
 
-        if($admin < 2){
+        if($admin < 1){
 
             
         $request->validate([
