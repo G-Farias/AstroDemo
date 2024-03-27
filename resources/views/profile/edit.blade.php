@@ -17,7 +17,7 @@
                 <div class="max-w-xl">
                     @include('profile.partials.update-password-form')
                 </div>
-            </div>
+            </div> 
 
         </div>
     </div>

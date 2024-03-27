@@ -31,7 +31,7 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                     <div class="p-3 text-gray-900">
                         <div class="font-semibold text-gray-800 leading-tight">
-                            <p>Cantidad de especialistas registrados: {{$q_specialist}}</p>
+                            <p>Cantidad de especialistas registrados: {{$q_specialist}} de {{ $limit_q_specialist }}</p>
                         </div>
                     </div>
                 </div>

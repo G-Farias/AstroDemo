@@ -1,4 +1,4 @@
-APP_NAME=SistemaAstro
+APP_NAME='Sistema Astro'
 APP_ENV=local
 APP_KEY=base64:5SR2M7zQZUylVyh2bfA03Gp2rPL1715+K+EASZRvlXs=
 APP_DEBUG=true

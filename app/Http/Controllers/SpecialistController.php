@@ -32,13 +32,15 @@ class SpecialistController extends Controller
         if (Gate::allows('isAdmin')) {
             $specialists = Specialist::orderBy('nombre','ASC')->latest()->paginate(10);
             $q_specialist = Specialist::count();
-
+            $limit_q_specialist = SistConfigController::q_especialistas;
         } else{
             $specialists = Specialist::orderBy('nombre','ASC')->where('id', Auth::user()->id_especialista)->get();
             $q_specialist = Specialist::count();
+            $limit_q_specialist = SistConfigController::q_especialistas;
+
         }
 
-        return view('especialistas.index', compact('specialists','q_specialist'));
+        return view('especialistas.index', compact('specialists','q_specialist','limit_q_specialist'));
     }
 
     /**
@@ -57,7 +59,8 @@ class SpecialistController extends Controller
     {
         $q_specialist = Specialist::count();
 
-        if($q_specialist < 5){
+        
+        if($q_specialist < SistConfigController::q_especialistas){
 
         
         $request->validate([
