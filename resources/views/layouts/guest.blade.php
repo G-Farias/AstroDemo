@@ -7,8 +7,8 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
-      <!-- Favicon -->
-        <link rel="shortcut icon" sizes="114x114" href="{{ asset('resources/img/favicon.ico') }}">
+         <!-- Favicon -->
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
 
     
         
