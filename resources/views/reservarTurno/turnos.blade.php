@@ -6,23 +6,27 @@
     <x-public-navbar></x-public-navbar>
 
 
-
+ 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <div class="mb-2 bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <div class="col-sm-6">
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                             {{ __('Ver turnos por fecha') }} 
                         </h2>
-                    <form action="{{ route('reservarTurno.turnos', $specialist)}}" method="post">  
+                    <form action="{{ route('reservarTurno.turnos', $SST = Crypt::encrypt($specialist))}}" method="post">  
                         @csrf
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
                             <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                           
                         </div>
-                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <x-success-button >{{ __('Buscar') }}</x-success-button>
+                        </div>
                         </form>
                     </div>
                 </div>
@@ -31,10 +35,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <h2 class="mb-4 font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Turnos disponibles de:')}} 
+                        {{ __('Turnos disponibles:')}} 
                     </h2>
+
                     <div class="row">
-                        @foreach($schedules as $schedule)
+                        @forelse($schedules as $schedule)
                         <div class="col-sm-6 mb-3">
                           <div class="card">
                             <div class="card-body">
@@ -45,16 +50,19 @@
                               <p class="card-text mb-3">{{date("H:i",strtotime($schedule->hr_atencion))}}hs</p>
 
                               @if ($schedule->estado == '0')
-                                 <x-primary-a href="{{route('reservarTurno.reservar', $schedule)}}">{{__('Reservar turno atención')}}</x-primary-a>
+                                 <x-primary-a href="{{route('reservarTurno.reservar', $SSL = Crypt::encrypt($schedule))}}">{{__('Reservar turno atención')}}</x-primary-a>
                               @else
                                 <x-red-anunnce>{{__('Turno reservado')}}</x-red-anunnce>  
                               @endif
 
-
-                            </div>
+                            </div>  
                           </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <h2 class="font-semibold text-l text-gray-800 leading-tight">
+                            {{ __('No hay turnos disponibles.') }} 
+                        </h2>                        
+                        @endforelse
                     </div>
                 </div>
             </div>

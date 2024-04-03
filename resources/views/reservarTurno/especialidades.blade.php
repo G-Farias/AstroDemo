@@ -41,7 +41,7 @@
                                 {{ucfirst($specialty->nombre_especialidad)}}
                               </h2>
                               <p class="card-text mb-3">Presiona el siguiente botón para ver los especialistas y sus respectivos turnos.</p>
-                              <x-primary-a href="{{route('reservarTurno.especialistas', $specialty) }}">{{__('Ver turnos de atención')}}</x-primary-a>
+                              <x-primary-a href="{{route('reservarTurno.especialistas', $STY = Crypt::encrypt($specialty) ) }}">{{__('Ver turnos de atención')}}</x-primary-a>
                             </div>
                           </div>
                         </div>

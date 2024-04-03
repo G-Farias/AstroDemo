@@ -41,7 +41,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/generate-turn-pdf', [PDFController::class, 'generateTurnPDF'])->name('generate-turn-pdf');
     Route::get('/generate-turn-hoy', [PDFController::class, 'generateTurnTodayPDF'])->name('generate-turn-hoy');
    
-    Route::get('/generate-comprobante/{schedule}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
+    Route::get('/generate-comprobante/{RT}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
 
     /* EXPORTAR EXCEL */ 
     Route::get('patients/export/', [PatientController::class, 'export'])->name('export-patient');
@@ -202,15 +202,19 @@ Route::middleware('auth')->group(function () {
 });
 
     Route::get('/reservarTurno', [PublicUserController::class, 'index'])->name('reservarTurno.especialidades');
-    Route::get('/reservarTurno/{specialty}/especialista', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
-    Route::get('/reservarTurno/{specialist}/turnos', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
-    Route::post('/reservarTurno/{specialist}/turnos', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos');
-    Route::get('/reservarTurno/{schedule}/reservar',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
+    Route::get('/reservarTurno/especialista/{STY}', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
+    Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
+    Route::post('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos');
+    Route::get('/reservarTurno/reservar/{SLE}',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
     Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
+    Route::get('/reservarTurno/turnoReservado/{RT}',[PublicUserController::class,'turno_reservado'])->name('reservarTurno.turnoReservado');
+
 
     Route::get('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::post('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::delete('/reservarTurno/{reservedTurn}', [PublicUserController::class, 'destroy'])->name('reservarTurno.destroy');
+
+    Route::delete('/reservarTurno/cancel/{reservedTurn}', [PublicUserController::class, 'cancelar'])->name('reservarTurno.cancelar');
 
 
 require __DIR__.'/auth.php';

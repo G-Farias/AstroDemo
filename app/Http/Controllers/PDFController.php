@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Crypt;
 
 
 
@@ -66,13 +67,14 @@ class PDFController extends Controller
         return $pdf->stream(); /* ->download('document.pdf');*/
     }
 
-    public function generateComprobante(Schedule $schedule, Request $request)
+    public function generateComprobante($RT, Request $request)
     {
+        $reservedTurn = Crypt::decrypt($RT);
 
-        $reservedTurn = ReservedTurn::find($schedule->id);
+        $schedules = Schedule::where('id', $reservedTurn->id_horario_atencion)->get();
 
         $data = ['title' => 'Comprobante del turno'];
-        $pdf = PDF::loadView('pdf.comprobante',$data,compact('schedule','reservedTurn'));
+        $pdf = PDF::loadView('pdf.comprobante',$data,compact('schedules','reservedTurn'));
         $pdf->set_paper("A4", "portrait");
 
 

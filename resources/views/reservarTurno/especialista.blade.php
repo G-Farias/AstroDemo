@@ -14,6 +14,7 @@
                     </h2>
                     <div class="row">
                         @foreach($specialists as $specialist)
+                            
                         <div class="col-sm-6 mb-3">
                           <div class="card">
                             <div class="card-body">
@@ -23,7 +24,7 @@
                               <p class="card-text"><strong>Día y horario de atención: </strong></p>
                               <p class="card-text">{{ucfirst($specialist->dia_atencion)}}</p>
                               <p class="card-text mb-3">{{$specialist->hr_atencion}}</p>
-                              <x-primary-a href="{{route('reservarTurno.turnos', $specialist) }}">{{__('Ver turnos de atención')}}</x-primary-a>
+                              <x-primary-a href="{{route('reservarTurno.turnos',$SST = Crypt::encrypt($specialist)) }}">{{__('Ver turnos de atención')}}</x-primary-a>
                             </div>
                           </div>
                         </div>
