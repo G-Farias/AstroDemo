@@ -17,7 +17,7 @@
                         {{ __('Especialidades') }}
                     </x-nav-link>
                     <x-nav-link :href="route('reservarTurno.misTurnos')" :active="request()->routeIs('reservarTurno.misTurnos')">
-                        {{ __('Cancelar turno') }}
+                        {{ __('Gestionar turnos') }}
                     </x-nav-link>        
                 </div>
             </div>
@@ -42,7 +42,7 @@
                 {{ __('Especialidades') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('reservarTurno.misTurnos')" :active="request()->routeIs('reservarTurno.misTurnos')">
-                {{ __('Cancelar turno') }}
+                {{ __('Gestionar turno') }}
             </x-responsive-nav-link>
         </div>
 

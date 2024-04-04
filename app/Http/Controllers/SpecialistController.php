@@ -115,8 +115,9 @@ class SpecialistController extends Controller
      */
     public function show(Specialist $specialist)
     {
-        return view('especialistas.show', compact('specialist'));
+        $medicalInsurenceSpecialists = MedicalInsurenceSpecialist::where('id_especialista', $specialist->id)->get();
 
+        return view('especialistas.show', compact('specialist','medicalInsurenceSpecialists'));
     }
 
     /**

@@ -41,7 +41,6 @@ Route::middleware('auth')->group(function() {
     Route::get('/generate-turn-pdf', [PDFController::class, 'generateTurnPDF'])->name('generate-turn-pdf');
     Route::get('/generate-turn-hoy', [PDFController::class, 'generateTurnTodayPDF'])->name('generate-turn-hoy');
    
-    Route::get('/generate-comprobante/{RT}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
 
     /* EXPORTAR EXCEL */ 
     Route::get('patients/export/', [PatientController::class, 'export'])->name('export-patient');
@@ -49,6 +48,7 @@ Route::middleware('auth')->group(function() {
    
     /*--------------*/ 
 });
+    Route::get('/generate-comprobante/{RT}', [PDFController::class, 'generateComprobante'])->name('generate-comprobante');
 
 
 Route::get('/', function () {

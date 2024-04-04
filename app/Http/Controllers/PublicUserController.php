@@ -36,7 +36,9 @@ class PublicUserController extends Controller
 
         $specialists = Specialist::where('especialidad', $specialty->id)->get();
 
-        return view('reservarTurno.especialista', compact('specialists','specialty'));
+        $medicalInsurenceSpecialists = MedicalInsurenceSpecialist::get();
+
+        return view('reservarTurno.especialista', compact('specialists','specialty','medicalInsurenceSpecialists'));
     }
 
     public function turnos($SST, Request $request)

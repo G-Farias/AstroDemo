@@ -61,10 +61,10 @@
                           </div>
                           
                           <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Especialidad</span>
                             <select class="form-control" required id="especialidad" name="especialidad" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                              <option selected disabled >Especialidad</option>
                                   @foreach ($specialty as $specialty)
-                                      <option value="{{$specialty->id}}">
+                                      <option selected value="{{$specialty->id}}">
                                           {{ucfirst($specialty->nombre_especialidad)}}
                                       </option>
                                   @endforeach

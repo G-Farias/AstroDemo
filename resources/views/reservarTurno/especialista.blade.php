@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-4 font-semibold text-xl text-gray-800 leading-tight">
+                    <h2 class="mb-3 font-semibold text-xl text-gray-800 leading-tight">
                         {{ __('Especialistas disponibles de la especialidad:')}} {{ucfirst($specialty->nombre_especialidad)}}
                     </h2>
                     <div class="row">
@@ -23,7 +23,15 @@
                               </h2>
                               <p class="card-text"><strong>Día y horario de atención: </strong></p>
                               <p class="card-text">{{ucfirst($specialist->dia_atencion)}}</p>
-                              <p class="card-text mb-3">{{$specialist->hr_atencion}}</p>
+                              <p class="card-text mb-2">{{$specialist->hr_atencion}}</p>
+
+                              <p class="card-text mb-3"><strong>Obras sociales / prepagas que atiende: </strong> <br>
+                              @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
+                               @if ($medicalInsurenceSpecialist->id_especialista == $specialist->id)
+                                {{$medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial }} 
+                                @endif
+                              @endforeach
+                              </p>
                               <x-primary-a href="{{route('reservarTurno.turnos',$SST = Crypt::encrypt($specialist)) }}">{{__('Ver turnos de atención')}}</x-primary-a>
                             </div>
                           </div>

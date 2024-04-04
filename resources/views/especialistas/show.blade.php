@@ -41,9 +41,11 @@
                       <p class="card-text"><strong>Días de atención : </strong>{{$specialist->dia_atencion}}</p>
                       <p class="card-text"><strong>Horario de atención : </strong>{{$specialist->hr_atencion}}</p>
                       <p class="card-text"><strong>Especialidad : </strong>{{ucfirst($specialist->especialidad)}}</p>
-                      
-
-
+                      <p class="card-text"><strong>Obra social / prepaga : </strong>
+                      @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
+                      {{ucfirst($medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial)}}
+                      @endforeach
+                         </p>
                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                         <x-success-a href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-success-a>
                         <x-third-a href="{{ route('especialistas.edit', $specialist) }}">{{__('Editar')}}</x-third-a>

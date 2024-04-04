@@ -32,7 +32,7 @@
                       {{ __('Registrar obra social o prepaga.') }}
                     </h2>
                     <p class="mt-1 text-sm text-gray-600">
-                      {{ __("Ingrese la información.") }}
+                      {{ __("Ingrese la información correctamente, serán mostradas al público.") }}
                     </p>
                   </header>
                   <form action="{{ route('obraSocial.store')}}" method="post">  
