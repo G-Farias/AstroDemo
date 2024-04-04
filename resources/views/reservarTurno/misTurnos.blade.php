@@ -30,7 +30,7 @@
             <div class="mb-2 bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <div class="col-sm-12">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3 mt-2">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-1 mt-2">
                             {{ __('Ver mis turnos') }} 
                         </h2>
                         <p class="mb-2 text-muted font-semibold leading-tight">

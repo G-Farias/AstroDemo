@@ -13,31 +13,33 @@
             <div class="mb-2 bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <div class="col-sm-6">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-1">
                             {{ __('Ver turnos por fecha') }} 
                         </h2>
+                        <p class="mb-3 text-muted font-semibold leading-tight">
+                            Ingrese la fecha de un turno que desea buscar
+                        </p>
                     <form action="{{ route('reservarTurno.turnos', $SST = Crypt::encrypt($specialist))}}" method="post">  
                         @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
                             <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                            
                         </div>
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            <x-success-button >{{ __('Buscar') }}</x-success-button>
-                        </div>
-                        </form>
                     </div>
+                    <div class="d-grid gap-2 flex-wrap justify-content-end">                                                        
+                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>     
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <h2 class="mb-4 font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Turnos disponibles:')}} 
+                        {{ __('Turnos disponibles de')}} {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}} 
                     </h2>
-
                     <div class="row">
                         @forelse($schedules as $schedule)
                         <div class="col-sm-6 mb-3">
