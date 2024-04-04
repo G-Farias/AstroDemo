@@ -59,9 +59,9 @@
                </div>
 
                 <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Seleccione un intervalo de turnos</span>
                     <select class="form-control" id="intervalo" name="intervalo" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                      <option selected disabled >Seleccione un intervalo de turnos</option>
-                        <option value="15">15 minutos</option>
+                        <option selected value="15">15 minutos</option>
                         <option value="30">30 minutos</option>
                         <option value="45">45 minutos</option>
                         <option value="60">60 minutos</option>

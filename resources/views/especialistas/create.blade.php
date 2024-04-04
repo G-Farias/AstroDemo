@@ -76,8 +76,9 @@
                           </div>
 
                           <p class="mb-2 text-sm text-gray-600">
-                            {{ __("La información del día y horario de atención será mostrada al publico, procura que esté correcta.") }}
-                          </p>
+                            {{ __("La información del día y horario de atención será mostrada al publico, procura que esté correcta.") }} 
+                            <br> {{__('En el horario de atención se recomienda agregar la abreviatura hs, ejemplo: 11hs a 13hs y 17hs a 20hs')}}
+                          </p> 
                           <div class="input-group mb-3">
                             <input type="text" required name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
                             <input type="text" required name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
