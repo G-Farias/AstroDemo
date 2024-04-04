@@ -29,8 +29,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="mb-2 bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <div class="col-sm-6">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
+                    <div class="col-sm-12">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3 mt-2">
                             {{ __('Ver mis turnos') }} 
                         </h2>
                         <p class="mb-2 text-muted font-semibold leading-tight">
@@ -38,14 +38,16 @@
                         </p>
                     <form action="{{ route('reservarTurno.misTurnos')}}" method="post">  
                         @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group mt-2">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Buscar turnos: </span>
                             <input type="number" placeholder="D.N.I / Pasaporte" required name="dni" id="dni" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                         </div>
-                        <x-success-button >{{ __('Buscar') }}</x-success-button>
-                        </form>
                     </div>
+                    <div class="d-grid gap-2 flex-wrap justify-content-end">                                                        
+                        <x-success-button>{{ __('Buscar') }}</x-success-button>
+                        </div>
+                        </form>
                 </div>
             </div>
         </div>     
@@ -55,7 +57,7 @@
                         {{ __('Mis turnos disponibles')}} 
                     </h2>
                     <div class="row">
-                        @foreach ($reservedTurns as $reservedTurn)
+                        @forelse ($reservedTurns as $reservedTurn)
                         @foreach ($schedules as $schedule)
                         @if ($schedule->id == $reservedTurn->id_horario_atencion)
                         <div class="card border-light">
@@ -79,7 +81,11 @@
                         </div>
                         @endif
                         @endforeach
-                        @endforeach
+                        @empty 
+                        <p class="text-muted font-semibold leading-tight">
+                            Usted no posee turnos registrados.
+                        </p>
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -15,24 +15,26 @@
                     <div class="row">
                         @foreach($specialists as $specialist)
                             
-                        <div class="col-sm-6 mb-3">
-                          <div class="card">
-                            <div class="card-body">
-                              <h2 class="card-tittle font-semibold text-xl text-gray-800 leading-tight">
+                        <div class="col-sm-6 mb-3 ">
+                          <div class="card h-100">
+                            <div class="card-body d-flex flex-column">
+                              <h2 class="card-tittle font-semibold text-xl text-gray-800 leading-tight mb-2">
                                 {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}} 
                               </h2>
                               <p class="card-text"><strong>Día y horario de atención: </strong></p>
                               <p class="card-text">{{ucfirst($specialist->dia_atencion)}}</p>
                               <p class="card-text mb-2">{{$specialist->hr_atencion}}</p>
 
-                              <p class="card-text mb-3"><strong>Obras sociales / prepagas que atiende: </strong> <br>
+                              <p class="card-text mb-2"><strong>Obras sociales / prepagas que atiende: </strong> <br>
                               @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
                                @if ($medicalInsurenceSpecialist->id_especialista == $specialist->id)
-                                {{$medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial }} 
+                                {{ucfirst($medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial) }}
                                 @endif
                               @endforeach
                               </p>
-                              <x-primary-a href="{{route('reservarTurno.turnos',$SST = Crypt::encrypt($specialist)) }}">{{__('Ver turnos de atención')}}</x-primary-a>
+                              <div class="d-grid gap-2 col-6 mt-auto">
+                                <x-primary-a class="w-60" href="{{route('reservarTurno.turnos',$SST = Crypt::encrypt($specialist)) }}">{{__('Ver turnos de atención')}}</x-primary-a>
+                              </div>
                             </div>
                           </div>
                         </div>

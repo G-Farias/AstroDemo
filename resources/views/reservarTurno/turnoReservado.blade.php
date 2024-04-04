@@ -48,8 +48,8 @@
                        <p class="card-text"><strong>Obra social / prepaga: </strong>{{ ucfirst($reservedTurn->medicalInsurence?->nombre_obraSocial)}} </p>
                        <p class="card-text"><strong>Número de afiliado: </strong>{{ $reservedTurn->numero_obraSocial }}</p>
                        
-                       <div class="d-grid gap-2 d-md-flex justify-content-md-end">          
-                            <x-primary-a  href="{{ route('reservarTurno.especialidades') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Volver') }}</i></x-primary-a>                  
+                       <div class="btn-group flex-wrap justify-content-end mt-4">          
+                            <x-primary-a  href="{{ route('reservarTurno.especialidades') }}"><i class="bi bi-printer-fill"> {{ __('Volver') }}</i></x-primary-a>                  
                             <x-primary-a  href="{{ route('generate-comprobante', $RT = Crypt::encrypt($reservedTurn)) }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Descargar comprobante') }}</i></x-primary-a>
                             <form class="mb-0 " action="{{route('reservarTurno.cancelar',$reservedTurn )}}" method="POST">
                                 @csrf
