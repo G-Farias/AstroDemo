@@ -38,8 +38,8 @@
                           </p>
                         </header>
                           <div class="input-group mb-3">
-                            <input type="text" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
-                            <input type="text" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
+                            <input type="text" name="nombre" id="nombre" required class="form-control rounded-l border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre" aria-label="Nombre">
+                            <input type="text" name="apellido" id="apellido" required class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido" aria-label="Apellido">
                           </div>
 
                         
@@ -48,16 +48,16 @@
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="number" name="celular" id="celular" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="celular">
-                            <input type="number" name="telefono" id="telefono" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Teléfono" aria-label="Telefono">
+                            <input type="number" name="celular" id="celular" class="form-control rounded-l border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="celular">
+                            <input type="number" name="telefono" id="telefono" class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Teléfono" aria-label="Telefono">
                           </div>
 
                           <p class="mb-2 text-sm text-gray-600">
                             {{ __("El email y la contraseña se utilizará para que el especialista pueda acceder.") }}
                           </p>
                           <div class="input-group mb-3">
-                           <input type="mail" required name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                           <input type="password" required name="password" id="password" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                           <input type="mail" required name="email" id="email" class="form-control rounded-l border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
+                           <input type="password" required name="password" id="password" class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
                           </div>
                           
                           <div class="input-group mb-3">
@@ -80,17 +80,17 @@
                             <br> {{__('En el horario de atención se recomienda agregar la abreviatura hs, ejemplo: 11hs a 13hs y 17hs a 20hs')}}
                           </p> 
                           <div class="input-group mb-3">
-                            <input type="text" required name="dia_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
-                            <input type="text" required name="hr_atencion" id="dia_atencion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
+                            <input type="text" required name="dia_atencion" id="dia_atencion" class="form-control rounded-l border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Día de atención" aria-label="dia">
+                            <input type="text" required name="hr_atencion" id="dia_atencion" class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Horario de atención" aria-label="horarioAtencion">
                           </div>
 
                           <div class="input-group mb-3">
-                            <input type="text" name="provincia_residencia" id="provincia_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
-                            <input type="text" name="localidad_residencia" id="localidad_residencia" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
+                            <input type="text" name="provincia_residencia" id="provincia_residencia" class="form-control rounded-l border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Provincia" aria-label="Provincia">
+                            <input type="text" name="localidad_residencia" id="localidad_residencia" class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Localidad" aria-label="Localidad">
                           </div>
                                                   
                           <x-success-button>{{ __('Guardar') }}</x-success-button>
-                          <x-primary-a href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-primary-a>
+                          <x-primary-a class="rounded" href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-primary-a>
 
                     </form>
                 </div>

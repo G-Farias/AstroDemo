@@ -69,7 +69,7 @@
                                       </option>
                                   @endforeach
                               </select>
-                              <input type="text" name="numero_obraSocial" id="numero_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número obra social" aria-label="NumeroObraSocial">                        
+                              <input type="text" name="numero_obraSocial" id="numero_obraSocial" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Número de afiliado" aria-label="NumeroObraSocial">                        
                           </div>
 
                           <div class="input-group mb-3">

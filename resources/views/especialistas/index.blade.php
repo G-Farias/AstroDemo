@@ -42,7 +42,7 @@
             @elsecan('isUser')
              @endcan
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                @foreach ($specialists as $specialist)
+                @forelse ($specialists as $specialist)
                 <div class="card border-light">
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</p>
@@ -68,7 +68,11 @@
                       </div>
                     </div>
                  </div>
-                 @endforeach
+                 @empty 
+                 <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
+                    {{__('No hay especialistas registrados.')}}
+                </h2>
+                 @endforelse
 
 
             </div>

@@ -29,7 +29,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                @foreach ($specialtys as $specialty)
+                @forelse ($specialtys as $specialty)
                 <div class="card border-light">
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre de la especialidad : </strong> {{ucfirst($specialty->nombre_especialidad) }}</p>
@@ -42,7 +42,7 @@
                         </p> 
 
 
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
                         <x-third-a href="{{ route('especialidad.edit', $specialty) }}">{{__('Editar')}}</x-third-a>
                         <form class="mb-0 " action="{{ route('especialidad.destroy', $specialty) }}" method="POST">
                             @csrf
@@ -52,7 +52,11 @@
                       </div>
                     </div>
                  </div>
-                 @endforeach
+                 @empty 
+                 <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
+                    {{__('No hay especialidades registradas.')}}
+                </h2>
+                 @endforelse
 
                  {{ $specialtys->links() }}
 

@@ -29,7 +29,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                @foreach ($medicalInsurences as $medicalInsurence)
+                @forelse ($medicalInsurences as $medicalInsurence)
                 <div class="card border-light">
         
                     <div class="card-body">
@@ -47,7 +47,11 @@
                       </div>
                     </div>
                  </div>
-                 @endforeach
+                 @empty 
+                 <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
+                    {{__('No hay obras sociales o prepagas registradas.')}}
+                </h2>
+                 @endforelse
 
                  {{ $medicalInsurences->links() }}
 

@@ -139,9 +139,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/especialistas/obra_social/{medicalInsurenceSpecialist}', [SpecialistController::class, 'destroy_obras_sociales'])->name('especialistas.obra_social_destroy');
 
     Route::get('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
-    Route::post('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
+    Route::post('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion'); 
     Route::post('especialistas/store_horario_atencion', [ScheduleController::class, 'store'])->name('especialistas.store_horario_atencion');
     Route::delete('/especialistas/horario_atencion/{schedule}', [ScheduleController::class, 'destroy_horario_atencion'])->name('especialistas.horario_atencion_destroy');
+    Route::post('/especialistas/horariosDeAtencion/{specialist}', [ScheduleController::class, 'destroy_horario_all_atencion'])->name('especialistas.horariosDeAtencion_destroy');
 
 });
 

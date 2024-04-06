@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
+use App\Models\Patient;
 use App\Models\Schedule;
 use App\Models\Specialist;
 use App\Models\Specialty;
@@ -175,7 +176,10 @@ class SpecialistController extends Controller
 
         MedicalInsurenceSpecialist::where('id_especialista', $specialist->id)->delete();
 
+        Schedule::where('id_especialista', $specialist->id)->delete(); 
 
+        Patient::where('id_especialista', $specialist->id)->delete(); 
+        
         $specialist->delete();
 
         return redirect()->route('especialistas.index')
@@ -227,11 +231,10 @@ class SpecialistController extends Controller
         ->with('sucess','Obra social / prepaga eliminada correctamente');
     }
 
+
     public function horario_atencion(Request $request, Specialist $specialist){
         
-
-
-        $schedule = Schedule::where('id_especialista', $specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->get();
+        $schedule = Schedule::where('id_especialista', $specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->get();
 
 
         return view('especialistas.horario_atencion', compact('specialist', 'schedule'));

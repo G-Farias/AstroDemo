@@ -97,16 +97,29 @@
                                     @csrf
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
-                                    <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                                    <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
                                     <x-success-button >{{ __('Buscar') }}</x-success-button>
                                 </div>
                                 </form>
 
+                                <div class="row justify-content-end">
+                                <div class="col-6">
+                                <form action="{{ route('especialistas.horariosDeAtencion_destroy', $specialist)}}" method="post">  
+                                    @csrf
+                                    <div class="input-group mb-3 col-7">
+                                        <span class="input-group-text col" id="basic-addon1">Eliminar todos los turnos del día: </span>
+                                        <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="col form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                                        <x-danger-button >{{ __('Eliminar') }}</x-danger-button>
+                                    </div>
+                                </form>
+                                </div>
+                                </div>
                         @foreach ($schedule as $schedule)
+
                             <div class="card border-light">
                                 <div class="card-body">
-                                <h5 class="card-title"><strong> Horario : </strong> {{date("H:i",strtotime($schedule->hr_atencion))  }}</h5>
-                                <h5 class="card-title"><strong> Fecha : </strong> {{date("d-m-y",strtotime($schedule->fecha_atencion))  }}</h5>
+                                    <h5 class="card-title"><strong> Fecha : </strong> {{date("d-m-y",strtotime($schedule->fecha_atencion))  }}</h5>
+                                    <h5 class="card-title"><strong> Horario : </strong> {{date("H:i",strtotime($schedule->hr_atencion))  }}</h5>
 
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
@@ -117,9 +130,9 @@
                                     </form>
                                 </div>
                                 </div>
-                            </div>
+                             
+                            </div>             
                         @endforeach
-                           
                     </div>    
                 </div>
             </div>

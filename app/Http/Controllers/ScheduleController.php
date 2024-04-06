@@ -112,9 +112,9 @@ class ScheduleController extends Controller
           }
 
         if (Gate::allows('isAdmin')) {          
-        return redirect()->route('especialistas.index')->with('success', 'Horario agregado');       
+        return redirect()->back()->with('success', 'Horario agregado');       
         } else {
-        return redirect()->route('turno.inicio')->with('success', 'Horario agregado');       
+        return redirect()->back()->with('success', 'Horario agregado');       
             
         }    
        
@@ -126,6 +126,17 @@ class ScheduleController extends Controller
 
         return redirect()->back()
         ->with('sucess','Horario eliminado correctamente');
+    }
+
+    public function destroy_horario_all_atencion(Request $request, Specialist $specialist){
+
+     $schedules =  Schedule::where('id_especialista', $specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->get();
+
+     foreach ($schedules as $schedule) {
+        $schedule->delete();
+     }
+        return redirect()->back()
+        ->with('sucess','Horario eliminado correctamente'); 
     }
 
     /**

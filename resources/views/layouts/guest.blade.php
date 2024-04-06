@@ -8,7 +8,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
          <!-- Favicon -->
-        <link rel="icon" href="{{ asset('favicon.ico') }}">
+        <link rel="icon" href="{{ asset('public/favicon.ico') }}">
 
     
         
@@ -23,7 +23,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
             <div>
                 <a href="/">
-                    <img src="{!! asset('storage/images/logo.png') !!}" width="auto" height="auto">
+                    <img src="{!! asset('public/storage/images/logo.png') !!}" width="auto" height="auto">
                 </a>
             </div>
 

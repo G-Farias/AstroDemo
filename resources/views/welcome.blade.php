@@ -7,7 +7,7 @@
         <title>Sistema Astro</title>
 
      <!-- Favicon -->
-     <link rel="icon" href="{{ asset('favicon.ico') }}">
+     <link rel="icon" href="{{ asset('public/favicon.ico') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -45,7 +45,7 @@
 
             <div class="max-w-7xl mx-auto p-6 lg:p-8">
                 <div class="flex justify-center">
-                    <img src="{!! asset('storage/images/logo.png') !!}">
+                    <img src="{!! asset('public/storage/images/logo.png') !!}">
                 </div>
 
                 <div class="flex justify-center mt-5 mb-5">
@@ -66,7 +66,7 @@
 
 
                     <div class="ml-4 mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
-                        Agenda del sistema de turnos online. (v.1.2 - beta)
+                        Agenda del sistema de turnos online. (v.2.0 - beta)
                     </div>
                 </div>
             </div>

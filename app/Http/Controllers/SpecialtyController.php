@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MedicalInsurenceSpecialist;
+use App\Models\ReservedTurn;
+use App\Models\Specialist;
 use App\Models\Specialty;
+use App\Models\Schedule;
+use App\Models\User;
+use App\Models\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SpecialtyController extends Controller
 {
@@ -85,7 +92,20 @@ class SpecialtyController extends Controller
      */
     public function destroy(Specialty $specialty)
     {
-        $specialty->delete();
+     
+    $specialist =  Specialist::where('especialidad', $specialty->id)->get()->toArray();
+
+    MedicalInsurenceSpecialist::where('id_especialista', $specialist)->delete();
+
+    User::where('id_especialista', $specialist)->delete();
+
+    Specialist::where('especialidad', $specialty->id)->delete(); 
+
+    Patient::where('id_especialista', $specialist)->delete(); 
+        
+    Schedule::where('id_especialidad', $specialty->id)->delete(); 
+   
+    $specialty->delete(); 
 
         return redirect()->route('especialidad.index')
         ->with('sucess', 'Especialidad eliminada');
