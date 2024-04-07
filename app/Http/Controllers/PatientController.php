@@ -21,10 +21,10 @@ class PatientController extends Controller
     public function index()
     {
         if (Gate::allows('isAdmin')) {
-            $patients = Patient::orderBy('nombre','ASC')->latest()->paginate(10);
+            $patients = Patient::orderBy('nombre','ASC')->take(300)->get();
             $q_patients = Patient::count();
         } else{
-            $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->get();
+            $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->take(300)->get();
             $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
         }
 

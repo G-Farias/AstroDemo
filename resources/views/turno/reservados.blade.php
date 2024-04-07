@@ -9,7 +9,6 @@
         </h2>
         <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
         @can('isAdmin')
-            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Ver todos los turnos') }}</x-primary-a>
             <x-primary-a href="{{ route('turno.inicio') }}">{{ __('Volver') }}</x-primary-a>
         @elsecan('isUser')
         <x-primary-a href="{{ route('turno.inicio') }}">{{ __('Volver') }}</x-primary-a>
@@ -129,15 +128,16 @@
                     </h2>
                 <form action="{{ route('turno.reservados_dni')}}" method="post">  
                     @csrf
-                <div class="input-group mb-3">
                     <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
-                        <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
+                            <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                        </div>
+                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                        </form>
                     </div>
-                    <x-success-button >{{ __('Buscar') }}</x-success-button>
-                    </form>
+                
                 </div>
-            </div>
 
                 </div>    
             </div>
@@ -187,7 +187,7 @@
 </div>
 @endcan
 
-    <div class="py-1">
+    <div class="py-1 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">

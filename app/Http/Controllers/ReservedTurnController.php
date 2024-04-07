@@ -45,18 +45,36 @@ class ReservedTurnController extends Controller
         return view('dashboard', compact('specialists','reservedTurns','medicalInsurence','schedules'));
     }
 
+    public function inicio(Request $request)
+    {
+        if (Gate::allows('isAdmin')) {
+            $reservedTurn = ReservedTurn::latest()->paginate(10);
+            $specialtys = Specialty::all();
+            $specialists = Specialist::all();
+            $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(100)->get();
+        } else{
+            $reservedTurn = ReservedTurn::latest()->paginate(10);
+            $specialtys = Specialty::all();
+            $specialists = Specialist::all();
+            $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(100)->get();
+        }
+        return view('turno.index', compact('reservedTurn','specialtys', 'schedules','specialists'));
+    }
+
     public function index(Request $request)
     {
         if (Gate::allows('isAdmin')) {
             $reservedTurn = ReservedTurn::latest()->paginate(10);
             $specialtys = Specialty::all();
-            $schedules = Schedule::where('id_especialidad', $request->especialidad)->where('fecha_atencion', $request->date)->whereDate('fecha_atencion','>=', now())->get();
+            $specialists = Specialist::all();
+            $schedules = Schedule::where('id_especialidad', $request->especialidad)->where('fecha_atencion', $request->date)->whereDate('fecha_atencion','>=', now())->take(500)->get();
         } else{
             $reservedTurn = ReservedTurn::latest()->paginate(10);
             $specialtys = Specialty::all();
+            $specialists = Specialist::all();
             $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->where('fecha_atencion', $request->date)->whereDate('fecha_atencion','>=', now())->get();
         }
-        return view('turno.index', compact('reservedTurn','specialtys', 'schedules'));
+        return view('turno.index', compact('reservedTurn','specialtys', 'schedules','specialists'));
     }
 
     public function busqueda_especialidad(Request $request){
@@ -64,18 +82,38 @@ class ReservedTurnController extends Controller
         if (Gate::allows('isAdmin')) {
             $reservedTurn = ReservedTurn::latest()->paginate(10);
             $specialtys = Specialty::all();
-            $schedules = Schedule::where('id_especialidad', $request->especialidad)->whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
+            $specialists = Specialist::all();
+            $schedules = Schedule::where('id_especialidad', $request->especialidad)->whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(250)->get();
 
         }else{
             $reservedTurn = ReservedTurn::latest()->paginate(10);
             $specialtys = Specialty::all();
+            $specialists = Specialist::all();
             $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
 
         }
-        return view('turno.index', compact('reservedTurn','specialtys', 'schedules'));
+        return view('turno.index', compact('reservedTurn','specialtys', 'schedules','specialists'));
 
     }
 
+    public function busqueda_especialista(Request $request){
+        
+        if (Gate::allows('isAdmin')) {
+            $reservedTurn = ReservedTurn::latest()->paginate(10);
+            $specialtys = Specialty::all();
+            $specialists = Specialist::all();
+            $schedules = Schedule::where('id_especialista', $request->especialista)->whereDate('fecha_atencion','>=', now())->orderby('id_especialista','asc')->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(250)->get();
+
+        }else{
+            $reservedTurn = ReservedTurn::latest()->paginate(10);
+            $specialtys = Specialty::all();
+            $specialists = Specialist::all();
+            $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
+
+        }
+        return view('turno.index', compact('reservedTurn','specialtys', 'schedules','specialists'));
+
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -161,7 +199,8 @@ class ReservedTurnController extends Controller
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
         $reservedTurns = ReservedTurn::get();
-        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->orderBy('hr_atencion','desc')->take(100)->get();
+        $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','desc')->orderBy('hr_atencion','desc')->get();
+       
         }else{
         $specialists = Specialist::all();
         $medicalInsurence = MedicalInsurence::all();
@@ -197,6 +236,8 @@ class ReservedTurnController extends Controller
 
         return view('turno.reservados', compact('specialists','schedules','reservedTurns','medicalInsurence'));
     }
+
+    
 
     public function turnos_reservados_dni(Request $request){
         $specialists = Specialist::all();

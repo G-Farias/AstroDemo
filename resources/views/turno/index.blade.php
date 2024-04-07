@@ -97,6 +97,7 @@
                         </form>
                     </div>
                 </div>   
+
                 <div class="col-sm-6">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                         {{ __('Buscar turnos por especialidad') }} 
@@ -116,8 +117,31 @@
                         </div>
                         <x-success-button >{{ __('Buscar') }}</x-success-button>
                         </form>
+                    </div> 
+                </div>
+                    
+                <div class="col-sm-6">
+                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                        {{ __('Buscar turnos por especialista') }} 
+                    </h2>
+                    <form action="{{ route('turno.busqueda_especialista')}}" method="post">
+                        @csrf
+                    <div class="input-group mb-3">
+                        <div class="input-group mb-3">
+                            <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <option selected disabled >Especialista</option>
+                                    @foreach ($specialists as $specialist)
+                                        <option value="{{$specialist->id}}">
+                                            <strong>{{ucfirst($specialist->specialty->nombre_especialidad)}} : </strong>  {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}}
+                                        </option>
+                                    @endforeach
+                            </select>
+                        </div>
+                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                        </form>
                     </div>
                 </div>
+            
             </div>
                 </div>    
             </div>
@@ -149,14 +173,16 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                     {{ __('Ver todos los turnos disponibles') }} 
                 </h2>
-                <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
+                    <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
                     @csrf 
                 <div class="input-group mb-3">
-                    <x-success-button>{{ __('Ver todos') }}</x-success-button>
+                     <input type="text" disabled readonly class="form-control rounded border-gray-300 text-gray-600 shadow-sm focus:ring-indigo-500">
+                </div>  
+                <x-success-button>{{ __('Ver todos') }}</x-success-button>
                 </form>
-                </div>
             </div>
         </div>
+    </div>
             </div>    
         </div>
     </div>
@@ -169,7 +195,7 @@
 
 
  
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-5">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
@@ -192,7 +218,7 @@
                           <tr>
                             <td data-title="Fecha">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</td>
                             <td data-title="Hora" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-                            <td data-title="Especialista">{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
+                            <td data-title="Especialista"><strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br>{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
                             <td data-title="Estado">
                                 @if ($schedule->estado == '0')
                                     <p>Disponible</p>

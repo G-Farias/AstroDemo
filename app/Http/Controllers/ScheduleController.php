@@ -71,7 +71,7 @@ class ScheduleController extends Controller
             ->where('id_especialista', $request->specialist)->count();
 
             if($horario == '1'){
-                return redirect()->route('especialistas.index')->with('danger', 'Ya hay registro de horario para ese día, si quiere agregar más, agregue los faltantes o elimine los anteriores!');   
+                return redirect()->back()->with('danger', 'Ya hay registro de horario para ese día, si quiere agregar más, agregue los faltantes o elimine los anteriores!');   
             } else {
                
                 $schedule = new Schedule;
@@ -95,7 +95,7 @@ class ScheduleController extends Controller
             ->where('id_especialista', $request->specialist)->count();
 
             if($horario == '1'){
-                return redirect()->route('especialistas.index')->with('danger', 'Ya hay registro de horario para ese día, si quieres agregar más elimina los anteriores!');   
+                return redirect()->back()->with('danger', 'Ya hay registro de horario para ese día, si quieres agregar más elimina los anteriores!');   
             } else {
 
               $schedule_tarde = new Schedule;

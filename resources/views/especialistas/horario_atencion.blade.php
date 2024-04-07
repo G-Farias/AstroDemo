@@ -14,7 +14,11 @@
         {{ session('success') }}
     </div>
     @endif
-
+    @if (session('danger'))
+    <div class="alert alert-danger">
+          {{ session('danger') }}
+    </div>
+@endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
@@ -37,7 +41,7 @@
                     <span class="input-group-text" id="basic-addon1">Fecha de atención</span>
                     <input type="date" required name="date" id="date" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                 </div>
-            
+
                 <div class="input-group mb-3">
                     <input type="text" hidden value="{{ $specialist->id }}" name="specialist" id="specialist">
                     <input type="text" hidden value="{{ $specialist->especialidad }}" name="specialty" id="specialty">

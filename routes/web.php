@@ -148,9 +148,11 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('auth')->group(function() {
 
-    Route::get('/turno', [ReservedTurnController::class, 'index'])->name('turno.inicio');
+    Route::get('/turno', [ReservedTurnController::class, 'inicio'])->name('turno.inicio');
+    Route::get('/turno/inicio', [ReservedTurnController::class, 'index'])->name('turno.busqueda_fecha');
     Route::post('/turno/resultados', [ReservedTurnController::class, 'index'])->name('turno.index');
     Route::post('/turno/resultados_especialidad', [ReservedTurnController::class, 'busqueda_especialidad'])->name('turno.busqueda_especialidad');
+    Route::post('/turno/resultados_especialista', [ReservedTurnController::class, 'busqueda_especialista'])->name('turno.busqueda_especialista');
 
 
     Route::get('/turno/{schedule}/create', [ReservedTurnController::class, 'create'])->name('turno.create');
