@@ -11,7 +11,7 @@ class MedicalInsurenceSpecialist extends Model
 
     public function medicalInsurence()
     {
-        return $this->belongsTo(medicalInsurence::class, 'id_obraSocial', 'id');
+        return $this->belongsTo(MedicalInsurence::class, 'id_obraSocial', 'id');
     }
 
 }

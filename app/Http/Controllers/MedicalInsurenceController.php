@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\MedicalInsurence;
+use App\Models\MedicalInsurenceSpecialist;
 use Illuminate\Http\Request;
 
 class MedicalInsurenceController extends Controller
@@ -87,6 +88,7 @@ class MedicalInsurenceController extends Controller
      */
     public function destroy(MedicalInsurence $medicalInsurence)
     {
+        MedicalInsurenceSpecialist::where('id_obraSocial',$medicalInsurence->id)->delete();
         $medicalInsurence->delete();
 
         return redirect()->route('obraSocial.index')

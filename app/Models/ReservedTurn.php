@@ -11,6 +11,6 @@ class ReservedTurn extends Model
 
     public function medicalInsurence()
     {
-        return $this->belongsTo(medicalInsurence::class, 'obra_social', 'id');
+        return $this->belongsTo(MedicalInsurence::class, 'obra_social', 'id');
     }
 }
