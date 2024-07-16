@@ -21,7 +21,7 @@ return new class extends Migration
             $table-> bigInteger('telefono')->nullable();
             $table-> string('email')->nullable();
             $table-> integer('obra_social')->nullable();
-            $table-> bigInteger('numero_obraSocial')->nullable();
+            $table-> string('numero_obraSocial')->nullable();
             $table-> mediumText('observacion')->nullable();
             $table-> string('direccion')->nullable();
             $table-> string('pais_residencia')->nullable();

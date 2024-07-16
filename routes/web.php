@@ -66,14 +66,15 @@ Route::get('/ayuda', function () {
 
 Route::get('/notificar', function(){
 
-    //ELIMINAR PASADO
+    //ELIMINAR PASADO 
+    /*
     $eliminarTurnos = Schedule::whereDate('fecha_atencion', '<', now()->subDays(1))->get();
     foreach($eliminarTurnos as $eliminarTurno){
 
     ReservedTurn::where('id_horario_atencion', $eliminarTurno->id)->delete();
     }
     Schedule::whereDate('fecha_atencion', '<', now()->subDays(1))->delete();
-    
+    */
     //-------------------------------------------------
 
     //NOTIFICAR TURNO POR MAIL
