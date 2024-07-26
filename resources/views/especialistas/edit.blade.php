@@ -1,6 +1,8 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -58,10 +60,21 @@
 
                           <div class="input-group mb-3">
                            <input type="mail" required value="{{ $specialist->email }}" name="email" id="email" class="form-control rounded-l border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                           <input type="password" required value="{{ $specialist->password }}" name="password" id="password" class="form-control rounded-r border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
-
+                           <input type="password" required value="{{ $specialist->password }}"  name="password" id="password" class="form-control rounded-r border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                            <x-primary-a type="button" onclick="mostrarContrasena()">Ver contraseña</x-primary-a>
                           </div>
                           
+                          <script>
+                            function mostrarContrasena(){
+                                var tipo = document.getElementById("password");
+                                if(tipo.type == "password"){
+                                    tipo.type = "text";
+                                }else{
+                                    tipo.type = "password";
+                                }
+                            }
+                          </script>
+
                           <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Especialidad</span>
                             <select class="form-control" required id="especialidad" name="especialidad" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">

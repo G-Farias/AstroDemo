@@ -40,7 +40,7 @@
                       <br>   
                       <p class="card-text"><strong>Días de atención : </strong>{{$specialist->dia_atencion}}</p>
                       <p class="card-text"><strong>Horario de atención : </strong>{{$specialist->hr_atencion}}</p>
-                      <p class="card-text"><strong>Especialidad : </strong>{{ucfirst($specialist->especialidad)}}</p>
+                      <p class="card-text"><strong>Especialidad : </strong>{{ucfirst($specialist->specialty->nombre_especialidad)}}</p>
                       <p class="card-text"><strong>Obra social / prepaga : </strong>
                       @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
                       {{ucfirst($medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial)}}
