@@ -18,17 +18,7 @@ use Illuminate\Support\Facades\Gate;
 
 class ScheduleController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Specialist $specialist)
     {
         return view('especialistas.horario_atencion', compact('specialist'));
@@ -139,35 +129,4 @@ class ScheduleController extends Controller
         ->with('sucess','Horario eliminado correctamente'); 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Schedule $schedule)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Schedule $schedule)
-    {
-        //
-    }
 }

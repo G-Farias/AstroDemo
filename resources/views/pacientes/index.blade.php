@@ -37,7 +37,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white mb-1 overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('pacientes.buscar')}}" method="post">
+                    <form action="{{ route('pacientes.buscar')}}" method="get">
                         @csrf
                         <header class="mb-3">
                             <h2 class="text-lg font-medium text-gray-900">
@@ -90,6 +90,9 @@
                  @endforeach
 
                 </div>
+            </div>
+            <div class="py-3">
+                {{$patients->links()}}
             </div>
         </div>
     </div>

@@ -52,8 +52,9 @@
                     {{__('No hay obras sociales o prepagas registradas.')}}
                 </h2>
                  @endforelse
-
-                 {{ $medicalInsurences->links() }}
+            </div>
+            <div class="py-3">
+                {{ $medicalInsurences->links() }}
 
             </div>
         </div>

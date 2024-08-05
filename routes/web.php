@@ -114,7 +114,9 @@ Route::middleware('auth')->group(function() {
 Route::middleware('auth')->group(function () {
 
     Route::get('/pacientes', [PatientController::class, 'index'])->name('pacientes.index');
-    Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
+  //  Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
+    Route::get('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
+
     Route::get('/pacientes/create', [PatientController::class, 'create'])->name('pacientes.create');
     Route::post('/pacientes', [PatientController::class, 'store'])->name('pacientes.store');
     Route::get('/pacientes/{patient}', [PatientController::class, 'show'])->name('pacientes.show');
@@ -150,19 +152,20 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function() {
 
     Route::get('/turno', [ReservedTurnController::class, 'inicio'])->name('turno.inicio');
-    Route::get('/turno/inicio', [ReservedTurnController::class, 'index'])->name('turno.busqueda_fecha');
-    Route::post('/turno/resultados', [ReservedTurnController::class, 'index'])->name('turno.index');
-    Route::post('/turno/resultados_especialidad', [ReservedTurnController::class, 'busqueda_especialidad'])->name('turno.busqueda_especialidad');
-    Route::post('/turno/resultados_especialista', [ReservedTurnController::class, 'busqueda_especialista'])->name('turno.busqueda_especialista');
+
+    Route::get('/turno/resultado_fecha', [ReservedTurnController::class, 'busqueda_fecha'])->name('turno.busqueda_fecha');    
+    Route::get('/turno/resultados_especialidad', [ReservedTurnController::class, 'busqueda_especialidad'])->name('turno.busqueda_especialidad');
+    Route::get('/turno/resultados_especialista', [ReservedTurnController::class, 'busqueda_especialista'])->name('turno.busqueda_especialista');
 
 
     Route::get('/turno/{schedule}/create', [ReservedTurnController::class, 'create'])->name('turno.create');
     Route::post('/turno', [ReservedTurnController::class, 'store'])->name('turno.store');
     
     Route::get('/turno/reservados', [ReservedTurnController::class, 'turnos_reservados'])->name('turno.reservados');
-    Route::post('/turno/reservados_fecha', [ReservedTurnController::class, 'turnos_reservados_fecha'])->name('turno.reservados_fecha');
-    Route::post('/turno/reservados_especialidad', [ReservedTurnController::class, 'turnos_reservados_especialidad'])->name('turno.reservados_especialidad');
-    Route::post('/turno/reservados_dni', [ReservedTurnController::class, 'turnos_reservados_dni'])->name('turno.reservados_dni');
+    Route::get('/turno/reservados_fecha', [ReservedTurnController::class, 'turnos_reservados_fecha'])->name('turno.reservados_fecha');
+    Route::get('/turno/reservados_especialista', [ReservedTurnController::class, 'turnos_reservados_especialista'])->name('turno.reservados_especialista');
+    Route::get('/turno/reservados_dni', [ReservedTurnController::class, 'turnos_reservados_dni'])->name('turno.reservados_dni');
+   
     Route::post('/turno/reservados/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 
 
@@ -208,7 +211,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reservarTurno', [PublicUserController::class, 'index'])->name('reservarTurno.especialidades');
     Route::get('/reservarTurno/especialista/{STY}', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
     Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
-    Route::post('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos');
+    Route::get('/reservarTurno/turnos_fecha/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos_fecha');
     Route::get('/reservarTurno/reservar/{SLE}',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
     Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
     Route::get('/reservarTurno/turnoReservado/{RT}',[PublicUserController::class,'turno_reservado'])->name('reservarTurno.turnoReservado');

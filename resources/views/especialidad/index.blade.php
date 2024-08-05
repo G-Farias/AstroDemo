@@ -57,10 +57,10 @@
                     {{__('No hay especialidades registradas.')}}
                 </h2>
                  @endforelse
-
-                 {{ $specialtys->links() }}
-
             </div>
+            <div class="my-3">
+                {{ $specialtys->links() }}
+               </div>
         </div>
     </div>
 </x-app-layout>

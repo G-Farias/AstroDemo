@@ -73,8 +73,9 @@
                     {{__('No hay especialistas registrados.')}}
                 </h2>
                  @endforelse
-
-
+            </div>
+            <div class="py-3">
+                {{$specialists->links()}}
             </div>
         </div>
     </div>

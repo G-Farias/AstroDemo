@@ -19,7 +19,7 @@
                         <p class="mb-3 text-muted font-semibold leading-tight">
                             Ingrese la fecha de un turno que desea buscar
                         </p>
-                    <form action="{{ route('reservarTurno.turnos', $SST = Crypt::encrypt($specialist))}}" method="post">  
+                    <form action="{{ route('reservarTurno.turnos_fecha', $SST = Crypt::encrypt($specialist))}}" method="get">  
                         @csrf
                     <div class="input-group">
                         <div class="input-group mb-3">
@@ -67,6 +67,9 @@
                         @endforelse
                     </div>
                 </div>
+            </div>
+            <div class="py-3">
+                {{$schedules->links()}}
             </div>
         </div>
     </div>

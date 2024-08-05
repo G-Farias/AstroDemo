@@ -47,7 +47,7 @@ class PublicUserController extends Controller
         $specialist = Crypt::decrypt($SST);
 
         $specialists = Specialist::where('id', $specialist)->get();
-        $schedules = Schedule::where('id_especialista',$specialist->id)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->take(20)->get();
+        $schedules = Schedule::where('id_especialista',$specialist->id)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->paginate(20)->withQueryString();
         
         return view('reservarTurno.turnos', compact('specialists','schedules','specialist'));
     }
@@ -57,7 +57,7 @@ class PublicUserController extends Controller
         $specialist = Crypt::decrypt($SST);
 
         $specialists = Specialist::where('id', $specialist)->get();
-        $schedules = Schedule::where('id_especialista',$specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->orderBy('hr_atencion','asc')->get();
+        $schedules = Schedule::where('id_especialista',$specialist->id)->where('fecha_atencion', $request->fecha_busqueda)->whereDate('fecha_atencion','>=', now())->orderBy('hr_atencion','asc')->paginate(20)->withQueryString();
         
         return view('reservarTurno.turnos', compact('specialists','schedules','specialist'));
     }
@@ -158,33 +158,5 @@ class PublicUserController extends Controller
         return redirect()->route('reservarTurno.especialidades')->with('success', 'Turno cancelado correctamente.');
     }
     
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(PublicUser $publicUser)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(PublicUser $publicUser)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, PublicUser $publicUser)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
 
 }

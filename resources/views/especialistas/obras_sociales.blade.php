@@ -54,6 +54,7 @@
                     </div>
                 </div>
                     @endforeach
+                    <x-primary-a href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-primary-a>
                 </div>
             </div>
         </div>

@@ -13,4 +13,8 @@ class ReservedTurn extends Model
     {
         return $this->belongsTo(MedicalInsurence::class, 'obra_social', 'id');
     }
+
+    public function Schedule(){
+        return $this->belongsTo(Schedule::class, 'id_horario_atencion');
+       }
 }

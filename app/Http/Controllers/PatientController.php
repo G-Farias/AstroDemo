@@ -21,10 +21,10 @@ class PatientController extends Controller
     public function index()
     {
         if (Gate::allows('isAdmin')) {
-            $patients = Patient::orderBy('nombre','ASC')->take(300)->get();
+            $patients = Patient::orderBy('nombre','ASC')->paginate(10);
             $q_patients = Patient::count();
         } else{
-            $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->take(300)->get();
+            $patients = Patient::orderBy('nombre','ASC')->where('id_especialista', Auth::user()->id_especialista)->paginate(10);
             $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
         }
 
@@ -39,13 +39,15 @@ class PatientController extends Controller
             ->orWhere('nombre', "LIKE", "%{$request->busqueda}%")
             ->orWhere('apellido', "LIKE", "%{$request->busqueda}%")
             ->orWhereRaw("concat(nombre, ' ', apellido) like '%" .$request->busqueda. "%' ")
-            ->get();
+            ->paginate(10)->withQueryString();
+
+            return view ('pacientes.index', compact('patients','q_patients'));
         } else{
             $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
 
             $patients = Patient::where('id_especialista', Auth::user()->id_especialista)
             ->WhereRaw("concat(dni,' ', nombre, ' ', apellido) like  '%" .$request->busqueda. "%' ")
-            ->get();        
+            ->paginate(10)->withQueryString();       
 
         }
 

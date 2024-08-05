@@ -70,7 +70,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('turno.index')}}" method="post">  
+                    <form action="{{ route('turno.busqueda_fecha')}}" method="get">  
                         @csrf
             <div class="row">
                 <div class="col-sm-6">
@@ -102,7 +102,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                         {{ __('Buscar turnos por especialidad') }} 
                     </h2>
-                    <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
+                    <form action="{{ route('turno.busqueda_especialidad')}}" method="get">
                         @csrf
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
@@ -124,7 +124,7 @@
                     <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                         {{ __('Buscar turnos por especialista') }} 
                     </h2>
-                    <form action="{{ route('turno.busqueda_especialista')}}" method="post">
+                    <form action="{{ route('turno.busqueda_especialista')}}" method="get">
                         @csrf
                     <div class="input-group mb-3">
                         <div class="input-group mb-3">
@@ -153,7 +153,7 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
             <div class="p-6 text-gray-900">
-                <form action="{{ route('turno.index')}}" method="post">  
+                <form action="{{ route('turno.busqueda_fecha')}}" method="get">  
                     @csrf
         <div class="row">
             <div class="col-sm-6">
@@ -173,7 +173,7 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                     {{ __('Ver todos los turnos disponibles') }} 
                 </h2>
-                    <form action="{{ route('turno.busqueda_especialidad')}}" method="post">
+                    <form action="{{ route('turno.busqueda_especialidad')}}" method="get">
                     @csrf 
                 <div class="input-group mb-3">
                      <input type="text" disabled readonly class="form-control rounded border-gray-300 text-gray-600 shadow-sm focus:ring-indigo-500">
@@ -242,6 +242,9 @@
                         @endforeach
                         </tbody>
                       </table>
+                    </div>
+                    <div class="py-3">
+                        {{$schedules->links() }}
                     </div>
                 </div>    
             </div>

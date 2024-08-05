@@ -35,7 +35,7 @@ class SpecialistController extends Controller
             $q_specialist = Specialist::count();
             $limit_q_specialist = SistConfigController::q_especialistas;
         } else{
-            $specialists = Specialist::orderBy('nombre','ASC')->where('id', Auth::user()->id_especialista)->get();
+            $specialists = Specialist::orderBy('nombre','ASC')->where('id', Auth::user()->id_especialista)->paginate(10);
             $q_specialist = Specialist::count();
             $limit_q_specialist = SistConfigController::q_especialistas;
 
