@@ -19,7 +19,7 @@ class PatientsExport implements FromView
     {
         if (Gate::allows('isAdmin')) {
             return view('export.patients', [
-                'patients' => Patient::all()
+                'patients' => Patient::get()
             ]);
         } else{
             return view('export.patients', [

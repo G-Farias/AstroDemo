@@ -20,14 +20,18 @@ class ReservedTurnsExport implements FromView
     {
         if (Gate::allows('isAdmin')) {
             return view('export.reservedTurn', [
-                'turn' => ReservedTurn::all(),
-                'schedules' => Schedule::all()
+
+            'reservedTurns' => ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+            ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+            ->get()
+            
             ]);
-    
         } else{
             return view('export.reservedTurn', [
-                'turn' => ReservedTurn::all(),
-                'schedules' => Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->get()  
+                'reservedTurns' => ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+                ->where('id_especialista', Auth::user()->id_especialista)
+                ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+                ->get()
             ]);
         }
     }

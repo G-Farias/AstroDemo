@@ -39,26 +39,21 @@
           </tr>
         </thead>
         <tbody>
-    @foreach ($turn as $turn)
-     @foreach ($schedules as $schedule)
-      @if ($schedule->id == $turn->id_horario_atencion)
-        <tr>
-          <td>{{ucfirst($turn->nombre)}}</td>
-          <td>{{ucfirst($turn->apellido)}}</td>
-          <td>{{$turn->dni}}</td>
-          <td>{{$turn->celular}}</td>
-          <td>{{$turn->telefono}}</td>
-          <td>{{$turn->email}}</td>
-          <td>{{ucfirst($turn->medicalInsurence?->nombre_obraSocial)}}</td>
-          <td>{{$turn->numero_obraSocial}}</td>
-          <td>{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-          <td>{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
-          <td>{{ucfirst($schedule->specialty->nombre_especialidad)}}</td>
-        </tr>
-
-            @endif
+            @foreach ($reservedTurns as $reservedTurns)
+            <tr>
+              <td>{{ucfirst($reservedTurns->nombre)}}</td>
+              <td>{{ucfirst($reservedTurns->apellido)}}</td>
+              <td>{{$reservedTurns->dni}}</td>
+              <td>{{$reservedTurns->celular}}</td>
+              <td>{{$reservedTurns->telefono}}</td>
+              <td>{{$reservedTurns->email}}</td>
+              <td>{{ucfirst($reservedTurns->medicalInsurence?->nombre_obraSocial)}}</td>
+              <td>{{$reservedTurns->numero_obraSocial}}</td>
+              <td data-title="Fecha y hora">{{ date("d-m-y",strtotime($reservedTurns->schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($reservedTurns->schedule->hr_atencion)) }}</td>
+              <td>{{ ucfirst($reservedTurns->schedule->specialist->nombre) }} {{ucfirst($reservedTurns->schedule->specialist->apellido)}}</td>
+              <td>{{ucfirst($reservedTurns->schedule->specialty->nombre_especialidad)}}</td>
+            </tr>
         @endforeach
-    @endforeach
 </tbody>
 </table>
 

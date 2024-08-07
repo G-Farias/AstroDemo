@@ -34,33 +34,48 @@ class PDFController extends Controller
     public function generateTurnPDF()
     {
         if (Gate::allows('isAdmin')) {
-            $turn = ReservedTurn::get();
-            $schedules = Schedule::orderby('fecha_atencion','asc')->get();
+
+            $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+            ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+            ->get();
 
         } else{
-            $turn = ReservedTurn::get();
-            $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();           
+            $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+            ->where('id_especialista', Auth::user()
+            ->id_especialista)->whereDate('fecha_atencion','>=', now())
+            ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+            ->get();
         }
 
         $data = ['title' => 'Turnos reservados'];
-        $pdf = PDF::loadView('pdf.document-turno',$data,compact('turn','schedules'));
+        $pdf = PDF::loadView('pdf.document-turno',$data,compact('reservedTurns'));
         $pdf->set_paper("A4", "landscape");
         return $pdf->stream(); /* ->download('document.pdf');*/
     }
+   
+   
+   
+   
     public function generateTurnTodayPDF()
     {
         if (Gate::allows('isAdmin')) {
-            $turn = ReservedTurn::get();
-            $schedules = Schedule::whereDate('fecha_atencion','=', now())->orderby('fecha_atencion','asc')->get();
+            $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+            ->whereDate('fecha_atencion','=', now())
+            ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+            ->get();
 
         } else{
-            $turn = ReservedTurn::get();
-            $schedules = Schedule::where('id_especialista', Auth::user()->id_especialista)->whereDate('fecha_atencion','=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();           
+     
+            $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
+            ->where('id_especialista', Auth::user()->id_especialista)
+            ->whereDate('fecha_atencion','=', now())
+            ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
+            ->get();
         }
 
         {{$DateAndTime = date('d-m-Y', time());  }}
         $data = ['title' => 'Turnos reservados del día de la fecha: '. $DateAndTime];
-        $pdf = PDF::loadView('pdf.document-turno-hoy',$data,compact('turn','schedules'));
+        $pdf = PDF::loadView('pdf.document-turno-hoy',$data,compact('reservedTurns'));
         $pdf->set_paper("A4", "landscape");
 
 
