@@ -6,7 +6,7 @@
 @if ($level === 'error')
 # @lang('¡Ups!')
 @else
-# @lang('¡Hola!')
+# @lang('Hola, nos comunicamos para informar sobre su turno')
 @endif
 @endif
 
@@ -44,6 +44,7 @@
 @isset($actionText)
 <x-slot:subcopy>
 @lang(
+     "Este mensaje es automatico, por favor no lo responda.\n".
     "Si tienes problemas al clickear el siguiente botón \":actionText\", copia y pega el siguiente link debajo\n".
     'dentro de tu navegador:',
     [

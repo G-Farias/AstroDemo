@@ -19,8 +19,9 @@ class Schedule extends Model
         return $this->belongsTo(Specialty::class, 'id_especialidad', 'id');
     }
 
+
     public function ReservedTurn(){
-        return $this->hasMany(ReservedTurn::class, 'id');
+        return $this->hasMany(ReservedTurn::class);
        }
 }
 

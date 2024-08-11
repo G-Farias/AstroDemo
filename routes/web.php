@@ -93,7 +93,7 @@ Route::get('/notificar', function(){
         }
     
     }
-})->middleware(['auth', 'verified'])->name('notificar');
+});
         //---------------------------------------------------
 /*
 Route::get('/dashboard', function () {
@@ -166,7 +166,8 @@ Route::middleware('auth')->group(function() {
     Route::get('/turno/reservados_especialista', [ReservedTurnController::class, 'turnos_reservados_especialista'])->name('turno.reservados_especialista');
     Route::get('/turno/reservados_dni', [ReservedTurnController::class, 'turnos_reservados_dni'])->name('turno.reservados_dni');
    
-    Route::post('/turno/reservados/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
+    Route::put('/turno/reservados/{reservedTurn}',[ReservedTurnController::class, 'turnos_reservados_act_estado'])->name('turno.actualizar_estado');
+    Route::put('/turno/reservados/observacion/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_act_observacion'])->name('turno.actualizar_observacion');
 
 
     Route::get('/turno/{reservedturn}', [ReservedTurnController::class, 'show'])->name('turno.show');

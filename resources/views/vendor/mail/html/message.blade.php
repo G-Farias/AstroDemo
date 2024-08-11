@@ -2,7 +2,7 @@
 {{-- Header --}}
 <x-slot:header>
 <x-mail::header :url="config('app.url')">
-{{ _('Notificación') }}
+{{ _('Notificación centro C.I.R.A') }}
 </x-mail::header>
 </x-slot:header>
 

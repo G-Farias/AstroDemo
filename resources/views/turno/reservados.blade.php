@@ -234,35 +234,36 @@
                               <td data-title="Contacto">{{ $reservedTurn->celular }}</td>
                               <td data-title="Obra social"><strong>{{ ucfirst($reservedTurn->medicalInsurence?->nombre_obraSocial)}}</strong> <br> {{ $reservedTurn->numero_obraSocial }} </td>
                                <td data-title="Estado">
-                                <form action="{{ route('turno.actualizar', $reservedTurn ) }}" method="post">
+                                <form action="{{ route('turno.actualizar_estado', $reservedTurn ) }}" method="post">
                                 <div class="input-group mb-3">
-                                        @csrf
-                                        <input type="text" hidden name="observacion" id="observacion" value="{{$reservedTurn->observacion}}">
+                                    @csrf
+                                    @method('PUT')
                                         <select class="form-control" required id="estado" name="estado" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                        <option disabled>Seleccionar estado</option>
-                                        <option selected disabled value="{{ $reservedTurn->estado }}">
+                                        <option  selected value="{{ $reservedTurn->estado }}">
                                         @if ($reservedTurn->estado == 0)
                                             Disponible
                                         @elseif($reservedTurn->estado == 1)
                                             Reservado
-                                        @else
+                                        @elseif($reservedTurn->estado == 3)
                                             Asistido
+                                        @else
+                                            Ausente
                                         @endif
                                         </option>
                                         <option value="1">Reservado</option>
                                         <option value="3">Asistido</option>
+                                        <option value="4">Ausente</option>
+
                                 </select>
                                 <x-success-button><i class="bi bi-save"></i></x-success-button>
                                 </div>
-                            </form>
                                </td>
                              
                              
                               <td data-title="Observación">
-                                <form action="{{route('turno.actualizar', $reservedTurn)}}" method="post">
                                 <div class="input-group mb-3">
                                         @csrf
-                                        <input type="text" hidden name="estado" id="estado" value="{{$reservedTurn->estado}}">
+                                        @method('PUT')
                                         <input value="{{$reservedTurn->observacion}}" name="observacion" id="observacion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"/>
                                 <x-success-button><i class="bi bi-save"></i></x-success-button>
                                 </div>
@@ -289,75 +290,3 @@
     </div>
     
 </x-app-layout>
-
- {{--
-@foreach ($reservedTurns as $reservedTurn)
-@foreach ($schedules as $schedule)
-    @if ($schedule->id == $reservedTurn->id_horario_atencion)
-
-
-     <tbody>
-        <tr>
-          <input type="text" name="id" id="id" hidden value="{{ $reservedTurn->id }}">
-        <td data-title="Notificación">                         
-        @if ($reservedTurn->notificacion == null)
-            <p>No</p>
-        @else
-            <p>Si</p>
-        @endif</td>
-          <td data-title="Fecha y hora">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}<br>{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
-          <td data-title="Especialista"> <strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br> {{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
-          <td data-title="Paciente">{{ $reservedTurn->nombre }} {{$reservedTurn->apellido}} <br>{{$reservedTurn->dni}} </td>
-          <td data-title="Contacto">{{ $reservedTurn->celular }}</td>
-          <td data-title="Obra social"><strong>{{ ucfirst($reservedTurn->medicalInsurence?->nombre_obraSocial)}}</strong> <br> {{ $reservedTurn->numero_obraSocial }} </td>
-           <td data-title="Estado">
-            <form action="{{ route('turno.actualizar', $reservedTurn ) }}" method="post">
-            <div class="input-group mb-3">
-                    @csrf
-                    <input type="text" hidden name="observacion" id="observacion" value="{{$reservedTurn->observacion}}">
-                    <select class="form-control" required id="estado" name="estado" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                    <option disabled>Seleccionar estado</option>
-                    <option selected disabled value="{{ $reservedTurn->estado }}">
-                    @if ($reservedTurn->estado == 0)
-                        Disponible
-                    @elseif($reservedTurn->estado == 1)
-                        Reservado
-                    @else
-                        Asistido
-                    @endif
-                    </option>
-                    <option value="1">Reservado</option>
-                    <option value="3">Asistido</option>
-            </select>
-            <x-success-button><i class="bi bi-save"></i></x-success-button>
-            </div>
-        </form>
-           </td>
-         
-         
-          <td data-title="Observación">
-            <form action="{{route('turno.actualizar', $reservedTurn)}}" method="post">
-            <div class="input-group mb-3">
-                    @csrf
-                    <input type="text" hidden name="estado" id="estado" value="{{$reservedTurn->estado}}">
-                    <input value="{{$reservedTurn->observacion}}" name="observacion" id="observacion" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500"/>
-            <x-success-button><i class="bi bi-save"></i></x-success-button>
-            </div>
-            </form> 
-          </td>
-          <td>
-            <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar?')">{{ __('Eliminar') }}</x-danger-button>
-            </form>
-          </td>
-        </tr>
-      </tbody>
-
-
-
-    @endif
-@endforeach
-@endforeach
-</table> --}}
