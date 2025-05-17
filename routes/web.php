@@ -174,6 +174,7 @@ Route::middleware('auth')->group(function() {
     Route::get('/turno/{reservedturn}/edit', [ReservedTurnController::class, 'edit'])->name('turno.edit');
     Route::put('/turno/{reservedturn}', [ReservedTurnController::class, 'update'])->name('turno.update');
     Route::delete('/turno/{reservedTurn}', [ReservedTurnController::class, 'destroy'])->name('turno.destroy');
+    Route::delete('/turno/ver-mas/{reservedTurn}', [ReservedTurnController::class, 'destroy_turno'])->name('turno.destroy_turno');
 
 });
 

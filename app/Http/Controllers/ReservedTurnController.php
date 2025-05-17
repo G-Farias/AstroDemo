@@ -66,6 +66,19 @@ class ReservedTurnController extends Controller
         return view('turno.index', compact('reservedTurn','specialtys', 'schedules','specialists'));
   
         }
+        
+    public function show(Request $request, $id)
+    {
+        
+  
+        
+        $reservedTurn = ReservedTurn::find($id);
+
+
+        return view('turno.show', compact('reservedTurn'));
+
+        }
+        
 
     public function busqueda_fecha(Request $request)
     {
@@ -315,14 +328,20 @@ class ReservedTurnController extends Controller
     public function destroy(ReservedTurn $reservedTurn)
     {
         $schedule = Schedule::find($reservedTurn->id_horario_atencion);
-
         $schedule->estado = '0';
-
         $schedule->save();
-
         $reservedTurn->delete();
-
         return redirect()->back()
+            ->with('success', 'Turno cancelado correctamente.');
+    }
+
+      public function destroy_turno(ReservedTurn $reservedTurn)
+    {
+        $schedule = Schedule::find($reservedTurn->id_horario_atencion);
+        $schedule->estado = '0';
+        $schedule->save();
+        $reservedTurn->delete();
+        return redirect()->route("turno.reservados")
             ->with('success', 'Turno cancelado correctamente.');
     }
 
