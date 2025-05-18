@@ -4,9 +4,16 @@
 
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Agregar obras sociales / prepagas que utiliza el especialista') }}
-        </h2>
+        <div class="row">
+            <div class="col d-grid gap-2 d-md-flex ">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                    {{ __('Agregar obras sociales / prepagas que utiliza el especialista') }}
+                </h2>
+            </div>            
+            <div class="col-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                <x-success-a href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-success-a>
+            </div>
+        </div>
     </x-slot>
 
     @if ($errors->any())
@@ -31,7 +38,7 @@
                                             <div class="card-body">
                                                 <input type="text" hidden value="{{ $medicalInsurence->id }}" name="id_obraSocial" id="id_obraSocial" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
                                                 <input type="text" hidden value="{{$specialist->id}}" name="id_especialista" id="id_especialista" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
-                                                 <h5 class="card-title">Obra social / prepaga : {{ ucfirst($medicalInsurence->nombre_obraSocial) }}</h5>
+                                                 <h5 class="card-title"><strong> Obra social / prepaga: </strong>{{ ucfirst($medicalInsurence->nombre_obraSocial) }}</h5>
                                                 
                                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
                                                     <x-success-button >{{ __('Guardar') }}</x-success-button>
@@ -39,22 +46,20 @@
                         </form>
                             @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
                                 @if ($medicalInsurenceSpecialist->id_obraSocial == $medicalInsurence->id)
-                                <div class="mt-1 d-grid gap-2 d-md-flex justify-content-md-end">
-
-                                    <x-grey-anunnce disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
+                                <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end">
                                     <form class="mb-0 " action="{{ route('especialistas.obra_social_destroy',$medicalInsurenceSpecialist->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
+                                        <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
                                     </form>
+                                    <x-grey-anunnce class="fst-italic " disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
                                 </div>
-                                @endif
+                                @endif 
                             @endforeach
                         </div>
                     </div>
                 </div>
                     @endforeach
-                    <x-primary-a href="{{ route('especialistas.index') }}">{{ __('Volver') }}</x-primary-a>
                 </div>
             </div>
         </div>

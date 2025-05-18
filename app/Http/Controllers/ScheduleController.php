@@ -116,6 +116,7 @@ class ScheduleController extends Controller
 
         return redirect()->back()
         ->with('sucess','Horario eliminado correctamente');
+
     }
 
     public function destroy_horario_all_atencion(Request $request, Specialist $specialist){
