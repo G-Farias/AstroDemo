@@ -22,26 +22,35 @@
             #no-more-tables tr,
             #no-more-tables td {
                 display: block;
+         
+            }
+                #no-more-tables tbody {
+                    border: 1px solid #ccc;
+                    margin-top: 3%;
+                    padding-left: 5%;
+                    padding-top: 2%;
+
             }
             #no-more-tables thead tr {
                 position: absolute;
                 top: -9999px;
                 left: -9999px;
+                
             }
             #no-more-tables td {
                 position: relative;
                 padding-left: 50%;
+                padding-top: 5%;
+                padding-bottom: 5%; 
                 border: none;
-                border-bottom: 1px solid #eee;
+                border-bottom: 1px solid #fff;
             }
             #no-more-tables td:before {
                 content: attr(data-title);
                 position: absolute;
                 left: 6px;
                 font-weight: bold;
-            }
-            #no-more-tables tr {
-                border-bottom: 1px solid #ccc;
+
             }
         }
     </style>
@@ -84,17 +93,17 @@
                             <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
                         </div>
 
-                        <div class="input-group mb-3">
-                            <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                <option selected disabled >Especialista</option>
-                                    @foreach ($specialists as $specialist)
-                                        <option value="{{$specialist->id}}">
-                                            <strong>{{ucfirst($specialist->specialty->nombre_especialidad)}} : </strong>  {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}}
-                                        </option>
-                                    @endforeach
-                            </select>
-                        </div>
-                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                                <div class="input-group mb-3">
+                                        <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                            <option selected disabled >Especialista</option>
+                                                @foreach ($specialists as $specialist)
+                                                    <option value="{{$specialist->id}}">
+                                                    <strong>{{ucfirst($specialist->specialty->nombre_especialidad)}} : </strong>  {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}}
+                                                    </option>
+                                                @endforeach
+                                        </select>   
+                                    <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-search"></i></x-success-button-non-r>
+                                </div>
                         </form>
                     </div>
                 </div>
@@ -102,42 +111,38 @@
                         <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
                             {{ __('Ver turnos por especialista') }} 
                         </h2>
-                        <form action="{{ route('turno.reservados_especialista')}}" method="get">
-                            @csrf
                         <div class="input-group mb-3">
-
-                            <div class="input-group mb-3">
-                                <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                                    <option selected disabled >Especialista</option>
-                                        @foreach ($specialists as $specialist)
-                                            <option value="{{$specialist->id}}">
-                                                <strong>{{ucfirst($specialist->specialty->nombre_especialidad)}} : </strong>  {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}}
-                                            </option>
-                                        @endforeach
-                                </select>
-                            </div>
-                            <x-success-button >{{ __('Buscar') }}</x-success-button>
+                            <form action="{{ route('turno.reservados_especialista')}}" method="get">
+                                @csrf
+                                <div class="input-group mb-3">
+                                        <select class="form-control" id="especialista" name="especialista" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                            <option selected disabled >Especialista</option>
+                                                @foreach ($specialists as $specialist)
+                                                    <option value="{{$specialist->id}}">
+                                                    <strong>{{ucfirst($specialist->specialty->nombre_especialidad)}} : </strong>  {{ucfirst($specialist->nombre)}} {{ucfirst($specialist->apellido)}}
+                                                    </option>
+                                                @endforeach
+                                        </select>   
+                                    <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-search"></i></x-success-button-non-r>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
                       
-                <div class="col-sm-6">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Buscar turnos por DNI del paciente') }} 
-                    </h2>
-                <form action="{{ route('turno.reservados_dni')}}" method="get">  
-                    @csrf
-                    <div class="input-group mb-3">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
-                            <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                        </div>
-                        <x-success-button >{{ __('Buscar') }}</x-success-button>
+                    <div class="col-sm-6">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                            {{ __('Buscar turnos por DNI del paciente') }} 
+                        </h2>
+                        <form action="{{ route('turno.reservados_dni')}}" method="get">  
+                            @csrf
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>                            
+                                    <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                        <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-search"></i></x-success-button-non-r>                    
+                            </div>
                         </form>
                     </div>
-                
-                </div>
 
                 </div>    
             </div>
@@ -148,41 +153,39 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
             <div class="p-6 text-gray-900">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Ver turnos por fecha') }} 
-                    </h2>
-                <form action="{{ route('turno.reservados_fecha')}}" method="get">  
-                    @csrf
-                <div class="input-group mb-3">
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
-                        <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                            {{ __('Ver turnos por fecha') }} 
+                        </h2>
+                        <form action="{{ route('turno.reservados_fecha')}}" method="get">  
+                            @csrf
+                        <div class="input-group mb-3">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">Buscar turnos del día: </span>
+                                <input type="date" required name="fecha_busqueda" id="fecha_busqueda" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-search"></i></x-success-button-non-r>                    
+                            </div>
+                            </form>
+                        </div>
                     </div>
-                    <x-success-button >{{ __('Buscar') }}</x-success-button>
-                    </form>
-                </div>
+                    <div class="col-sm-6">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
+                            {{ __('Buscar turnos por DNI del paciente') }} 
+                        </h2>
+                            <form action="{{ route('turno.reservados_dni')}}" method="get">  
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>                            
+                                        <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                                            <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-search"></i></x-success-button-non-r>                    
+                                </div>
+                            </form>
+                    </div>
+                </div>    
             </div>
-            <div class="col-sm-6">
-                <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                    {{ __('Buscar turnos por DNI del paciente') }} 
-                </h2>
-            <form action="{{ route('turno.reservados_dni')}}" method="get">  
-                @csrf
-            <div class="input-group mb-3">
-                <div class="input-group mb-3">
-                    <span class="input-group-text" id="basic-addon1">Buscar turnos del paciente: </span>
-                    <input type="number" required name="dni" id="dni" placeholder="D.N.I / Pasaporte" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
-                </div>
-                <x-success-button >{{ __('Buscar') }}</x-success-button>
-                </form>
-            </div>
-        </div>    
-        </div>
 
-            </div>    
-        </div>
+        </div>    
     </div>
 </div>
 @endcan
@@ -197,28 +200,28 @@
                               {{ __('Turnos reservados') }} 
                             </h2>
                         </div>
-                        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-                            <x-primary-a  href="{{ route('generate-turn-pdf') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Imprimir') }}</i></x-primary-a>
-                            <x-primary-a  href="{{ route('export-turn') }}" target="_blank"><i class="bi bi-file-earmark-excel"> {{ __('Exportar excel') }}</i></x-primary-a>
-
+                        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">                                
+                                <x-primary-a  href="{{ route('generate-turn-pdf') }}" target="_blank"><i class="bi bi-printer-fill"> {{ __('Imprimir') }}</i></x-primary-a>
+                                <x-primary-a  href="{{ route('export-turn') }}" target="_blank"><i class="bi bi-file-earmark-excel"> {{ __('Exportar excel') }}</i></x-primary-a>                         
                         </div>
                     </div>
 
                     <div class="table-responsive" id="no-more-tables">
-                        <table class="table text-center">
+                        <table class="table text-center table-borderless">
                         <thead>
                           <tr>
                             <th scope="col">Fecha y hora</th>
                             <th scope="col">Especialista</th>
                             <th scope="col">Paciente</th>
                             <th scope="col">Contacto</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Observación</th>
-                            <th scope="col">Cancelar</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         @foreach ($reservedTurns as $reservedTurn)
-                        <tbody>
+                        <tbody class="border border-gray rounded">
+                                
                             <tr>
                               <input type="text" name="id" id="id" hidden value="{{ $reservedTurn->id }}">
                             {{-- <td data-title="Notificación">                         
@@ -227,11 +230,11 @@
                             @else
                                 <p>Si</p>
                             @endif</td>  --}}
-                              <td data-title="Fecha y hora">{{ date("d-m-y",strtotime($reservedTurn->schedule?->fecha_atencion)) }}<br>{{ date("H:i",strtotime($reservedTurn->schedule?->hr_atencion)) }}</td>
-                              <td data-title="Especialista"> <strong>{{ucfirst($reservedTurn->schedule?->specialty->nombre_especialidad)}}</strong> <br> {{ ucfirst($reservedTurn->schedule?->specialist->nombre) }} {{ucfirst($reservedTurn->schedule?->specialist->apellido)}}</td>
-                              <td data-title="Paciente">{{ ucfirst($reservedTurn->nombre) }} {{ucfirst($reservedTurn->apellido)}} <br>{{$reservedTurn->dni}} </td>
-                              <td data-title="Contacto">{{ $reservedTurn->celular }}</td>
-                               <td data-title="Estado">
+                              <td data-title="Fecha y hora :" class="table-borderless">{{ date("d-m-y",strtotime($reservedTurn->schedule?->fecha_atencion)) }}<br>{{ date("H:i",strtotime($reservedTurn->schedule?->hr_atencion)) }}</td>
+                              <td data-title="Especialista :"> <strong>{{ucfirst($reservedTurn->schedule?->specialty->nombre_especialidad)}}</strong> <br> {{ ucfirst($reservedTurn->schedule?->specialist->nombre) }} {{ucfirst($reservedTurn->schedule?->specialist->apellido)}}</td>
+                              <td data-title="Paciente :">{{ ucfirst($reservedTurn->nombre) }} {{ucfirst($reservedTurn->apellido)}} <br>{{$reservedTurn->dni}} </td>
+                              <td data-title="Contacto :">{{ $reservedTurn->celular }}</td>
+                               <td data-title="Estado : ">
                                 <form action="{{ route('turno.actualizar_estado', $reservedTurn ) }}" method="post">
                                  <div class="input-group">
                                  @csrf
@@ -252,22 +255,22 @@
                                         <option value="3">Asistido</option>
                                         <option value="4">Ausente</option>
                                 </select>
-                                  <x-success-button-non-r  class="btn btn-outline-success"><i class="bi bi-floppy"></i></x-success-button-non-r>
+                                  <x-success-button-non-r class="btn btn-outline-success"><i class="bi bi-floppy"></i></x-success-button-non-r>
                                 </div>
                                </td>
                              
                              
-                              <td data-title="Observación">
+                              <td data-title="Observación :">
                                 <div class="input-group">
                                         @csrf
                                         @method('PUT')
-                                        <input value="{{$reservedTurn->observacion}}" name="observacion" id="observacion" class="form-control text-indigo-600 shadow-sm focus:ring-indigo-500"/>
+                                        <input value="{{$reservedTurn->observacion}}" placeholder="Observación" name="observacion" id="observacion" class="form-control text-indigo-600 shadow-sm focus:ring-indigo-500"/>
                                   <x-success-button-non-r  class="btn btn-outline-success"><i class="bi bi-floppy"></i></x-success-button-non-r>
                              </form>
                                 </div>
                                 </form> 
                               </td>
-                              <td>
+                         {{--     <td>
                                 <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -276,7 +279,21 @@
                               </td>
                               <td>
                                 <x-success-a href="{{ route('turno.show', $reservedTurn->id) }}">{{ __('Ver más') }}</x-success-a>
-
+                            </td> --}}
+                            <td >
+                                <div class="dropdown col d-grid gap-2 d-md-flex justify-content-md-end">
+                                    <x-primary-a  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </x-primary-a>
+                                    <ul class="dropdown-menu">
+                                        <li><form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
+                                                @csrf
+                                             @method('DELETE')
+                                            <button class="dropdown-item" style="color:crimson;" onclick="return confirm('¿Estás seguro que quieres eliminar?')">Cancelar turno</button>
+                                            </form></li>
+                                        <li><a class="dropdown-item" href="{{ route('turno.show', $reservedTurn->id) }}">Más información</a></li>
+                                    </ul>
+                                </div>
                             </td>
                             </tr>
                           </tbody>                    
@@ -291,4 +308,5 @@
         </div>
     </div>
     
+
 </x-app-layout>
