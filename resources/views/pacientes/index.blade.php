@@ -5,13 +5,18 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <x-app-layout>
     <x-slot name="header" class="container">
-        <h2 class="mb-2 font-semibold text-xl text-gray-800 leading-tight">
+        <div class="row">
+            <div class="col d-grid gap-2 d-md-flex ">
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Pacientes') }}
-        </h2>
-        <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
+                </h2>
+            </div>            
+            <div class="col-4 d-grid gap-2 d-md-flex justify-content-md-end">
             <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
+            </div>
         </div>
-    </x-slot>
+    </x-slot>    
+
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -45,8 +50,9 @@
                             </h2>
                           </header>
                     <div class="input-group mb-3">
-                        <input type="text" name="busqueda" id="busqueda" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Ingrese D.N.I, nombre o apellido para buscar..." aria-label="Nombre">
-                        <x-success-button href="">{{ __('Buscar') }}</x-success-button>
+                        <input type="text" name="busqueda" id="busqueda" required class="form-control rounded-left border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Ingrese D.N.I, nombre o apellido para buscar..." aria-label="Nombre">
+                        <x-success-button-non-r class="btn btn-outline-success" href=""><i class="bi bi-search"></i></x-success-button-non-r>                                        
+
                     </div>
                     </form>
                 </div>
@@ -82,7 +88,7 @@
                         <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $patient->nombre }} {{ $patient->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
+                            <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $patient->nombre }} {{ $patient->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
                       </div>
                     </div>
