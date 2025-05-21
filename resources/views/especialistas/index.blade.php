@@ -4,7 +4,7 @@
 <x-app-layout>
     <x-slot name="header" class="container">
         <div class="row">
-            <div class="col d-grid gap-2 d-md-flex ">
+            <div class="col d-grid gap-2 d-md-flex">
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                     {{ __('Especialistas') }}
                 </h2>
@@ -77,9 +77,15 @@
                     </div>
                  </div>
                  @empty 
-                 <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
-                    {{__('No hay especialistas registrados.')}}
-                </h2>
+            <div class="py-1">
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+                    <div class="p-3 text-gray-900">
+                        <div class="font-semibold text-gray-800 leading-tight">
+                                {{__('No hay especialistas registrados.')}}
+                        </div>
+                    </div>
+                </div>
+            </div>
                  @endforelse
             </div>
             <div class="py-3">

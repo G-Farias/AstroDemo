@@ -29,6 +29,14 @@
        {{ session('success') }}
     </div>
   @endif
+    
+        @if($specialty->count() < 1)
+        <div class="alert alert-danger">
+           {{'¡ALERTA! No se encuentra ninguna especialidad registrada, recomendamos primero crear especialidades para poder asignarle al especialista.'}}
+       </div>
+        @endif
+      
+  
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
