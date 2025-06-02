@@ -95,6 +95,8 @@ class SpecialistController extends Controller
         $user = new User;
 
         $user->name = $request->nombre;
+        $user->name = $request->apellido;
+        $user->user = $request->dni;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->remember_token = Str::random(60);
@@ -159,6 +161,8 @@ class SpecialistController extends Controller
         $user = User::where('id_especialista', $id)->first();
 
         $user->name = $request->nombre;
+        $user->surname = $request->apellido;
+        $user->user = $request->dni;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 

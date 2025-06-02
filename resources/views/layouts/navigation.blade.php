@@ -15,28 +15,34 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Inicio') }}
                     </x-nav-link>
+                    @can('isAdmin-or-isUser')
                     <x-nav-link :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
                         {{ __('Pacientes') }}
                     </x-nav-link>
                     <x-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                         {{ __('Especialistas') }}
                     </x-nav-link>
+                    @endcan
                     @can('isAdmin')
                     <x-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                         {{ __('Especialidad') }}
                     </x-nav-link>
                     @endcan
+                    @can('isAdmin-or-isUser')
                     <x-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
                         {{ __('Turnos') }}
                     </x-nav-link>
+                    @endcan
                     @can('isAdmin')
                     <x-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                         {{ __('Obras sociales / Prepagas') }}
                     </x-nav-link>
                     @endcan
-                    
-            
-        
+                    @can('isPatient')
+                    <x-nav-link :href="route('reservarTurno.especialidades')" :active="request()->routeIs('reservarTurno.especialidades')">
+                        {{ __('Reservar Turno') }}
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -101,24 +107,33 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
+            @can('isAdmin-or-isUser')
             <x-responsive-nav-link :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
                 {{ __('Pacientes') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                 {{ __('Especialistas') }}
+            @endcan
             </x-responsive-nav-link>
             @can('isAdmin')
             <x-responsive-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
                 {{ __('Especialidades') }}
             </x-responsive-nav-link>
             @endcan
+            @can('isAdmin-or-isUser')
             <x-responsive-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
                 {{ __('Turno') }}
             </x-responsive-nav-link>
+            @endcan
             @can('isAdmin')
             <x-responsive-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
                 {{ __('Obra social / Prepagas') }}
             </x-responsive-nav-link>
+            @endcan
+            @can('isPatient')
+            <x-nav-link :href="route('reservarTurno.especialidades')" :active="request()->routeIs('reservarTurno.especialidades')">
+                {{ __('Reservar Turno') }}
+            </x-nav-link>
             @endcan
         </div>
 

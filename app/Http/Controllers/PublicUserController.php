@@ -9,6 +9,7 @@ use App\Models\Schedule;
 use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
 use App\Models\ReservedTurn;
+use App\Models\User;
 use Illuminate\Console\View\Components\Component;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;

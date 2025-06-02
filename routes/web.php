@@ -105,13 +105,16 @@ Route::get('/pacientes', function () {
     return view('pacientes\pacientes');
 })->middleware(['auth', 'verified'])->name('pacientes');
 
+
 Route::middleware('auth')->group(function() {
     Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
     Route::post('/dashboard/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 
 });
 
-Route::middleware('auth')->group(function () {
+
+
+Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
 
     Route::get('/pacientes', [PatientController::class, 'index'])->name('pacientes.index');
   //  Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
@@ -129,7 +132,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('can:isAdmin')->group(function (){
     Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
 });
-Route::middleware('auth')->group(function () {
+Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
     Route::get('/especialistas', [SpecialistController::class, 'index'])->name('especialistas.index');
     Route::post('/especialistas', [SpecialistController::class, 'store'])->name('especialistas.store');
     Route::get('/especialistas/{specialist}', [SpecialistController::class, 'show'])->name('especialistas.show');
@@ -149,7 +152,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware(['can:isAdmin-or-isUser'])->group(function() {
 
     Route::get('/turno', [ReservedTurnController::class, 'inicio'])->name('turno.inicio');
 
@@ -210,20 +213,26 @@ Route::middleware('auth')->group(function () {
 
 });
 
+
     Route::get('/reservarTurno', [PublicUserController::class, 'index'])->name('reservarTurno.especialidades');
     Route::get('/reservarTurno/especialista/{STY}', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
     Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
     Route::get('/reservarTurno/turnos_fecha/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos_fecha');
+    
+    Route::middleware(['auth','can:isAll'])->group(function () {
+
     Route::get('/reservarTurno/reservar/{SLE}',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
     Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
     Route::get('/reservarTurno/turnoReservado/{RT}',[PublicUserController::class,'turno_reservado'])->name('reservarTurno.turnoReservado');
 
+    });
 
     Route::get('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::post('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::delete('/reservarTurno/{reservedTurn}', [PublicUserController::class, 'destroy'])->name('reservarTurno.destroy');
 
     Route::delete('/reservarTurno/cancel/{reservedTurn}', [PublicUserController::class, 'cancelar'])->name('reservarTurno.cancelar');
+
 
 
 require __DIR__.'/auth.php';

@@ -3,7 +3,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <x-viewpublic>
 
+@guest
     <x-public-navbar></x-public-navbar>
+@endguest
+@auth
+    @include('layouts.navigation')
+@endauth
 
     @if ($errors->any())
     <div class="alert alert-danger">
@@ -62,23 +67,23 @@
                     <div class="input-group mb-3">
                         <input type="text" name="id_horario" id="id_horario" hidden value="{{ $schedule->id }}">
                         <input type="text" name="estado" id="estado" hidden value="{{ $schedule->estado }}">
-                        <input type="text"  name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre/s" aria-label="Nombre">
-                        <input type="text"  name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido/s" aria-label="Apellido">
+                        <input type="text" value="{{ auth()->user()->name }}" name="nombre" id="nombre" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Nombre/s" aria-label="Nombre">
+                        <input type="text" value="{{ auth()->user()->surname }}" name="apellido" id="apellido" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Apellido/s" aria-label="Apellido">
                     </div>
 
                     <p class="mb-2 text-sm text-gray-600">
                         {{ __("Ingrese el DNI o pasaporte sin puntos ni guiones.") }}
                       </p>
                     <div class="input-group mb-3">
-                        <input type="number"  name="dni" id="dni" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="D.N.I / Pasaporte" aria-label="">
-                        <input type="number"  name="dni_rep" id="dni_rep" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Repetir D.N.I / Pasaporte" aria-label="">
+                        <input type="number"  name="dni" id="dni" value="{{ auth()->user()->user }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="D.N.I / Pasaporte" aria-label="">
+                        <input type="number"  name="dni_rep" id="dni_rep" value="{{ auth()->user()->user }}" required class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Repetir D.N.I / Pasaporte" aria-label="">
                     </div>
                     <p class="mb-2 text-sm text-gray-600">
                         {{ __("El email y celular se utilizará como medio de contacto.") }}
                       </p>
                     <div class="input-group mb-3">
                         <input type="number" required  name="celular" id="celular" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Celular" aria-label="">
-                        <input type="mail" required name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="">
+                        <input type="mail" required value="{{ auth()->user()->email }}" name="email" id="email" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="">
                     </div>
 
                     <div class="input-group mb-3">

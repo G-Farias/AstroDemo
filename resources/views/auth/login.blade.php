@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout >
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -7,11 +7,18 @@
 
         <!-- Email Address -->
         <div>
+            <x-input-label for="user" :value="__('D.N.I/Pasaporte')" />
+            <x-text-input id="user" class="block mt-1 w-full" type="number" name="user" :value="old('user')" required autofocus autocomplete="user" />
+            <x-input-error :messages="$errors->get('user')" class="mt-2" />
+        </div>
+
+       <!-- Email Address -->
+    <!--    <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
-
+    -->
         <!-- Password -->
         <div class="mt-4">
             <x-input-label for="password" :value="__('Contraseña')" />
@@ -32,13 +39,15 @@
             </label>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
+        <div class="flex items-center justify-end mt-5">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
+                <a class="mr-3 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
                     {{ __('¿Olvidaste tu contraseña?') }}
                 </a>
-            @endif
-
+            @endif            
+            <x-blue-a  href="{{ route('register') }}">
+                {{ __('Registrar') }}
+            </x-blue-a>
             <x-primary-button class="ms-3">
                 {{ __('Ingresar') }}
             </x-primary-button>

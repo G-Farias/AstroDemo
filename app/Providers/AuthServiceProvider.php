@@ -32,5 +32,17 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isUser', function ($user) {
             return $user->level == '1';
         });
+
+        Gate::define('isPatient', function ($user) {
+            return $user->level == '2';
+        });
+
+        Gate::define('isAdmin-or-isUser', function ($user) {
+            return in_array($user->level, [ null, '1']);
+        });
+
+        Gate::define('isAll', function ($user) {
+            return in_array($user->level, [ null, '1','2']);
+        });
     }
 }
