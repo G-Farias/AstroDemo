@@ -168,8 +168,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    <h2 class="mb-3 font-semibold text-xl text-gray-800 leading-tight">
-                        {{ __('Mis turnos')}} 
+                    <h2 class="mb-2 font-semibold text-xl text-gray-800 leading-tight">
+                        {{ __('Mis turnos: ')}}{{ (ucfirst(auth()->user()->name))}} {{ (ucfirst(auth()->user()->surname))}} 
                     </h2>
                     <div class="row">
                         @forelse ($reservedTurns as $reservedTurn)
@@ -179,18 +179,24 @@
                             <div class="card-body ">
                               <h2 class="card-tittle font-semibold text-xl text-gray-800 leading-tight">
                               </h2>
-                              <p class="card-text"><strong>Nombre y Apellido: </strong>{{ucfirst($reservedTurn->nombre)}} {{ucfirst($reservedTurn->apellido)}}</p>
-                              <p class="card-text"><strong>D.N.I / Pasaporte: </strong>{{$reservedTurn->dni}}</p>
+                              <p class="card-text"><strong>DNI / Pasaporte: </strong>{{$reservedTurn->dni}}</p>
                               <p class="card-text"><strong>Especialidad: </strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</p>
                               <p class="card-text"><strong>Especialista: </strong>{{ucfirst($schedule->specialist->nombre)}} {{ucfirst($schedule->specialist->apellido)}}</p>
-                              <p class="card-text"><strong>Fecha de atención: </strong>{{date("d-m-y",strtotime($schedule->fecha_atencion))}}</p>
-                              <p class="card-text mb-3"><strong>Hora de atención: </strong>{{date("H:i",strtotime($schedule->hr_atencion))}}hs</p>
+                             
+                              <p class="card-text mt-3"><i class="bi bi-calendar-check"></i> <strong>Fecha de atención: </strong>{{date("d-m-y",strtotime($schedule->fecha_atencion))}}</p>
+                              <p class="card-text mb-3"><i class="bi bi-clock"></i> <strong>Hora de atención: </strong>{{date("H:i",strtotime($schedule->hr_atencion))}}hs</p>
 
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                 <form class="mb-0 " action="{{route('reservarTurno.destroy',$reservedTurn )}}" method="POST">
                                     @csrf
                                     @method('DELETE')
+                                    @if($reservedTurn->estado == '1')
                                     <x-danger-button onclick="return confirm('¿Estás seguro que quieres cancelar el turno seleccionado?')">{{ __('Cancelar turno') }}</x-danger-button>
+                                    @elseif($reservedTurn->estado == '3')
+                                     <x-grey-anunnce  type="button" class="btn btn-dark" disabled>{{__('Turno ya asistido')}}</x-grey-anunnce> 
+                                    @else
+                                     <x-grey-anunnce  type="button" class="btn btn-dark" disabled>{{__('Ausente')}}</x-grey-anunnce>
+                                    @endif
                                 </form>
                               </div>
                             </div>                        
