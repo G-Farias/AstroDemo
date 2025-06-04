@@ -44,5 +44,9 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isAll', function ($user) {
             return in_array($user->level, [ null, '1','2']);
         });
+
+        Gate::define('isAdmin-or-isPatient', function ($user) {
+            return in_array($user->level, [ null, '2']);
+        });
     }
 }

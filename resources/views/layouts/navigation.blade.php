@@ -62,7 +62,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        @can('isAdmin')
+                        @can('isAdmin-or-isPatient')
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Perfil') }}
                         </x-dropdown-link>
@@ -143,7 +143,7 @@
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
             </div>
             <div class="mt-3 space-y-1">
-                @can('isAdmin')
+                @can('isAdmin-or-isPatient')
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Perfil') }}
                 </x-responsive-nav-link>

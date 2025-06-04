@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
+     @can('isAdmin')
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Perfil administrativo') }}
         </h2>
+        @elsecan('isPatient')
+                <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Perfil') }}
+        </h2>
+     @endcan
     </x-slot>
 
     <div class="py-12">

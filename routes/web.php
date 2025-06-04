@@ -225,14 +225,19 @@ Route::middleware('auth')->group(function () {
     Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
     Route::get('/reservarTurno/turnoReservado/{RT}',[PublicUserController::class,'turno_reservado'])->name('reservarTurno.turnoReservado');
 
-    });
-
     Route::get('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::post('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
     Route::delete('/reservarTurno/{reservedTurn}', [PublicUserController::class, 'destroy'])->name('reservarTurno.destroy');
 
     Route::delete('/reservarTurno/cancel/{reservedTurn}', [PublicUserController::class, 'cancelar'])->name('reservarTurno.cancelar');
 
+    Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
+
+
+
+    });
+
+ 
 
 
 require __DIR__.'/auth.php';

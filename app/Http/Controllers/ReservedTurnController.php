@@ -27,6 +27,8 @@ class ReservedTurnController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+ 
     public function dashboard(Request $request){
      if (Gate::allows('isAdmin')) {
                 $specialists = Specialist::all();
@@ -35,7 +37,10 @@ class ReservedTurnController extends Controller
                 ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
                 ->select('reserved_turns.*')
                 ->paginate(10)->withQueryString();
-          }else{
+
+                           return view('dashboard', compact('specialists','reservedTurns'));
+
+          }elseif(Gate::allows('isUser')){
             $specialists = Specialist::all();
             $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
                 ->whereDate('schedules.fecha_atencion','=',now())
@@ -43,11 +48,17 @@ class ReservedTurnController extends Controller
                 ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
                 ->select('reserved_turns.*')
                 ->paginate(10)->withQueryString();
-          }
-           return view('dashboard', compact('specialists','reservedTurns'));
 
-         
-        }
+                           return view('dashboard', compact('specialists','reservedTurns'));
+
+          }else {
+            $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
+            $reservedTurns = ReservedTurn::where('dni', auth()->user()->user)->get();
+
+             return view('dashboard', compact('reservedTurns','schedules'));
+          }
+
+        } 
 
     public function inicio(Request $request)
     {

@@ -123,15 +123,15 @@ class PublicUserController extends Controller
                     
 
     }
-
+/*
     public function mis_turnos(Request $request){
 
         $schedules = Schedule::whereDate('fecha_atencion','>=', now())->orderBy('fecha_atencion','asc')->orderBy('hr_atencion','asc')->get();
-        $reservedTurns = ReservedTurn::where('dni', $request->dni)->get();
+        $reservedTurns = ReservedTurn::where('dni', auth()->user()->user)->get();
 
-        return view('reservarTurno.misTurnos', compact('reservedTurns','schedules'));
+        return view('dashboard', compact('reservedTurns','schedules'));
     }
-
+*/
     public function destroy(ReservedTurn $reservedTurn)
     {
         $schedule = Schedule::find($reservedTurn->id_horario_atencion);
