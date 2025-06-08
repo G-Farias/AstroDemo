@@ -195,7 +195,7 @@
     <div class="py-1 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                <div class="p-6 text-gray-900">
+                <div class="p-6 text-gray-900" >
                     <div class="row mb-3">
                         <div class="col">
                             <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
@@ -208,7 +208,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive" id="no-more-tables">
+                    <div class="table-responsive overflow-visible" id="no-more-tables" >
                         <table class="table text-center table-borderless">
                         <thead>
                           <tr>
@@ -293,6 +293,24 @@
                                              @method('DELETE')
                                             <button class="dropdown-item" style="color:crimson;" onclick="return confirm('¿Estás seguro que quieres eliminar?')">Cancelar turno</button>
                                             </form></li>
+
+                                            @can('isAdmin')
+                                                @unless($patients->contains('dni', $reservedTurn->dni))
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ route('pacientes.pendiente_save', $reservedTurn->dni) }}">
+                                                            {{ __('Almacenar') }}
+                                                        </a>
+                                                    </li>
+                                                @endunless
+                                            @elsecan('isUser')
+                                                @unless($patients->contains('dni', $reservedTurn->dni))
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ route('pacientes.pendiente_save', $reservedTurn->dni) }}">
+                                                            {{ __('Almacenar') }}
+                                                        </a>
+                                                    </li>
+                                                @endunless                                            
+                                            @endcan
                                         <li><a class="dropdown-item" href="{{ route('turno.show', $reservedTurn->id) }}">Más información</a></li>
                                     </ul>
                                 </div>

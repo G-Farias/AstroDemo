@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SistConfigController;
+use App\Models\Patient;
+use App\Models\prePatient;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -43,14 +45,52 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-        $user = User::create([
+        
+        if(Patient::where('dni', $request->user)->first()){
+               
+            $user = User::create([
             'name' => $request->name,
             'surname' => $request->surname,
             'email' => $request->email,
             'user' => $request->user,
             'password' => Hash::make($request->password),
+            'level' => 2,
+            'patient' => 1,
         ]);
+        
+            }else{
+                $user = User::create([
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'email' => $request->email,
+                'user' => $request->user,
+                'password' => Hash::make($request->password),
+                'level' => 2,
+                'patient' => 0,   
+            ]);
+                    }
+
+ /*      $user = User::create([
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'email' => $request->email,
+            'user' => $request->user,
+            'password' => Hash::make($request->password),
+
+        ]);
+
+        $userId = $user->id;
+
+        if(Patient::where('dni', $request->user)->first()){
+
+        } else{
+            $intermediatePacient = new prePatient;
+
+            $intermediatePacient->id_user = $userId;
+            $intermediatePacient->dni = $request->user;
+            
+            $intermediatePacient->save();
+        } */
 
         event(new Registered($user));
 

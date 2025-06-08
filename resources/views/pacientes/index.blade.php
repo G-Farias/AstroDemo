@@ -10,10 +10,14 @@
                 <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Pacientes') }}
                 </h2>
-            </div>            
-            <div class="col-4 d-grid gap-2 d-md-flex justify-content-md-end">
+            </div>        
+            <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
+            @can('isAdmin')
+            <x-primary-a href="{{ route('pacientes.pendientes') }}">{{ __('Pacientes pendientes') }}</x-primary-a>
+            @endcan
             <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
-            </div>
+              </div>
+        
         </div>
     </x-slot>    
 
@@ -74,7 +78,6 @@
                 <div class=" text-gray-900">
                 @foreach ($patients as $patient)
                 <div class="card border-light">
-                   
                     <div class="card-body">
                       <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>
                       <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $patient->dni }}</p> 

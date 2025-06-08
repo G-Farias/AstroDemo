@@ -226,12 +226,14 @@ class ReservedTurnController extends Controller
     if (Gate::allows('isAdmin')) {
 
         $specialists = Specialist::all();
+        $patients = Patient::all();
              $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
             ->whereDate('schedules.fecha_atencion','>=',now())
             ->orderby('schedules.fecha_atencion','ASC')->orderby('schedules.hr_atencion','ASC')
             ->select('reserved_turns.*')
             ->paginate(10)->withQueryString(); 
     }else{
+        $patients = Patient::all();
         $specialists = Specialist::all();
         $reservedTurns = ReservedTurn::join('schedules', 'schedules.id', "=", "reserved_turns.id_horario_atencion")
             ->whereDate('schedules.fecha_atencion','>=',now())
@@ -240,7 +242,7 @@ class ReservedTurnController extends Controller
             ->select('reserved_turns.*')
             ->paginate(10)->withQueryString();
     }
-        return view('turno.reservados', compact('specialists','reservedTurns'));
+        return view('turno.reservados', compact('specialists','reservedTurns','patients'));
 
     }
 

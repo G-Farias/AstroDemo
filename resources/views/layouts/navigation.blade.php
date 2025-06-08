@@ -16,9 +16,17 @@
                         {{ __('Inicio') }}
                     </x-nav-link>
                     @can('isAdmin-or-isUser')
-                    <x-nav-link :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
-                        {{ __('Pacientes') }}
+                    <x-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
+                        {{ __('Pacientes') }}                     
                     </x-nav-link>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
+                        @can('isAdmin') 
+                            <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
+                        @endcan
+                        </ul>
+                    
+
                     <x-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                         {{ __('Especialistas') }}
                     </x-nav-link>
@@ -108,9 +116,15 @@
                 {{ __('Inicio') }}
             </x-responsive-nav-link>
             @can('isAdmin-or-isUser')
-            <x-responsive-nav-link :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
-                {{ __('Pacientes') }}
-            </x-responsive-nav-link>
+            <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" :href="route('pacientes.index')" :active="request()->routeIs('pacientes.index')">
+                {{ __('Pacientes') }}                     
+             </x-responsive-nav-link>
+                <ul class="dropdown-menu w-100">
+                    <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
+                   @can('isAdmin')  
+                    <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
+                    @endcan
+                </ul>
             <x-responsive-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                 {{ __('Especialistas') }}
             @endcan

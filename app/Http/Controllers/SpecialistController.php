@@ -95,13 +95,14 @@ class SpecialistController extends Controller
         $user = new User;
 
         $user->name = $request->nombre;
-        $user->name = $request->apellido;
+        $user->surname = $request->apellido;
         $user->user = $request->dni;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->remember_token = Str::random(60);
         $user->level = '1';
         $user->id_especialista = $specialist->id;
+        $user->patient = '1';
 
         $user->save();
     

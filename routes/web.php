@@ -117,6 +117,10 @@ Route::middleware('auth')->group(function() {
 Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
 
     Route::get('/pacientes', [PatientController::class, 'index'])->name('pacientes.index');
+    
+    Route::get('/pacientes/pendientes', [PatientController::class, 'pendiente'])->name('pacientes.pendientes');
+    Route::get('/pacientes/pendientes/{prePatient}/save', [PatientController::class, 'pendiente_save'])->name('pacientes.pendiente_save');
+
   //  Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
     Route::get('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
 
@@ -126,9 +130,12 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
     Route::get('/pacientes/{patient}/edit', [PatientController::class, 'edit'])->name('pacientes.edit');
     Route::put('/pacientes/{patient}', [PatientController::class, 'update'])->name('pacientes.update');
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
-
-
+    
 });
+
+
+
+
 Route::middleware('can:isAdmin')->group(function (){
     Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
 });

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 use App\Exports\PatientsExportsExport;
+use App\Models\User;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PatientController extends Controller
@@ -28,9 +29,25 @@ class PatientController extends Controller
             $q_patients = Patient::where('id_especialista', Auth::user()->id_especialista)->count();
         }
 
+
         return view('pacientes.index', compact('patients','q_patients'));
+    }   
+
+    public function pendiente(){
+        
+        $prePatients = User::where('patient','0')->paginate(10);
+        $q_patients = User::where('patient','0')->count();
+
+        return view('pacientes.pendientes', compact('prePatients','q_patients'));
     }
 
+    public function pendiente_save($prepatient){
+        $medicalInsurence= MedicalInsurence::all();
+        $prePatient = User::where('user', $prepatient)->get();
+
+        return view('pacientes.pendiente_save', compact('medicalInsurence', 'prePatient'));
+    }
+    
     public function buscar(Request $request){
 
         if (Gate::allows('isAdmin')) {
@@ -66,7 +83,7 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, User $user)
     {
         if (Gate::allows('isAdmin')) {
             $patients = Patient::where('dni', $request->dni)->count();
@@ -95,6 +112,17 @@ class PatientController extends Controller
             $pacientes->id_especialista = $request->user()->id_especialista;
     
             $pacientes->save();
+
+                $user = User::where('user', $request->dni)->first();         
+                
+                if($user){
+                $user->patient = '1';
+                $user->save();
+                }else {
+                    return redirect()->route('pacientes.index')->with('danger', 'Error al actualizar usuario');
+
+                }
+
         }
         } else {
             $patients = Patient::where('dni', $request->dni)->where('id_especialista', Auth::user()->id_especialista)->count();
@@ -122,6 +150,16 @@ class PatientController extends Controller
             $pacientes->id_especialista = $request->user()->id_especialista;
     
             $pacientes->save();
+
+             $user = User::where('user', $request->dni)->first();         
+        
+                if($user){
+                $user->patient = '1';
+                $user->save();
+                }else {
+                    return redirect()->route('pacientes.index')->with('danger', 'Error al actualizar usuario');
+
+                }
             }
         }
 
@@ -195,6 +233,10 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
+        $user = User::where('user', $patient->dni)->first();
+        $user->patient = '0';
+        $user->save();
+
         $patient->delete();
 
         return redirect()->route('pacientes.index')
@@ -205,5 +247,7 @@ class PatientController extends Controller
     {
         return Excel::download(new PatientsExport, 'patients.xlsx');
     }
+
+
 
 }
