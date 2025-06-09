@@ -73,12 +73,6 @@
                      {{ __('Turnos disponibles para reservar') }}
                 </h2>
             </div>            
-            <div class="col-4 d-grid gap-2 d-md-flex justify-content-md-end">
-            @can('isUser')
-            <x-third-a href="{{ route('especialistas.horario_atencion', Auth::user()->id_especialista) }}">{{__('Agregar turnos de atención')}}</x-third-a>
-            @endcan
-            <x-primary-a href="{{ route('turno.reservados') }}">{{ __('Ver turnos reservados') }}</x-primary-a>            </div>
-        </div>
     </x-slot>  
 
 

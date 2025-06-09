@@ -11,13 +11,13 @@
             {{ __('Pacientes') }}
                 </h2>
             </div>        
-            <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
+          <!--  <div class="col-6 d-grid gap-2 d-md-flex justify-content-md-end">
             @can('isAdmin')
             <x-primary-a href="{{ route('pacientes.pendientes') }}">{{ __('Pacientes pendientes') }}</x-primary-a>
             @endcan
             <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
               </div>
-        
+            -->
         </div>
     </x-slot>    
 

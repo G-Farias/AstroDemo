@@ -9,11 +9,6 @@
                     {{ __('Especialistas') }}
                 </h2>
             </div>     
-            @can('isAdmin')       
-            <div class="col d-grid gap-2 d-md-flex justify-content-md-end">
-                <x-primary-a href="{{ route('especialistas.create') }}">{{ __('Registrar especialista') }}</x-primary-a>
-            </div>
-            @endcan
         </div>
     </x-slot>
 

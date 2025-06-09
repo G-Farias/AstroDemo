@@ -11,9 +11,6 @@
             {{ __('Pacientes pendientes a ser almacenados en sistema') }}
                 </h2>
             </div>        
-            <div class="col-4 d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('pacientes.create') }}">{{ __('Registrar paciente') }}</x-primary-a>
-            </div>
         </div>
     </x-slot>    
 

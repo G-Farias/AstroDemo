@@ -21,31 +21,51 @@
                     </x-nav-link>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
+                            <li><a class="dropdown-item" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
                         @can('isAdmin') 
                             <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
                         @endcan
                         </ul>
-                    
-
-                    <x-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
-                        {{ __('Especialistas') }}
+                     @endcan
+                    @can('isAdmin-or-isUser') 
+                    <x-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
+                        {{ __('Especialistas') }}                     
                     </x-nav-link>
-                    @endcan
-                    @can('isAdmin')
-                    <x-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
-                        {{ __('Especialidad') }}
-                    </x-nav-link>
-                    @endcan
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{route('especialistas.index')}}">Especialistas</a></li>
+                        @can('isAdmin') 
+                            <li><a class="dropdown-item" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
+                        @endcan
+                        </ul>                        
+                    @endcan   
+                   
                     @can('isAdmin-or-isUser')
-                    <x-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
-                        {{ __('Turnos') }}
+                  <x-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
+                        {{ __('Turnos') }}                     
                     </x-nav-link>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
+                            <li><a class="dropdown-item" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
+                        @can('isUser')
+                            <li><hr class="dropdown-divider"></li> 
+                            <li><a class="dropdown-item" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
+                        @endcan
+                        </ul>
+
                     @endcan
                     @can('isAdmin')
-                    <x-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
-                        {{ __('Obras sociales / Prepagas') }}
+                    <x-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
+                        {{ __('Más') }}                     
                     </x-nav-link>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
+                            <li><a class="dropdown-item" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{route('especialidad.index')}}">Especialidades</a></li>
+                            <li><a class="dropdown-item" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
+                        </ul>
                     @endcan
+
                     @can('isPatient')
                     <x-nav-link :href="route('reservarTurno.especialidades')" :active="request()->routeIs('reservarTurno.especialidades')">
                         {{ __('Reservar Turno') }}
@@ -78,6 +98,11 @@
                         @can('isUser')
                         <x-dropdown-link :href="route('especialistas.edit', Auth::user()->id_especialista)">
                             {{__('Editar perfil')}}
+                        </x-dropdown-link>
+                        @endcan
+                        @can('isAdmin')
+                        <x-dropdown-link :href="route('admin.registrar')">
+                            {{ __('Registrar administrador') }}
                         </x-dropdown-link>
                         @endcan
                         <x-dropdown-link :href="route('ayuda')">
@@ -121,28 +146,46 @@
              </x-responsive-nav-link>
                 <ul class="dropdown-menu w-100">
                     <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
-                   @can('isAdmin')  
+                    <li><a class="dropdown-item" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
+                @can('isAdmin') 
                     <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
+                @endcan
+                </ul>
+                <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('especialistas.index')" :active="request()->routeIs('pacientes.index')">
+                    {{ __('Especialistas') }}                     
+                </x-responsive-nav-link>
+                        <ul class="dropdown-menu w-100">
+                            <li><a class="dropdown-item" href="{{route('especialistas.index')}}">Especialistas</a></li>
+                        @can('isAdmin') 
+                            <li><a class="dropdown-item" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
+                        @endcan
+                        </ul>                    
+                 @endcan
+            
+            @can('isAdmin-or-isUser')
+            <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('turno.inicio')" :active="request()->routeIs('pacientes.index')">
+                {{ __('Turnos') }}                     
+            </x-responsive-nav-link>
+                <ul class="dropdown-menu w-100">
+                        <li><a class="dropdown-item" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
+                        <li><a class="dropdown-item" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
+                @can('isUser') 
+                        <li><a class="dropdown-item" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
                     @endcan
                 </ul>
-            <x-responsive-nav-link :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
-                {{ __('Especialistas') }}
-            @endcan
-            </x-responsive-nav-link>
-            @can('isAdmin')
-            <x-responsive-nav-link :href="route('especialidad.index')" :active="request()->routeIs('especialidad.index')">
-                {{ __('Especialidades') }}
-            </x-responsive-nav-link>
-            @endcan
-            @can('isAdmin-or-isUser')
-            <x-responsive-nav-link :href="route('turno.inicio')" :active="request()->routeIs('turno.inicio')">
-                {{ __('Turno') }}
-            </x-responsive-nav-link>
+            
             @endcan
             @can('isAdmin')
-            <x-responsive-nav-link :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
-                {{ __('Obra social / Prepagas') }}
+            <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('obraSocial.index')" :active="request()->routeIs('obraSocial.index')">
+                {{ __('Más') }}                     
             </x-responsive-nav-link>
+                <ul class="dropdown-menu w-100">
+                    <li><a class="dropdown-item" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
+                    <li><a class="dropdown-item" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{{route('especialidad.index')}}">Especialidades</a></li>
+                    <li><a class="dropdown-item" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
+                </ul>            
             @endcan
             @can('isPatient')
             <x-nav-link :href="route('reservarTurno.especialidades')" :active="request()->routeIs('reservarTurno.especialidades')">
@@ -153,8 +196,8 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+            <div class="px-3">
+                <div class="font-medium text-base text-black-800">{{ Auth::user()->name }}</div>
             </div>
             <div class="mt-3 space-y-1">
                 @can('isAdmin-or-isPatient')
@@ -168,13 +211,18 @@
                     {{__('Editar perfil')}}
                 </x-responsive-nav-link>
                 @endcan
+                @can('isAdmin')
+                <x-responsive-nav-link :href="route('admin.registrar')">
+                    {{ __('Registrar administrador') }}
+                </x-responsive-nav-link>
+                 @endcan
                 <x-responsive-nav-link :href="route('ayuda')">
                     {{__('Ayuda')}}
                 </x-responsive-nav-link>
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
+                    
                     <x-responsive-nav-link :href="route('logout')"
                             onclick="event.preventDefault();
                                         this.closest('form').submit();">

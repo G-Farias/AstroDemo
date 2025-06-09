@@ -9,9 +9,6 @@
             {{ __('Obras sociales / Prepagas') }}
                 </h2>
             </div>            
-            <div class="col-5 d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('obraSocial.create') }}">{{ __('Registrar obra social / prepaga') }}</x-primary-a>
-            </div>
         </div>
     </x-slot>  
 

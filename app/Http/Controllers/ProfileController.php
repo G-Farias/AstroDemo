@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Specialist;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
@@ -15,6 +17,38 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+    public function admin()
+    {
+        $user = User::all();
+        return view('profile.register_admin', compact('user')); 
+    }
+    
+    public function admin_store(Request $request){
+
+        $request->validate([
+            'user' => ['required', 'unique:users', 'max:255'],
+            'email' => ['required', 'unique:users', 'max:255'],
+        ],
+        [
+            'user.unique' => 'El DNI/Pasaporte ya se encuentra registrado.',
+            'email.unique' => 'El Email ya se encuentra registrado.'
+        ]);
+
+        $user = new User;
+
+        $user->name = $request->name;
+        $user->surname = $request->surname;
+        $user->user = $request->user;
+        $user->password = Hash::make($request->password);
+        $user->email = $request->email;
+        $user->level = '3';
+        $user->patient = '1';
+
+        $user->save();
+
+         return redirect()->route('admin.registrar')->with('success', 'Cuenta administrativa registrada');
+
+    }
 
 
     public function edit(Request $request): View

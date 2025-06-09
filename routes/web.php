@@ -210,7 +210,11 @@ Route::middleware('can:isAdmin')->group(function () {
     Route::put('/especialidad/{specialty}', [SpecialtyController::class, 'update'])->name('especialidad.update');
     Route::delete('/especialidad/{specialty}', [SpecialtyController::class, 'destroy'])->name('especialidad.destroy');
 
+    
+    Route::get('/admin/registrar',[ProfileController::class, 'admin'])->name('admin.registrar');
+    Route::post ('/admin/registrar',[ProfileController::class, 'admin_store'])->name('admin.store');
 });
+
 
 
 Route::middleware('auth')->group(function () {

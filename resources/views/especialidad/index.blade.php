@@ -9,9 +9,6 @@
             {{ __('Especialidad') }}
                 </h2>
             </div>            
-            <div class="col-4 d-grid gap-2 d-md-flex justify-content-md-end">
-            <x-primary-a href="{{ route('especialidad.create') }}">{{ __('Registrar especialidad') }}</x-primary-a>
-            </div>
         </div>
     </x-slot>  
 
