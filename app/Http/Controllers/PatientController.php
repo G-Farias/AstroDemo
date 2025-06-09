@@ -205,7 +205,20 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+            $request->validate([
+            'dni' => ['required', 'unique:patients', 'max:255'],
+            'email' => ['required', 'unique:patients', 'max:255'],
+
+        ],
+        [
+            'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+            'email.unique' => 'El Email ya se encuentra registrado.',
+
+        ]);    
+
         $pacientes = patient::find($id);
+
+        $oldDni = $pacientes->dni;
 
 
         $pacientes->nombre = $request->nombre;
@@ -225,6 +238,19 @@ class PatientController extends Controller
 
         $pacientes->save();
         
+        $user = User::where('user', $oldDni)->first();
+
+        if ($user) {
+            $user->user = $request->dni;
+            $user->name = $request->nombre;
+            $user->surname = $request->apellido;
+            $user->email = $request->email;
+
+            $user->save();
+        } else {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
+
         return redirect()->route('pacientes.index')->with('success', 'Paciente actualizado');
     }
 
