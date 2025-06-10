@@ -130,8 +130,9 @@ class SpecialistController extends Controller
     public function edit(Specialist $specialist)
     {
         $specialty = Specialty::all();
+        $user = User::where('user',$specialist->dni)->first();
 
-        return view('especialistas.edit', compact('specialist','specialty'));
+        return view('especialistas.edit', compact('specialist','specialty','user'));
     }
 
     /**
@@ -139,7 +140,25 @@ class SpecialistController extends Controller
      */
     public function update(Request $request, $id)
     {
+            $request->validate([
+            'dni' => ['required', 'unique:specialists', 'max:255'],
+            'email' => ['required', 'unique:specialists', 'max:255'],
+
+
+            'user' => ['required', 'unique:users', 'max:255'],
+            'email' => ['required', 'unique:users', 'max:255'],
+        ],
+        [
+            'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+            'user.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+            'email.unique' => 'El Email ya se encuentra registrado.',
+
+        ]);    
+
+
         $specialist = Specialist::find($id);
+
+        $oldDni = $specialist->dni;
 
         
         $specialist->nombre = $request->nombre;
@@ -149,7 +168,6 @@ class SpecialistController extends Controller
         $specialist->telefono = $request->telefono;
         $specialist->telefono = $request->telefono;
         $specialist->email = $request->email;
-        $specialist->password = $request->password;
         $specialist->especialidad = $request->especialidad;
         $specialist->matricula = $request->matricula;
         $specialist->dia_atencion = $request->dia_atencion;
@@ -159,15 +177,19 @@ class SpecialistController extends Controller
 
         $specialist->save();
 
-        $user = User::where('id_especialista', $id)->first();
+        $user = User::where('user', $oldDni)->first();
 
-        $user->name = $request->nombre;
-        $user->surname = $request->apellido;
-        $user->user = $request->dni;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
+        if ($user) {
+            $user->user = $request->dni;
+            $user->name = $request->nombre;
+            $user->surname = $request->apellido;
+            $user->email = $request->email;
 
-        $user->save();
+
+            $user->save();
+        } else {
+            return response()->json(['error' => 'Usuario no encontrado'], 404);
+        }
         
         return redirect()->route('especialistas.index')->with('success', 'Especialista actualizado');
     }

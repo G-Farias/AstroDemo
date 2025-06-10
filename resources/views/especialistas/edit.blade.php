@@ -66,8 +66,7 @@
                           </div>
 
                           <div class="input-group mb-3">
-                           <input type="mail" required value="{{ $specialist->email }}" name="email" id="email" class="form-control rounded-l border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                           <input type="password" required value="{{ $specialist->password }}"  name="password" id="password" class="form-control rounded-r border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Contraseña" aria-label="contraseña">                        
+                           <input type="mail" required value="{{ $user->email }}" name="email" id="email" class="form-control rounded-l border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
                             <x-primary-a type="button" onclick="mostrarContrasena()">Ver contraseña</x-primary-a>
                           </div>
                           
