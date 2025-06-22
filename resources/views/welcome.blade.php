@@ -36,19 +36,22 @@
                     @endauth
                 </div>
             @endif
-
+            
             @if (session('danger'))
             <div class="alert alert-danger">
                   {{ session('danger') }}
             </div>
             @endif
 
-            <div class="max-w-7xl mx-auto p-6 lg:p-8">
+
+           <div class="flex justify-center items-start overflow-x-hidden p-6 ">
+                    <div class="bg-white shadow rounded-lg  p-6 w-full max-w-md">
                 <div class="flex justify-center">
-                    <img src="{!! asset('storage/images/logo.png') !!}">
+                 <img class="mb-4 block h-24 w-full fill-current text-gray-800" src="{!! asset('storage/images/logo.png') !!}">
                 </div>
 
-                <div class="flex justify-center mt-5 mb-5">
+
+                <div class="flex justify-center mb-5">
                     @if (Route::has('login'))
                     <div class="">
                         @auth
@@ -66,10 +69,11 @@
 
 
                     <div class="ml-4 mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
-                        Agenda del sistema de turnos online. (v.2.1 - beta)
+                        Agenda del sistema de turnos online. (v.3.0 - beta)
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </body>
 </html>

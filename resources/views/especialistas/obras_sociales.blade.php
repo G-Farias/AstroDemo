@@ -54,11 +54,13 @@
                                     </form>
                                     <x-grey-anunnce class="fst-italic " disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
                                 </div>
+                                
                                 @endif 
                             @endforeach
                         </div>
                     </div>
                 </div>
+                
                     @endforeach
                 </div>
             </div>
