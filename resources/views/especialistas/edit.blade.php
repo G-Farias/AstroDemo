@@ -66,20 +66,11 @@
                           </div>
 
                           <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">Email</span>
                            <input type="mail" required value="{{ $user->email }}" name="email" id="email" class="form-control rounded-l border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Email" aria-label="Email">
-                            <x-primary-a type="button" onclick="mostrarContrasena()">Ver contraseña</x-primary-a>
                           </div>
                           
-                          <script>
-                            function mostrarContrasena(){
-                                var tipo = document.getElementById("password");
-                                if(tipo.type == "password"){
-                                    tipo.type = "text";
-                                }else{
-                                    tipo.type = "password";
-                                }
-                            }
-                          </script>
+
 
                           <div class="input-group mb-3">
                             <span class="input-group-text" id="basic-addon1">Especialidad</span>

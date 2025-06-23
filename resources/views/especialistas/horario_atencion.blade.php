@@ -25,7 +25,7 @@
           {{ session('danger') }}
     </div>
 @endif
-    <div class="py-12">
+  <!--  <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
@@ -91,6 +91,102 @@
         </div>
     </div>
 
+-->
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+                <div class="p-6 text-gray-900">
+                    <header class="mb-3">
+                        <h2 class="text-lg font-medium text-gray-900">
+                          {{ __('Registrar turno de atención') }}
+                        </h2>
+                        <p class="mb-2 text-sm text-gray-600">
+                          {{ __("Seleccione el día, horario de atención y el intervalo de cada turno.") }}
+                        </p>                    
+                        <p class="text-sm text-gray-600">
+                            {{$specialist->nombre}} {{$specialist->apellido}} </br>
+                            {{$specialist->dia_atencion}} </br> {{$specialist->hr_atencion}}
+                        </p>
+                      </header>
+                <form action="{{ route('especialistas.store_horario_atencion')}}" method="post">  
+                @csrf
+
+                <!-- Selección de días -->
+                <div class="mb-3">
+                        <h2 class="text-lg font-medium text-gray-900">
+                          {{ __('Días de la semana') }}
+                        </h2>
+                        <p class="mb-3 text-sm text-gray-600">
+                          {{ __("Seleccione los días para crear los turnos y a continuación el intervalo de días.") }}
+                        </p>
+                    <div class="flex flex-wrap gap-2 inline-flex items-center">
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="1">Lunes</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="2"> Martes</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="3"> Miércoles</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="4"> Jueves</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="5"> Viernes</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="6"> Sábado</label>
+                        <label><input class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-600 checked:bg-slate-800 checked:border-slate-800" type="checkbox" name="dias[]" value="0"> Domingo</label>
+                    </div>
+                </div>
+                <!-- Rango de fechas -->
+                <div class="input-group mb-5">
+                    <span class="input-group-text">Desde</span>
+                    <input type="date" required name="desde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                    <span class="input-group-text">Hasta</span>
+                    <input type="date" required name="hasta" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                </div>
+
+                <div>
+                    <h2 class="text-lg font-medium text-gray-900">
+                        {{ __('Rango de horario de atención') }}
+                    </h2>
+                    <p class="mb-3 text-sm text-gray-600">
+                        {{ __("Seleccione el intervalo de horario de atención, si posee horario de corrido, puede ignorar el turno tarde") }}
+                    </p>
+                </div>
+                <!-- Turnos -->
+                <div class="input-group mb-3">
+                    <input type="hidden" value="{{ $specialist->id }}" name="specialist">
+                    <input type="hidden" value="{{ $specialist->especialidad }}" name="specialty">
+
+                    <span class="input-group-text">Horario inicio turno mañana</span>
+                    <input type="time" name="inicio_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                    <span class="input-group-text">Horario finalización turno mañana</span>
+                    <input type="time" name="fin_turno_mañana" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Horario inicio turno tarde</span>
+                    <input type="time" name="inicio_turno_tarde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                    <span class="input-group-text">Horario finalización turno tarde</span>
+                    <input type="time" name="fin_turno_tarde" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+                </div>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">Seleccione un intervalo de turnos</span>
+                    <select name="intervalo" class="form-control rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">
+                        <option selected value="15">15 minutos</option>
+                        <option value="20">20 minutos </option>
+                        <option value="30">30 minutos</option>
+                        <option value="45">45 minutos</option>
+                        <option value="60">1hr</option>
+                        <option value="75">1:15hr</option>
+                        <option value="90">1:30hr</option>
+                        <option value="105">1:45hr</option>
+                        <option value="120">2hr</option>
+                    </select>
+                </div>
+
+                <div class="col d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                    <x-success-button>{{ __('Guardar') }}</x-success-button>
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="py-1 pb-5">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -119,7 +215,7 @@
                                     <div class="input-group mb-3 col-7">
                                         <span class="input-group-text col" id="basic-addon1">Eliminar todos los turnos del día: </span>
                                         <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="col form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
-                                        <x-danger-button >{{ __('Eliminar') }}</x-danger-button>
+                                        <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar todos los turnos del siguiente día?')" >{{ __('Eliminar') }}</x-danger-button>
                                     </div>
                                 </form>
                                 </div>
@@ -133,15 +229,18 @@
 
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
-                                    <form class=" " action="{{ route('especialistas.horario_atencion_destroy',$schedule->id) }}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
-                                    <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
-                                    </form>
+                                   <x-confirm-delete
+                                    :id="$schedule->id "
+                                    :route="route('especialistas.horario_atencion_destroy',$schedule->id)"
+                                    title="Eliminar horario de atención"
+                                    :message="'¿Seguro que querés eliminar el horario de atención?'"
+                                    button="Eliminar"
+                                    label="Eliminar"
+                                />
                                 </div>
                                 </div>
-                             
-                            </div>             
+                            </div>      
+    
                         @endforeach
                     </div>    
                 
@@ -149,4 +248,6 @@
             </div>
         </div>
     </div>
+
+
 </x-app-layout>

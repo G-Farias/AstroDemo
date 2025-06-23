@@ -1,5 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -22,10 +23,10 @@
                         {{ __('Pacientes') }}                     
                     </x-nav-link>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
-                            <li><a class="dropdown-item" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
+                            <li><a class="dropdown-item p-3  " href="{{route('pacientes.index')}}">Pacientes</a></li>                                       
+                            <li><a class="dropdown-item p-3" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
                         @can('isAdmin') 
-                            <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
                         @endcan
                         </ul>
                      @endcan
@@ -34,9 +35,9 @@
                         {{ __('Especialistas') }}                     
                     </x-nav-link>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('especialistas.index')}}">Especialistas</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialistas.index')}}">Especialistas</a></li>
                         @can('isAdmin') 
-                            <li><a class="dropdown-item" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
                         @endcan
                         </ul>                        
                     @endcan   
@@ -46,11 +47,11 @@
                         {{ __('Turnos') }}                     
                     </x-nav-link>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
-                            <li><a class="dropdown-item" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
                         @can('isUser')
                             <li><hr class="dropdown-divider"></li> 
-                            <li><a class="dropdown-item" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
                         @endcan
                         </ul>
 
@@ -60,11 +61,11 @@
                         {{ __('Más') }}                     
                     </x-nav-link>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
-                            <li><a class="dropdown-item" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
+                            <li><a class="dropdown-item p-3" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{route('especialidad.index')}}">Especialidades</a></li>
-                            <li><a class="dropdown-item" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
+                            <li><a class="dropdown-item p-3" href="{{route('especialidad.index')}}">Especialidades</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
                         </ul>
                     @endcan
 
@@ -147,32 +148,32 @@
                 {{ __('Pacientes') }}                     
              </x-responsive-nav-link>
                 <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item" href="{{route('pacientes.index')}}">Pacientes</a></li>
-                    <li><a class="dropdown-item" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
+                    <li><a class="dropdown-item p-3" href="{{route('pacientes.index')}}">Pacientes</a></li>
+                    <li><a class="dropdown-item p-3" href="{{route('pacientes.create')}}">Registrar paciente</a></li>
                 @can('isAdmin') 
-                    <li><a class="dropdown-item" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
+                    <li><a class="dropdown-item p-3" href="{{route('pacientes.pendientes')}}">Pacientes pendientes</a></li>
                 @endcan
                 </ul>
-                <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('especialistas.index')" :active="request()->routeIs('pacientes.index')">
+                <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('especialistas.index')" :active="request()->routeIs('especialistas.index')">
                     {{ __('Especialistas') }}                     
                 </x-responsive-nav-link>
                         <ul class="dropdown-menu w-100">
-                            <li><a class="dropdown-item" href="{{route('especialistas.index')}}">Especialistas</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialistas.index')}}">Especialistas</a></li>
                         @can('isAdmin') 
-                            <li><a class="dropdown-item" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
+                            <li><a class="dropdown-item p-3" href="{{route('especialistas.create')}}">Registrar especialista</a></li>
                         @endcan
                         </ul>                    
                  @endcan
             
             @can('isAdmin-or-isUser')
-            <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('turno.inicio')" :active="request()->routeIs('pacientes.index')">
+            <x-responsive-nav-link class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" :href="route('turno.inicio')" :active="request()->routeIs('turno.index')">
                 {{ __('Turnos') }}                     
             </x-responsive-nav-link>
                 <ul class="dropdown-menu w-100">
-                        <li><a class="dropdown-item" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
-                        <li><a class="dropdown-item" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
+                        <li><a class="dropdown-item p-3" href="{{route('turno.inicio')}}">Turnos disponibles</a></li>
+                        <li><a class="dropdown-item p-3" href="{{route('turno.reservados')}}">Turnos reservados</a></li>
                 @can('isUser') 
-                        <li><a class="dropdown-item" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
+                        <li><a class="dropdown-item p-3" href="{{route('especialistas.horario_atencion', Auth::user()->id_especialista)}}">Agregar turnos de atención</a></li>
                     @endcan
                 </ul>
             
@@ -182,11 +183,11 @@
                 {{ __('Más') }}                     
             </x-responsive-nav-link>
                 <ul class="dropdown-menu w-100">
-                    <li><a class="dropdown-item" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
-                    <li><a class="dropdown-item" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
+                    <li><a class="dropdown-item p-3" href="{{route('obraSocial.index')}}">Obras sociales/prepagas</a></li>
+                    <li><a class="dropdown-item p-3" href="{{route('obraSocial.create')}}">Registrar obras sociales/prepagas</a></li>                            
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="{{route('especialidad.index')}}">Especialidades</a></li>
-                    <li><a class="dropdown-item" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
+                    <li><a class="dropdown-item p-3" href="{{route('especialidad.index')}}">Especialidades</a></li>
+                    <li><a class="dropdown-item p-3" href="{{route('especialidad.create')}}">Registrar especialidad</a></li>       
                 </ul>            
             @endcan
             @can('isPatient')
@@ -234,4 +235,6 @@
             </div>
         </div>
     </div>
+
+
 </nav>

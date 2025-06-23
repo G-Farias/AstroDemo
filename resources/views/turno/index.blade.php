@@ -217,7 +217,6 @@
                             <th scope="col">Fecha</th>
                             <th scope="col">Hora</th>
                             <th scope="col">Especialista</th>
-                            <th scope="col">Estado</th>
                             <th scope="col">Reservar</th>
                             <th scope="col">Reservar sobreturno</th>
                           </tr>
@@ -226,15 +225,9 @@
                         @foreach ($schedules as $schedule)  
                           <tr>
                             <td data-title="Fecha: ">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</td>
-                            <td data-title="Hora:" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}</td>
+                            <td data-title="Hora:" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}hs</td>
                             <td data-title="Especialista:"><strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br>{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
-                            <td data-title="Estado:">
-                                @if ($schedule->estado == '0')
-                                    <p>Disponible</p>
-                                @else
-                                    <p>Ocupado</p>
-                                @endif
-                            </td>
+
                             <td data-title="Reservar:">
                                 @if ($schedule->estado == '0')
                                  <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>

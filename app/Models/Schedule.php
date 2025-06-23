@@ -9,6 +9,14 @@ class Schedule extends Model
 {
     protected $table = 'schedules';
 
+    protected $fillable = [
+    'hr_atencion',
+    'fecha_atencion',
+    'id_especialista',
+    'id_especialidad',
+    'estado',
+];
+
     public function specialist()
     {
         return $this->belongsTo(Specialist::class, 'id_especialista', 'id');

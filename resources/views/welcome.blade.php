@@ -6,8 +6,8 @@
 
         <title>Sistema Astro</title>
 
-     <!-- Favicon -->
-     <link rel="icon" href="{{ asset('public/favicon.ico') }}">
+             <!-- Favicon -->
+        <link rel="icon" href="{{ asset('favicon.ico') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

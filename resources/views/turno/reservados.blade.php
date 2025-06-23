@@ -294,6 +294,7 @@
                                             <button class="dropdown-item" style="color:crimson;" onclick="return confirm('¿Estás seguro que quieres eliminar?')">Cancelar turno</button>
                                             </form></li>
 
+
                                             @can('isAdmin')
                                                 @unless($patients->contains('dni', $reservedTurn->dni))
                                                     <li>
@@ -322,6 +323,7 @@
                     </div>
                 </div>    
             </div>
+            
             <div class="py-3"> 
                 {{$reservedTurns->links()}}
             </div>

@@ -74,35 +74,54 @@
                     </div>
                 </div>
             </div>
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                <div class=" text-gray-900">
-                @foreach ($patients as $patient)
-                <div class="card border-light">
-                    <div class="card-body">
-                      <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>
-                      <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $patient->dni }}</p> 
-                      <p class="card-text"><strong>Celular : </strong>{{$patient->celular}}</p>
-                      <p class="card-text"><strong>Teléfono : </strong>{{$patient->telefono}}</p>
 
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <x-success-a href="{{ route('pacientes.show', $patient) }}">{{ __('Ver más') }}</x-success-a>
-                        <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
+    @foreach ($patients as $patient)
+    <div class="bg-white shadow rounded-xl p-6 max-w-8xl mx-auto mb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+    <!-- Datos del paciente -->
+    <div class="space-y-1 text-sm md:text-base text-gray-700">
+        <p><span class="font-semibold">Nombre/s y apellido/s:</span> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>
+        <p><span class="font-semibold">D.N.I. / Pasaporte:</span> {{ $patient->dni }}</p>
+        <p><span class="font-semibold">Celular:</span> {{$patient->celular}}</p>
+        <p><span class="font-semibold">Teléfono:</span> {{$patient->telefono}}</p>
+    </div>
 
-                        <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $patient->nombre }} {{ $patient->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
-                        </form>
-                      </div>
-                    </div>
-                 </div>
-                 @endforeach
+    <!-- Botones -->
+    <div class="flex gap-2 shrink-0">
+        <x-success-a href="{{ route('pacientes.show', $patient) }}">{{ __('Ver más') }}</x-success-a>
 
-                </div>
+        <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
+
+        <x-danger-button data-bs-toggle="modal" data-bs-target="#Eliminar{{ $patient->id }}">{{ __('Eliminar') }}</x-danger-button>
+
+            <!-- Modal -->
+        <div class="modal fade" id="Eliminar{{ $patient->id }}" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-body">
+                <p class="modal-title font-bold text-xl mb-2" id="modalEjemploLabel">Eliminar paciente</p>
+                ¿Estas seguro que quieres quieres eliminar el siguiente paciente?
             </div>
-            <div class="py-3">
-                {{$patients->links()}}
+            <div class="modal-footer border-none">
+                <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</x-primary-button>
+                <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <x-danger-button class="w-100">{{ __('Eliminar') }}</x-danger-button>
+                </form>
             </div>
+            </div>
+        </div>
+        </div>
+        <!-- Modal fin -->  
+    </div>
+    </div>
+
+     
+    @endforeach
+    <div class="py-3">
+        {{$patients->links()}}
+    </div>
+            
         </div>
     </div>
 </x-app-layout>

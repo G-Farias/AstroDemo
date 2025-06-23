@@ -52,6 +52,7 @@
                                         @method('DELETE')
                                         <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
                                     </form>
+                                    
                                     <x-grey-anunnce class="fst-italic " disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
                                 </div>
                                 

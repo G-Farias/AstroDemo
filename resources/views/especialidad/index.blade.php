@@ -30,30 +30,32 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
+            
                 @forelse ($specialtys as $specialty)
-                <div class="card border-light">
-                    <div class="card-body">
-                      <p class="card-text"><strong>Nombre de la especialidad : </strong> {{ucfirst($specialty->nombre_especialidad) }}</p>
-                      <p class="card-text"><strong>¿Se pueden hacer sobreturnos? : </strong>
+                <div class="bg-white shadow-md rounded-xl p-6 max-w-8xl mx-auto mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <!-- Datos del profesional -->
+                <div class="space-y-1 text-sm md:text-base text-gray-700">
+                    <p><span class="font-semibold">Nombre de la especialidad :</span> {{ucfirst($specialty->nombre_especialidad) }}</p>
+                    <p><span class="font-semibold">¿Se pueden hacer sobreturnos? :</span>
                         @if ($specialty->sobreturno == '1')
                             Si
                         @else
                             No
                         @endif
-                        </p> 
+                    </p>
 
+                </div>
 
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-3">
+                <!-- Botones de acción -->
+                <div class="flex flex-wrap justify-end gap-2 shrink-0">
                         <x-third-a href="{{ route('especialidad.edit', $specialty) }}">{{__('Editar')}}</x-third-a>
                         <form class="mb-0 " action="{{ route('especialidad.destroy', $specialty) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                                    @csrf
+                                @method('DELETE')
                             <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar la especialidad {{ $specialty->nombre_especialidad }} ?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
-                      </div>
-                    </div>
-                 </div>
+                </div>
+                </div>
                  @empty 
                  <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
                     {{__('No hay especialidades registradas.')}}
@@ -62,7 +64,11 @@
             </div>
             <div class="my-3">
                 {{ $specialtys->links() }}
-               </div>
+            </div>
+        
+
+
+        
         </div>
     </div>
 </x-app-layout>

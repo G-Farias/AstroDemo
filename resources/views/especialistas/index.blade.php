@@ -42,35 +42,37 @@
             @elsecan('isUser')
              @endcan
                 @forelse ($specialists as $specialist)
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">                
-                <div class="card border-light ">
-                    <div class="card-body">
-                      <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</p>
-                      <p class="card-text"><strong>Especialidad : </strong> {{ ucfirst($specialist->specialty->nombre_especialidad) }}</p> 
-                      <p class="card-text"><strong>Días de atención : </strong> {{$specialist->dia_atencion}}</p> 
-                      <p class="card-text"><strong>Horario de atención : </strong> {{$specialist->hr_atencion}}</p> 
-                      <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $specialist->dni }}</p> 
-                      <p class="card-text"><strong>Celular : </strong>{{$specialist->celular}}</p>
-                      <p class="card-text"><strong>Teléfono : </strong>{{$specialist->telefono}}</p>
+                    <div class="bg-white shadow-md rounded-xl p-6 max-w-8xl mx-auto mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                        <!-- Datos del profesional -->
+                        <div class="space-y-1 text-sm md:text-base text-gray-700">
+                            <p><span class="font-semibold">Nombre/s y apellido/s:</span> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</p>
+                            <p><span class="font-semibold">Especialidad:</span> {{ ucfirst($specialist->specialty->nombre_especialidad) }}</p>
+                            <p><span class="font-semibold">Días de atención:</span> {{$specialist->dia_atencion}}</p>
+                            <p><span class="font-semibold">Horario de atención:</span> {{$specialist->hr_atencion}}</p>
+                            <p><span class="font-semibold">D.N.I. / Pasaporte:</span> {{ $specialist->dni }}</p>
+                            <p><span class="font-semibold">Celular:</span> {{$specialist->celular}}</p>
+                            <p><span class="font-semibold">Teléfono:</span> {{$specialist->telefono}}</p>
+                        </div>
 
+                        <!-- Botones de acción -->
+                        <div class="flex flex-wrap gap-2 shrink-0">
+                                <x-success-a  href="{{ route('especialistas.show', $specialist) }}">{{ __('Ver más') }}</x-success-a>
+                                <x-primary-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-primary-a>
 
+                                @can('isAdmin')
+                                    <x-primary-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-primary-a>
+                                @endcan
 
-
-
-                        <div class="d-flex flex-column flex-md-row justify-content-end mt-2">
-                            <x-success-a  href="{{ route('especialistas.show', $specialist) }}">{{ __('Ver más') }}</x-success-a>
-                            <x-primary-a href="{{ route('especialistas.obras_sociales', $specialist) }}">{{__('Agregar obras sociales')}}</x-primary-a>
-                            @can('isAdmin')
-                            <x-primary-a href="{{ route('especialistas.horario_atencion', $specialist) }}">{{__('Agregar turnos de atención')}}</x-primary-a>
-                            @endcan
-                                <form class="mb-0 " action="{{ route('especialistas.destroy', $specialist) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $specialist->nombre }} {{ $specialist->apellido }}?')">{{ __('Eliminar') }}</x-danger-button>
-                            </form>
+                                    <x-confirm-delete
+                                    :id="$specialist->id "
+                                    :route="route('especialistas.destroy', $specialist)"
+                                    title="Eliminar especialista"
+                                    :message="'¿Seguro que querés eliminar al siguiente especialista?'"
+                                    button="Eliminar"
+                                    label="Eliminar"
+                                    />
                         </div>
                     </div>
-                 </div>
                  @empty 
             <div class="py-1">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
@@ -86,6 +88,11 @@
             <div class="py-3">
                 {{$specialists->links()}}
             </div>
+
+
+
+
+
         </div>
     </div>
 </x-app-layout>

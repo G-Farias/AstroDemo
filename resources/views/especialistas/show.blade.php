@@ -30,40 +30,55 @@
     </div>
   @endif
   
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">              
-                <div class="card border-light">
-                    <div class="card-body">
-                      <p class="card-text"><strong>Nombre/s y apellido/s : </strong> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</p>
-                      <p class="card-text"><strong>D.N.I / Pasaporte : </strong> {{ $specialist->dni }}</p> 
-                      <p class="card-text"><strong>Matrícula : </strong>{{$specialist->matricula}}</p>
-                      <br>
-                      <p class="card-text"><strong>Celular : </strong>{{$specialist->celular}}</p>
-                      <p class="card-text"><strong>Teléfono : </strong>{{$specialist->telefono}}</p>
-                      <p class="card-text"><strong>Email : </strong>{{$specialist->email}}</p>
-                      <p class="card-text"><strong>Provincia : </strong>{{ucfirst($specialist->provincia_residencia)}}</p>
-                      <p class="card-text"><strong>Localidad : </strong>{{ucfirst($specialist->localidad_residencia)}}</p>
-                      <br>   
-                      <p class="card-text"><strong>Días de atención : </strong>{{$specialist->dia_atencion}}</p>
-                      <p class="card-text"><strong>Horario de atención : </strong>{{$specialist->hr_atencion}}</p>
-                      <p class="card-text"><strong>Especialidad : </strong>{{ucfirst($specialist->specialty->nombre_especialidad)}}</p>
-                      <p class="card-text"><strong>Obra social / prepaga : </strong>
-                      @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
-                      {{ucfirst($medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial)}}
-                      @endforeach
-                         </p>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
-                        <x-third-a href="{{ route('especialistas.edit', $specialist) }}">{{__('Editar')}}</x-third-a>
-                        <form class="mb-0 " action="{{ route('especialistas.destroy', $specialist) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <x-danger-button class="w-100" onclick="return confirm('Estás seguro que quieres eliminarlo?')">{{ __('Eliminar') }}</x-danger-button>
-                        </form>
-                      </div>
-                    </div>
-                 </div>
-                 
+<div class="py-12">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+<div class="max-w-5xl mx-auto bg-white shadow rounded-xl p-6 space-y-4 text-sm md:text-base ">
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-6 ">
+    <div>  <h2 class="text-2xl md:text-3xl font-semibold text-gray-800 border-b border-gray-200 pb-2 mb-4">
+    Información del especialista</h2></div> <br>
+    <div><span class="font-semibold">Nombre/s y apellido/s:</span> {{ucfirst($specialist->nombre) }} {{ ucfirst($specialist->apellido) }}</div>
+    <div><span class="font-semibold">D.N.I. / Pasaporte:</span>  {{ $specialist->dni }}</div>
+    <div><span class="font-semibold">Matrícula: </span>{{$specialist->matricula}}</div>
+    <div><span class="font-semibold">Especialidad:</span> {{ucfirst($specialist->specialty->nombre_especialidad)}}</div>
+
+
+    <div><span class="font-semibold">Celular:</span> {{$specialist->celular}}</div>
+    <div><span class="font-semibold">Teléfono:</span> {{$specialist->telefono}}</div>
+    <div><span class="font-semibold">Email:</span> {{$specialist->email}}</div>
+
+    <div><span class="font-semibold">Provincia:</span> {{ucfirst($specialist->provincia_residencia)}}</div>
+    <div><span class="font-semibold">Localidad:</span> {{ucfirst($specialist->localidad_residencia)}}</div>
+
+    <div><span class="font-semibold">Día de antención:</span> {{$specialist->dia_atencion}}</div>
+    <div><span class="font-semibold">Horario de atención:</span> {{$specialist->hr_atencion}}</div>
+    <div><span class="font-semibold">Obra social / prepaga: </span> 
+                    @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
+                    {{ucfirst($medicalInsurenceSpecialist->medicalInsurence?->nombre_obraSocial)}}
+                    @endforeach</div>
+    <div><span class="font-semibold"></span></div>
+ 
+  </div>
+
+  <div class="flex justify-end gap-2 pt-4">
+        <x-third-a href="{{ route('especialistas.edit', $specialist) }}">{{__('Editar')}}</x-third-a>
+<!-- 
+        <form class="mb-0 " action="{{ route('especialistas.destroy', $specialist) }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <x-danger-button class="w-100" onclick="return confirm('Estás seguro que quieres eliminarlo?')">{{ __('Eliminar') }}</x-danger-button>
+        </form> -->
+
+        <x-confirm-delete
+        :id="$specialist->id "
+        :route="route('especialistas.destroy', $specialist)"
+        title="Eliminar especialista"
+        :message="'¿Seguro que quieres eliminar al siguiente especialista?'"
+        button="Eliminar"
+        label="Eliminar"
+        />
+  </div>
+</div>
 
             </div>
         </div>

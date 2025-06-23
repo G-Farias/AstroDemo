@@ -259,11 +259,14 @@ class PatientController extends Controller
      */
     public function destroy(Patient $patient)
     {
-        $user = User::where('user', $patient->dni)->first();
-        $user->patient = '0';
-        $user->save();
 
-        $patient->delete();
+        if($user = User::where('user', $patient->dni)->first()){
+            $user->patient = '0';
+            $user->save();
+        }else {
+            //
+        }
+            $patient->delete();
 
         return redirect()->route('pacientes.index')
             ->with('success', 'Paciente eliminado correctamente.');

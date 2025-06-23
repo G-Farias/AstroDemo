@@ -29,25 +29,26 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 @forelse ($medicalInsurences as $medicalInsurence)
-                <div class="card border-light">
-        
-                    <div class="card-body">
-                      <p class="card-text"><strong>Obra social / Prepaga : </strong> {{ucfirst($medicalInsurence->nombre_obraSocial) }}</p>
-                      <p class="card-text"><strong>Monto : </strong> {{ $medicalInsurence->precio_obraSocial }}</p> 
-                      <p class="card-text"><strong>Información adicional : </strong>{{$medicalInsurence->info_obraSocial}}</p>
+                    <div class="bg-white shadow-md rounded-xl p-6 max-w-8xl mx-auto mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <!-- Datos del profesional -->
+                    <div class="space-y-1 text-sm md:text-base text-gray-700">
+                        <p><span class="font-semibold">Obra social / Prepaga :</span> {{ucfirst($medicalInsurence->nombre_obraSocial) }}</p>
+                        <p><span class="font-semibold">Monto :</span> {{ $medicalInsurence->precio_obraSocial }}</p>
+                        <p><span class="font-semibold">Información adicional :</span> {{$medicalInsurence->info_obraSocial}}</p>
+                    </div>
 
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <!-- Botones de acción -->
+                    <div class="flex flex-wrap justify-end gap-2 shrink-0">
                         <x-third-a href="{{ route('obraSocial.edit', $medicalInsurence) }}">{{__('Editar')}}</x-third-a>
-                        <form class="mb-0 " action="{{ route('obraSocial.destroy', $medicalInsurence) }}" method="POST">
+                            <form class="mb-0 " action="{{ route('obraSocial.destroy', $medicalInsurence) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $medicalInsurence->nombre }} ?')">{{ __('Eliminar') }}</x-danger-button>
                         </form>
-                      </div>
+                        
                     </div>
-                 </div>
+                    </div>
                  @empty 
                  <h2 class="mt-3 mb-3 ml-3 font-semibold text-l text-gray-800 leading-tight">
                     {{__('No hay obras sociales o prepagas registradas.')}}
@@ -56,8 +57,6 @@
             </div>
             <div class="py-3">
                 {{ $medicalInsurences->links() }}
-
             </div>
-        </div>
     </div>
 </x-app-layout>
