@@ -67,7 +67,7 @@
                         
                         </div>
                     </div>
-                    <div class="table-responsive" id="no-more-tables">
+                    <div class="table-responsive overflow-visible" id="no-more-tables">
                         <table class="table text-center table-borderless">
                         <thead>
                           <tr>
@@ -136,18 +136,37 @@
                               <td>
                                 <x-success-a href="{{ route('turno.show', $reservedTurn->id) }}">{{ __('Ver más') }}</x-success-a>
                             </td> --}}
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="cancelarTurno{{$reservedTurn->id}}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5 class="modal-title font-bold text-xl mb-2">Cancelar turno reservado</h5>
+                <p>¿Estás seguro de que deseas cancelar el turno del día <br> {{ date("d-m-y",strtotime($reservedTurn->schedule?->fecha_atencion)) }} a las {{ date("H:i",strtotime($reservedTurn->schedule?->hr_atencion)) }}hs?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </x-primary-button>
+                <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <x-danger-button>Cancelar</x-danger-button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>                           
                             <td>
                                 <div class="dropdown col d-grid gap-2 d-md-flex justify-content-md-end">
                                     <x-primary-a  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="bi bi-three-dots"></i>
                                     </x-primary-a>
-
                                     <ul class="dropdown-menu">
-                                        <li><form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
-                                                @csrf
-                                             @method('DELETE')
-                                            <button class="dropdown-item" style="color:crimson;" onclick="return confirm('¿Estás seguro que quieres eliminar?')">Cancelar turno</button>
-                                            </form></li>
+                                        <li>
+                                            <button class="dropdown-item"  data-bs-toggle="modal" data-bs-target="#cancelarTurno{{$reservedTurn->id}}" style="color:crimson;">Cancelar turno</button>
+                                        </li>
                                         <li><a class="dropdown-item" href="{{ route('turno.show', $reservedTurn->id) }}">Más información</a></li>
                                     </ul>
                                 </div>

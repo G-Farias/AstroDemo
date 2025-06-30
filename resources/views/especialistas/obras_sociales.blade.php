@@ -30,39 +30,60 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
                 <div class="p-6 text-gray-900">
-                    @foreach ($medicalInsurence as $medicalInsurence)
-                        <form action="{{ route('especialistas.store_obras_sociales', $specialist)}}" method="post">  
-                            @csrf
-                                    <div class ="mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <input type="text" hidden value="{{ $medicalInsurence->id }}" name="id_obraSocial" id="id_obraSocial" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
-                                                <input type="text" hidden value="{{$specialist->id}}" name="id_especialista" id="id_especialista" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500">
-                                                 <h5 class="card-title"><strong> Obra social / prepaga: </strong>{{ ucfirst($medicalInsurence->nombre_obraSocial) }}</h5>
-                                                
-                                                <div class="d-grid gap-2 d-md-flex justify-content-md-end">                                                        
-                                                    <x-success-button >{{ __('Guardar') }}</x-success-button>
-                                                </div>
-                        </form>
-                            @foreach ($medicalInsurenceSpecialists as $medicalInsurenceSpecialist)
-                                @if ($medicalInsurenceSpecialist->id_obraSocial == $medicalInsurence->id)
-                                <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end">
-                                    <form class="mb-0 " action="{{ route('especialistas.obra_social_destroy',$medicalInsurenceSpecialist->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminarla?')">{{ __('Eliminar') }}</x-danger-button>
-                                    </form>
-                                    
-                                    <x-grey-anunnce class="fst-italic " disabled="true">{{ __('Ya guardado') }}</x-grey-anunnce>
-                                </div>
-                                
-                                @endif 
-                            @endforeach
+@foreach ($medicalInsurence as $medicalInsurence)
+
+    @php
+        $yaExiste = $medicalInsurenceSpecialists->contains(function ($item) use ($medicalInsurence) {
+            return $item->id_obraSocial == $medicalInsurence->id;
+        });
+    @endphp
+
+    <div class="mb-3">
+        <div class="card">
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    <strong>Obra social / prepaga:</strong> {{ ucfirst($medicalInsurence->nombre_obraSocial) }}
+                </h5>
+
+                @if (!$yaExiste)
+                    {{-- Si NO está registrada, muestro formulario para guardar --}}
+                    <form action="{{ route('especialistas.store_obras_sociales', $specialist) }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_obraSocial" value="{{ $medicalInsurence->id }}">
+                        <input type="hidden" name="id_especialista" value="{{ $specialist->id }}">
+
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <x-success-button>{{ __('Guardar') }}</x-success-button>
                         </div>
+                    </form>
+                @else
+                    {{-- Si YA está registrada, muestro botón eliminar y mensaje --}}
+                    @php
+                        // Busco la relación concreta para eliminar
+                        $relation = $medicalInsurenceSpecialists->firstWhere('id_obraSocial', $medicalInsurence->id);
+                    @endphp
+
+                    <div class="mt-3 d-grid gap-2 d-md-flex justify-content-md-end">
+                                <x-confirm-delete
+                            :id="$relation->id"
+                            :route="route('especialistas.obra_social_destroy', $relation)"
+                            title="Eliminar obra social/prepaga"
+                            :message="'¿Seguro que quieres eliminar la obra social/prepaga '.$relation->medicalInsurence->nombre_obraSocial.'?'"
+                            button="Eliminar"
+                            label="Eliminar"
+                            />
+                        <x-grey-anunnce class="fst-italic" disabled>
+                            {{ __('Ya guardado') }}
+                        </x-grey-anunnce>
                     </div>
-                </div>
-                
-                    @endforeach
+                @endif
+
+            </div>
+        </div>
+    </div>
+
+@endforeach
                 </div>
             </div>
         </div>

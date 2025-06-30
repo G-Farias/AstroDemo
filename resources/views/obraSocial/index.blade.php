@@ -41,12 +41,14 @@
                     <!-- Botones de acción -->
                     <div class="flex flex-wrap justify-end gap-2 shrink-0">
                         <x-third-a href="{{ route('obraSocial.edit', $medicalInsurence) }}">{{__('Editar')}}</x-third-a>
-                            <form class="mb-0 " action="{{ route('obraSocial.destroy', $medicalInsurence) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar a {{ $medicalInsurence->nombre }} ?')">{{ __('Eliminar') }}</x-danger-button>
-                        </form>
-                        
+                        <x-confirm-delete
+                        :id="$medicalInsurence->id "
+                        :route="route('obraSocial.destroy', $medicalInsurence)"
+                        title="Eliminar obra social/prepaga"
+                        :message="'¿Seguro que quieres eliminar la obra social/prepaga ' . $medicalInsurence->nombre_obraSocial . '?'"
+                        button="Eliminar"
+                        label="Eliminar"
+                        />
                     </div>
                     </div>
                  @empty 

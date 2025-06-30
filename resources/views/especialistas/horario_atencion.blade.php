@@ -216,7 +216,7 @@
                                         <span class="input-group-text col" id="basic-addon1">Eliminar todos los turnos del día: </span>
                                         <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="col form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
                                         <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar todos los turnos del siguiente día?')" >{{ __('Eliminar') }}</x-danger-button>
-                                    </div>
+                                    </div>     
                                 </form>
                                 </div>
                                 </div>

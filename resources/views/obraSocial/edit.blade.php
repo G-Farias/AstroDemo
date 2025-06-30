@@ -49,7 +49,7 @@
 
                         
                           <div class="input-group mb-3">
-                            <input type="number" value="{{ $medicalInsurence->precio_obraSocial }}" name="precio_obraSocial" id="precio_obraSocial" required class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Monto" aria-label="Monto">
+                            <input type="number" value="{{ $medicalInsurence->precio_obraSocial }}" name="precio_obraSocial" id="precio_obraSocial" class="form-control rounded border-gray-300  shadow-sm focus:ring-indigo-500" placeholder="Monto" aria-label="Monto">
                           </div>
 
                           <div class="input-group mb-3">

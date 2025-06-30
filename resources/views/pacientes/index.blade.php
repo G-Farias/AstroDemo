@@ -91,28 +91,15 @@
 
         <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
 
-        <x-danger-button data-bs-toggle="modal" data-bs-target="#Eliminar{{ $patient->id }}">{{ __('Eliminar') }}</x-danger-button>
+        <x-confirm-delete
+        :id="$patient->id"
+        :route="route('pacientes.destroy', $patient)"
+        title="Eliminar paciente"
+        :message="'¿Seguro que quieres eliminar al paciente ' . $patient->nombre . ' '.$patient->apellido.'?'"
+        button="Eliminar"
+        label="Eliminar"
+        />
 
-            <!-- Modal -->
-        <div class="modal fade" id="Eliminar{{ $patient->id }}" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-            <div class="modal-body">
-                <p class="modal-title font-bold text-xl mb-2" id="modalEjemploLabel">Eliminar paciente</p>
-                ¿Estas seguro que quieres quieres eliminar el siguiente paciente?
-            </div>
-            <div class="modal-footer border-none">
-                <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</x-primary-button>
-                <form class="mb-0 " action="{{ route('pacientes.destroy', $patient) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <x-danger-button class="w-100">{{ __('Eliminar') }}</x-danger-button>
-                </form>
-            </div>
-            </div>
-        </div>
-        </div>
-        <!-- Modal fin -->  
     </div>
     </div>
 

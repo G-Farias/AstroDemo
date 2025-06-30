@@ -67,7 +67,7 @@
                                     :id="$specialist->id "
                                     :route="route('especialistas.destroy', $specialist)"
                                     title="Eliminar especialista"
-                                    :message="'¿Seguro que querés eliminar al siguiente especialista?'"
+                                    :message="'¿Seguro que querés eliminar al especialista '. ucfirst($specialist->nombre)  .' '.ucfirst($specialist->apellido).'?'"
                                     button="Eliminar"
                                     label="Eliminar"
                                     />

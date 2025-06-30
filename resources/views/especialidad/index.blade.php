@@ -49,11 +49,14 @@
                 <!-- Botones de acción -->
                 <div class="flex flex-wrap justify-end gap-2 shrink-0">
                         <x-third-a href="{{ route('especialidad.edit', $specialty) }}">{{__('Editar')}}</x-third-a>
-                        <form class="mb-0 " action="{{ route('especialidad.destroy', $specialty) }}" method="POST">
-                                    @csrf
-                                @method('DELETE')
-                            <x-danger-button class="w-100" onclick="return confirm('¿Estás seguro que quieres eliminar la especialidad {{ $specialty->nombre_especialidad }} ?')">{{ __('Eliminar') }}</x-danger-button>
-                        </form>
+                            <x-confirm-delete
+                            :id="$specialty->id "
+                            :route="route('especialidad.destroy', $specialty)"
+                            title="Eliminar especialidad"
+                            :message="'¿Seguro que quieres eliminar la especialidad ' . $specialty->nombre_especialidad . '?'"
+                            button="Eliminar"
+                            label="Eliminar"
+                            />
                 </div>
                 </div>
                  @empty 
