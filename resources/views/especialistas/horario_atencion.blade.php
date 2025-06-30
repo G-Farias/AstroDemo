@@ -209,16 +209,49 @@
                                 </form>
 
                                 <div class="row justify-content-end">
-                                <div class="col">
-                                <form action="{{ route('especialistas.horariosDeAtencion_destroy', $specialist)}}" method="post">  
-                                    @csrf
-                                    <div class="input-group mb-3 col-7">
-                                        <span class="input-group-text col" id="basic-addon1">Eliminar todos los turnos del día: </span>
-                                        <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="col form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
-                                        <x-danger-button onclick="return confirm('¿Estás seguro que quieres eliminar todos los turnos del siguiente día?')" >{{ __('Eliminar') }}</x-danger-button>
-                                    </div>     
-                                </form>
-                                </div>
+<div class="col">
+    <form id="formEliminarTurnos" action="{{ route('especialistas.horariosDeAtencion_destroy', $specialist)}}" method="post">  
+        @csrf
+        <div class="input-group mb-3 col-7">
+            <span class="input-group-text col" id="basic-addon1">
+                Eliminar todos los turnos del día:
+            </span>
+            <input type="date" name="fecha_busqueda" id="fecha_busqueda" class="col form-control rounded-r border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500">                        
+            
+            <x-danger-button 
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#confirmDeleteModal">
+                {{ __('Eliminar') }}
+            </x-danger-button>
+        </div>     
+    </form>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        ¿Estás seguro que quieres eliminar todos los turnos del siguiente día?
+      </div>
+
+      <div class="modal-footer">
+        <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancelar
+        </x-primary-button>
+        <x-danger-button type="submit" form="formEliminarTurnos">Eliminar</x-danger-button>
+      </div>
+
+    </div>
+  </div>
+</div>
                                 </div>
                         @foreach ($schedule as $schedule)
 
