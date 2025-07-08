@@ -24,5 +24,7 @@ class MedicalInsurence extends Model
         return $this->hasMany(reservedTurn::class);
 
     }
+
+       
     
 }

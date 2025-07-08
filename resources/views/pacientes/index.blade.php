@@ -82,7 +82,15 @@
         <p><span class="font-semibold">Nombre/s y apellido/s:</span> {{ucfirst($patient->nombre) }} {{ ucfirst($patient->apellido) }}</p>
         <p><span class="font-semibold">D.N.I. / Pasaporte:</span> {{ $patient->dni }}</p>
         <p><span class="font-semibold">Celular:</span> {{$patient->celular}}</p>
-        <p><span class="font-semibold">Teléfono:</span> {{$patient->telefono}}</p>
+        @can('isAdmin')
+        <p><span class="font-semibold">Especialista asignado:</span>
+        @if($patient->specialist)
+        {{ ucfirst($patient->specialist->nombre) }} {{ ucfirst($patient->specialist->apellido) }}
+        @else
+        Sin especialista asignado
+        @endif
+        </p>
+        @endcan
     </div>
 
     <!-- Botones -->

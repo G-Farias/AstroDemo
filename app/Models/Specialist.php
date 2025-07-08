@@ -20,4 +20,9 @@ class Specialist extends Model
 
     }
 
+     public function patient()
+    {
+        return $this->hasMany(Patient::class);
+    }
+
 }
