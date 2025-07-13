@@ -119,7 +119,7 @@ class PatientController extends Controller
                 $user->patient = '1';
                 $user->save();
                 }else {
-                    return redirect()->route('pacientes.index')->with('danger', 'Error al actualizar usuario');
+                    return redirect()->route('pacientes.index')->with('success', 'paciente almacenado correctamente');
 
                 }
 
@@ -157,7 +157,7 @@ class PatientController extends Controller
                 $user->patient = '1';
                 $user->save();
                 }else {
-                    return redirect()->route('pacientes.index')->with('danger', 'Error al actualizar usuario');
+                    return redirect()->route('pacientes.index')->with('success', 'paciente almacenado correctamente');
 
                 }
             }
@@ -205,16 +205,21 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-            $request->validate([
-            'dni' => ['required', 'unique:patients', 'max:255'],
-            'email' => ['required', 'unique:patients', 'max:255'],
-
+    $request->validate([
+        'dni' => [
+            'required',
+            'max:255',
+            Rule::unique('patients')->ignore($id),
         ],
-        [
-            'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
-            'email.unique' => 'El Email ya se encuentra registrado.',
-
-        ]);    
+        'email' => [
+            'max:255',
+            Rule::unique('patients')->ignore($id),
+        ],
+    ],
+    [
+        'dni.unique' => 'El D.N.I / Pasaporte ya se encuentra registrado.',
+        'email.unique' => 'El Email ya se encuentra registrado.',
+    ]);   
 
         $pacientes = patient::find($id);
 

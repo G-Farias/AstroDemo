@@ -55,8 +55,14 @@ class RegisteredUserController extends Controller
             'user' => $request->user,
             'password' => Hash::make($request->password),
             'level' => 2,
-            'patient' => 1,
+            'patient' => 1,        
         ]);
+
+            $pacientes = patient::where('dni', $request->user)->first();
+            $pacientes->email = $request->email;
+            $pacientes->save();
+
+
         
             }else{
                 $user = User::create([
