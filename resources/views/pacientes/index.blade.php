@@ -96,6 +96,7 @@
     <!-- Botones -->
     <div class="flex gap-2 shrink-0">
         <x-success-a href="{{ route('pacientes.show', $patient) }}">{{ __('Ver más') }}</x-success-a>
+        <x-success-a href="{{ route('pacientes.archivos', $patient) }}">{{ __('Archivos') }}</x-success-a>
 
         <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
 

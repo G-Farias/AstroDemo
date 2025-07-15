@@ -22,6 +22,7 @@ use App\Models\Schedule;
 use Illuminate\Support\Facades\Schema;
 
 use App\Http\Controllers\PDFController;
+use App\Models\Patient;
 
 /*
 |--------------------------------------------------------------------------
@@ -131,6 +132,10 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
     Route::put('/pacientes/{patient}', [PatientController::class, 'update'])->name('pacientes.update');
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
     
+    Route::get('/pacientes/archivos/{patient}', [PatientController::class, 'archivo'])->name('pacientes.archivos');
+  //  Route::get('/pacientes/archivos/{patient}', [PatientController::class, 'obtener_archivo'])->name('pacientes.archivos');
+    Route::post('/pacientes/archivos/guardar/{patient}', [PatientController::class, 'archivo_store'])->name('archivos.guardar');
+
 });
 
 

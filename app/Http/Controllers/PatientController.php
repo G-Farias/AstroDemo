@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\PatientsExport;
 use App\Models\Patient;
+use App\Models\Archivo;
 use App\Models\MedicalInsurence;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -189,9 +190,52 @@ class PatientController extends Controller
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    public function archivo(Request $request, Patient $patient)
+    {
+
+        $orden = $request->get('orden', 'desc'); // default = más nuevos primero
+
+
+        $archivos = Archivo::orderBy('created_at', $orden)->where('id_paciente', $patient->id)->paginate(50);
+
+        return view('pacientes.archivos', compact('archivos','patient','orden'));
+    
+    }
+
+
+    public function archivo_store(Request $request, Patient $patient)
+    {
+    $request->validate([
+        'archivo' => 'required|file|max:2048'
+    ]);
+
+    if ($request->hasFile('archivo')) {
+        $nombre = time().'_'.$request->file('archivo')->getClientOriginalName();
+
+        $ruta = $request->file('archivo')->store('archivos');
+
+     
+
+        archivo::create([
+            'nombre' => $nombre,
+            'id_paciente' => $patient->id,
+            'id_especialista'=>  $request->user()->id_especialista,
+            'ruta' => $ruta
+        ]);
+    }
+
+    return back()->with('success', 'Archivo subido correctamente.');
+    }
+/*
+    public function obtener_archivo(Request $request, Patient $patient){
+        $archivo = Archivo::where('id_paciente', $patient);
+
+        return view('pacientes.archivos', compact('archivo'));
+    }
+
+
+*/
+
     public function edit(Patient $patient)
     {
         

@@ -211,7 +211,7 @@
                         {{ __('Reservar turnos') }} 
                     </h2>
                 <div class="table-responsive" id="no-more-tables">
-                    <table class="table table-borderless"">
+                    <table class="table table-borderless">
                         <thead>
                           <tr>
                             <th scope="col">Fecha</th>
