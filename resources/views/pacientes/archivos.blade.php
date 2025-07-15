@@ -57,38 +57,7 @@
                 </form>
         </div>
 
-<div class="max-w-3xl mx-auto p-4">
-    <div class="flex justify-end mb-4">
-    @if($orden == 'desc')
-        <a href="{{ route('pacientes.archivos', [$patient, 'orden' => 'asc']) }}"
-           class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700">
-            Ordenar más viejos primero
-        </a>
-    @else
-        <a href="{{ route('pacientes.archivos', [$patient, 'orden' => 'desc']) }}"
-           class="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700">
-            Ordenar más nuevos primero
-        </a>
-    @endif
-</div>
-    <h1 class="text-2xl font-bold mb-4">Lista de archivos</h1>
-
-    <div class="border rounded-lg overflow-y-auto max-h-96">
-        <ul class="divide-y divide-gray-200">
-            @foreach($archivos as $archivo)
-                <li class="p-4 hover:bg-gray-50 flex justify-between items-center">
-                    <span class="truncate">{{ $archivo->nombre }}</span>
-                    <span class="truncate">Fecha: {{ date("d-m-y",strtotime($archivo->updated_at)) }}</span>
-
-                    <x-success-a target="_blank" href="{{ url('storage/app/' . $archivo->ruta) }}">{{ __('Ver') }}</x-success-a>
-
-                </li>
-            @endforeach
-        </ul>
-    </div>
-</div>
-
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-5">
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-5 mt-5">
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
             <div class="p-6 text-gray-900">
                     <div class="flex justify-end mb-4">
@@ -119,7 +88,7 @@
                     <td data-title="Nombre: ">{{ $archivo->nombre }}</td>
                     <td data-title="Fecha: ">{{ date("d-m-y",strtotime($archivo->updated_at)) }}</td>
                     <td>
-                        <x-success-a target="_blank" href="{{ url('/ver-archivo/' . $archivo->ruta) }}">
+                        <x-success-a target="_blank" href="{{ url('storage/app/' . $archivo->ruta) }}">
                             {{ __('Ver') }}
                         </x-success-a>
                     </td>   
