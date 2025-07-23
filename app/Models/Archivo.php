@@ -14,6 +14,7 @@ class Archivo extends Model
         'ruta',
         'id_paciente',
         'id_especialista',
+        'tipoArchivo',
     ];
 
     public function getUrlAttribute()

@@ -205,51 +205,96 @@
 
  
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 pb-5">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg"> 
-                <div class="p-6 text-gray-900">
-                    <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-3">
-                        {{ __('Reservar turnos') }} 
-                    </h2>
-                <div class="table-responsive" id="no-more-tables">
-                    <table class="table table-borderless">
-                        <thead>
-                          <tr>
-                            <th scope="col">Fecha</th>
-                            <th scope="col">Hora</th>
-                            <th scope="col">Especialista</th>
-                            <th scope="col">Reservar</th>
-                            <th scope="col">Reservar sobreturno</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($schedules as $schedule)  
-                          <tr>
-                            <td data-title="Fecha: ">{{ date("d-m-y",strtotime($schedule->fecha_atencion)) }}</td>
-                            <td data-title="Hora:" >{{ date("H:i",strtotime($schedule->hr_atencion)) }}hs</td>
-                            <td data-title="Especialista:"><strong>{{ucfirst($schedule->specialty->nombre_especialidad)}}</strong> <br>{{ ucfirst($schedule->specialist->nombre) }} {{ucfirst($schedule->specialist->apellido)}}</td>
+    <div class="bg-white shadow-md rounded-xl p-6">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight mb-4">
+            {{ __('Reservar turnos') }}
+        </h2>
 
-                            <td data-title="Reservar:">
+        {{-- Versión para escritorio --}}
+        <div class="hidden sm:block overflow-x-auto border rounded-lg">
+            <table class="min-w-full text-sm text-left text-gray-700">
+                <thead class="bg-gray-100 text-gray-800 font-semibold">
+                    <tr>
+                        <th class="px-4 py-3">Fecha</th>
+                        <th class="px-4 py-3">Hora</th>
+                        <th class="px-4 py-3">Especialista</th>
+                        <th class="px-4 py-3">Reservar</th>
+                        <th class="px-4 py-3">Sobreturno</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($schedules as $schedule)
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="px-4 py-3">{{ date("d-m-y", strtotime($schedule->fecha_atencion)) }}</td>
+                            <td class="px-4 py-3">{{ date("H:i", strtotime($schedule->hr_atencion)) }} hs</td>
+                            <td class="px-4 py-3">
+                                <div class="font-semibold">{{ ucfirst($schedule->specialty->nombre_especialidad) }}</div>
+                                <div>{{ ucfirst($schedule->specialist->nombre) }} {{ ucfirst($schedule->specialist->apellido) }}</div>
+                            </td>
+                            <td class="px-4 py-3">
                                 @if ($schedule->estado == '0')
-                                 <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
+                                    <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
                                 @else
-                                <x-grey-anunnce>{{__('Reservado')}}</x-grey-anunnce>
+                                    <x-grey-anunnce>{{ __('Reservado') }}</x-grey-anunnce>
                                 @endif
                             </td>
-                            <td data-title="Sobreturno: ">@if ($schedule->specialty->sobreturno == '0')
-                                <x-grey-anunnce>{{__('No disponible')}}</x-grey-anunnce>
+                            <td class="px-4 py-3">
+                                @if ($schedule->specialty->sobreturno == '0')
+                                    <x-grey-anunnce>{{ __('No disponible') }}</x-grey-anunnce>
+                                @else
+                                    <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+
+        {{-- Tarjetas para mobile --}}
+        <div class="sm:hidden flex flex-col gap-4 mt-4">
+            @foreach ($schedules as $schedule)
+                <div class="border rounded-lg p-4 shadow-sm bg-white">
+                    <div class="mb-2">
+                        <span class="font-semibold">Fecha:</span> {{ date("d-m-y", strtotime($schedule->fecha_atencion)) }}
+                    </div>
+                    <div class="mb-2">
+                        <span class="font-semibold">Hora:</span> {{ date("H:i", strtotime($schedule->hr_atencion)) }} hs
+                    </div>
+                    <div class="mb-2">
+                        <span class="font-semibold">Especialista:</span><br>
+                        <span class="block text-sm text-gray-700">
+                            <strong>{{ ucfirst($schedule->specialty->nombre_especialidad) }}</strong><br>
+                            {{ ucfirst($schedule->specialist->nombre) }} {{ ucfirst($schedule->specialist->apellido) }}
+                        </span>
+                    </div>
+                    <div class="flex flex-col gap-2 mt-2">
+                        <div>
+                            <span class="font-semibold">Reservar:</span><br>
+                            @if ($schedule->estado == '0')
+                                <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
                             @else
-                            <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
-                            @endif</td>
-                          </tr>
-                        @endforeach
-                        </tbody>
-                      </table>
+                                <x-grey-anunnce>{{ __('Reservado') }}</x-grey-anunnce>
+                            @endif
+                        </div>
+                        <div>
+                            <span class="font-semibold">Sobreturno:</span><br>
+                            @if ($schedule->specialty->sobreturno == '0')
+                                <x-grey-anunnce>{{ __('No disponible') }}</x-grey-anunnce>
+                            @else
+                                <x-blue-a href="{{ route('turno.create', $schedule) }}">{{ __('Reservar') }}</x-blue-a>
+                            @endif
+                        </div>
                     </div>
-                    <div class="py-3">
-                        {{$schedules->links() }}
-                    </div>
-                </div>    
-            </div>
+                </div>
+            @endforeach
+        </div>
+
+        {{-- Paginación --}}
+        <div class="mt-6">
+            {{ $schedules->links() }}
         </div>
     </div>
+</div>
+
 </x-app-layout>

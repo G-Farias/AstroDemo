@@ -136,6 +136,9 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
   //  Route::get('/pacientes/archivos/{patient}', [PatientController::class, 'obtener_archivo'])->name('pacientes.archivos');
     Route::post('/pacientes/archivos/guardar/{patient}', [PatientController::class, 'archivo_store'])->name('archivos.guardar');
 
+    Route::get('/pacientes/{patient}/archivos', [PatientController::class, 'tipoArchivo'])->name('archivos.show');
+    Route::delete('/pacientes/{patient}/archivos/{archivo}', [PatientController::class, 'destroy_archivo'])->name('archivos.destroy');
+
 });
 
 

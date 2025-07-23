@@ -13,6 +13,7 @@ use Illuminate\Validation\Rule;
 
 use App\Exports\PatientsExportsExport;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PatientController extends Controller
@@ -202,39 +203,68 @@ class PatientController extends Controller
     
     }
 
+    public function tipoArchivo(Request $request, Patient $patient)
+{
+    $tipo = $request->get('tipo'); // puede venir null
+    $orden = 'asc'; // o el que prefieras
+
+    $query = Archivo::where('id_paciente', $patient->id);
+
+    if ($tipo) {
+        $query->where('tipoArchivo', $tipo);
+    }
+
+    $archivos = $query->orderBy('created_at', $orden)->paginate(50);
+
+    return view('pacientes.archivos', compact('archivos', 'patient', 'tipo', 'orden'));
+}
+
+
 
     public function archivo_store(Request $request, Patient $patient)
     {
     $request->validate([
-        'archivo' => 'required|file|max:2048'
+        'archivo' => 'required|file|max:2048',
+        'tipoArchivo' => 'required|in:1,2,3',
+
     ]);
 
     if ($request->hasFile('archivo')) {
         $nombre = time().'_'.$request->file('archivo')->getClientOriginalName();
 
         $ruta = $request->file('archivo')->store('archivos');
-
      
 
         archivo::create([
             'nombre' => $nombre,
             'id_paciente' => $patient->id,
             'id_especialista'=>  $request->user()->id_especialista,
+            'tipoArchivo' => $request->tipoArchivo,
             'ruta' => $ruta
         ]);
     }
 
     return back()->with('success', 'Archivo subido correctamente.');
     }
-/*
-    public function obtener_archivo(Request $request, Patient $patient){
-        $archivo = Archivo::where('id_paciente', $patient);
 
-        return view('pacientes.archivos', compact('archivo'));
+    public function destroy_archivo(Patient $patient, Archivo $archivo)
+{
+    // Validación de pertenencia del archivo
+    if ($archivo->id_paciente != $patient->id) {
+        abort(403);
     }
 
+    // Eliminar archivo del disco
+    if (Storage::exists($archivo->ruta)) {
+        Storage::delete($archivo->ruta);
+    }
 
-*/
+    // Eliminar registro (esto es lo correcto)
+
+    $archivo->delete(); 
+
+    return back()->with('success', 'Archivo eliminado correctamente.');
+}
 
     public function edit(Patient $patient)
     {
