@@ -191,17 +191,20 @@ class PatientController extends Controller
 
     }
 
-    public function archivo(Request $request, Patient $patient)
-    {
+public function archivo(Request $request, Patient $patient)
+{
+    $orden = $request->get('orden', 'desc');
+    $busqueda = $request->get('busqueda'); // <- Agregado
 
-        $orden = $request->get('orden', 'desc'); // default = más nuevos primero
+    $archivos = Archivo::where('id_paciente', $patient->id)
+        ->when($busqueda, function ($query, $busqueda) {
+            $query->where('nombre', 'like', '%' . $busqueda . '%');
+        })
+        ->orderBy('created_at', $orden)
+        ->paginate(50);
 
-
-        $archivos = Archivo::orderBy('created_at', $orden)->where('id_paciente', $patient->id)->paginate(50);
-
-        return view('pacientes.archivos', compact('archivos','patient','orden'));
-    
-    }
+    return view('pacientes.archivos', compact('archivos', 'patient', 'orden'));
+}
 
     public function tipoArchivo(Request $request, Patient $patient)
 {

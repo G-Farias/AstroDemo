@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-    @foreach ($patients as $patient)
+    @forelse ($patients as $patient)
     <div class="bg-white shadow rounded-xl p-6 max-w-8xl mx-auto mb-2 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
     <!-- Datos del paciente -->
     <div class="space-y-1 text-sm md:text-base text-gray-700">
@@ -112,8 +112,11 @@
     </div>
     </div>
 
-     
-    @endforeach
+             @empty
+            <div class="alert alert-danger">
+            {{ __('No se encontraron pacientes') }}
+            </div>
+    @endforelse
     <div class="py-3">
         {{$patients->links()}}
     </div>

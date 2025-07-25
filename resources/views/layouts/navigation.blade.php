@@ -73,6 +73,9 @@
                     <x-nav-link :href="route('reservarTurno.especialidades')" :active="request()->routeIs('reservarTurno.especialidades')">
                         {{ __('Reservar Turno') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('portalpaciente.misArchivos')" :active="request()->routeIs('portalpaciente.misArchivos')">
+                        {{ __('Mis archivos') }}
+                    </x-nav-link>
                     @endcan
                 </div>
             </div>

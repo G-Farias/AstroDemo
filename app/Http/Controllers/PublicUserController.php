@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivo;
 use App\Models\PublicUser;
 use App\Models\Specialist;
 use App\Models\Specialty;
 use App\Models\Schedule;
 use App\Models\MedicalInsurence;
 use App\Models\MedicalInsurenceSpecialist;
+use App\Models\Patient;
 use App\Models\ReservedTurn;
 use App\Models\User;
 use Illuminate\Console\View\Components\Component;
@@ -159,5 +161,23 @@ class PublicUserController extends Controller
         return redirect()->route('reservarTurno.especialidades')->with('success', 'Turno cancelado correctamente.');
     }
     
+public function mis_archivos(Request $request)
+{
+    $patient = Patient::where('dni', auth()->user()->user)->firstOrFail();
+
+    $orden = $request->get('orden', 'desc');
+    $busqueda = $request->get('busqueda');
+
+    $archivos = Archivo::where('id_paciente', $patient->id)
+        ->where('tipoArchivo', 3) // 🔒 SIEMPRE filtrar públicos
+        ->when($busqueda, function ($query, $busqueda) {
+            $query->where('nombre', 'like', '%' . $busqueda . '%');
+        })
+        ->orderBy('created_at', $orden)
+        ->paginate(50);
+
+    return view('reservarTurno.archivosPublic', compact('archivos', 'patient', 'orden'));
+}
+
 
 }

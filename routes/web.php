@@ -250,6 +250,8 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/reservarTurno/cancel/{reservedTurn}', [PublicUserController::class, 'cancelar'])->name('reservarTurno.cancelar');
 
+    Route::get('/misArchivos', [PublicUserController::class, 'mis_archivos'])->name('portalpaciente.misArchivos');
+
     Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
 
 
