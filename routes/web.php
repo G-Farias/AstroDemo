@@ -107,7 +107,7 @@ Route::get('/pacientes', function () {
 })->middleware(['auth', 'verified'])->name('pacientes');
 
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth','verified')->group(function() {
     Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
     Route::post('/dashboard/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 
@@ -115,7 +115,7 @@ Route::middleware('auth')->group(function() {
 
 
 
-Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
+Route::middleware(['can:isAdmin-or-isUser','verified'])->group(function () {
 
     Route::get('/pacientes', [PatientController::class, 'index'])->name('pacientes.index');
     
@@ -144,7 +144,7 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
 
 
 
-Route::middleware('can:isAdmin')->group(function (){
+Route::middleware('can:isAdmin', 'verified')->group(function (){
     Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
 });
 Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
@@ -167,7 +167,7 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
 
 });
 
-Route::middleware(['can:isAdmin-or-isUser'])->group(function() {
+Route::middleware(['can:isAdmin-or-isUser', 'verified'])->group(function() {
 
     Route::get('/turno', [ReservedTurnController::class, 'inicio'])->name('turno.inicio');
 
@@ -197,7 +197,7 @@ Route::middleware(['can:isAdmin-or-isUser'])->group(function() {
 });
 
 
-Route::middleware('can:isAdmin')->group(function () {
+Route::middleware('can:isAdmin', 'verified')->group(function () {
 
     Route::get('/obraSocial', [MedicalInsurenceController::class, 'index'])->name('obraSocial.index');
     Route::get('/obraSocial/create', [MedicalInsurenceController::class, 'create'])->name('obraSocial.create');
@@ -209,7 +209,7 @@ Route::middleware('can:isAdmin')->group(function () {
 
 });
 
-Route::middleware('can:isAdmin')->group(function () {
+Route::middleware('can:isAdmin', 'verified')->group(function () {
     Route::get('/especialidad', [SpecialtyController::class, 'index'])->name('especialidad.index');
     Route::get('/especialidad/create', [SpecialtyController::class, 'create'])->name('especialidad.create');
     Route::post('/especialidad', [SpecialtyController::class, 'store'])->name('especialidad.store');
@@ -225,7 +225,7 @@ Route::middleware('can:isAdmin')->group(function () {
 
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -238,7 +238,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
     Route::get('/reservarTurno/turnos_fecha/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos_fecha');
     
-    Route::middleware(['auth','can:isAll'])->group(function () {
+    Route::middleware(['auth','can:isAll', 'verified'])->group(function () {
 
     Route::get('/reservarTurno/reservar/{SLE}',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
     Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
