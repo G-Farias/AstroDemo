@@ -233,13 +233,10 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
 
-      <div class="modal-header">
-        <h5 class="modal-title">Confirmar eliminación</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-
       <div class="modal-body">
-        ¿Estás seguro que quieres eliminar todos los turnos del siguiente día?
+        <p class="modal-title text-xl font-bold">Confirmar eliminación</p>
+
+        ¿Estás seguro que quieres eliminar todos los turnos del siguiente día? 
       </div>
 
       <div class="modal-footer">

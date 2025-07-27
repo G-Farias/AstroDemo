@@ -59,12 +59,13 @@
                             </p>
                           </header>
                           <p class="mb-2 text-m text-gray">
-                            - Al reservar un turno (desde el lado administrativo), el paciente será registrado automáticamente si no está registrado. <br>
-                            - El <strong>D.N.I. / Pasaporte</strong> será utilizado como ID a la hora de modificar, eliminar o ver turnos. <strong>Se recomienda completar correctamente.</strong><br>
-                           - El nombre, apellido, día y horario de atención es visible a las vistas del público, se recomienda completar correctamente y sin errores ortográficos.<br>
+                            - Al reservar un turno (desde el lado administrativo),al activar el check de guardado de paciente, el mismo se almacenará. <br>
+                            - El <strong>D.N.I. / Pasaporte</strong> será utilizado como ID a la hora de modificar, eliminar o ver turnos, logueo y manejo del usuario del paciente. <br> <strong>Se recomienda completar correctamente.</strong><br>
+                            - El <strong> nombre, apellido, día y horario de atención es visible a las vistas del público, </strong> se recomienda completar correctamente y sin errores ortográficos.<br>
                             - Los turnos un día posterior se borran automáticamente, para más optimización. <br>
                             - Los turnos serán notificados dos días previos a la fecha.<br>
                             - Las obras sociales y especialidades se recomiendan <strong>NO REPETIR.</strong><br>
+                            - En la pestaña <strong>pacientes pendientes</strong>, se encuentran los pacientes que están registrados pero no están guardados con los pacientes en el sistema.
                           </p>
                     </div>
                  </div>
@@ -82,9 +83,9 @@
                             </p>
                           </header>
                           <p class="mb-2 text-m text-gray">
-                            - Al reservar un turno (desde el lado especialista), el paciente será registrado automáticamente si no está registrado. <br>
-                            - El <strong>D.N.I. / Pasaporte</strong> será utilizado como ID a la hora de modificar, eliminar o ver turnos. <strong>Se recomienda completar correctamente.</strong><br>
-                            - El nombre, apellido, día y horario de atención es visible a las vistas del público, se recomienda completar correctamente y sin errores ortográficos.<br>
+                            - Al reservar un turno (desde el lado administrativo),al activar el check de guardado de paciente, el mismo se almacenará. <br>
+                            - El <strong>D.N.I. / Pasaporte</strong> será utilizado como ID a la hora de modificar, eliminar o ver turnos, logueo y manejo del usuario del paciente. <br> <strong>Se recomienda completar correctamente.</strong><br>
+                           - El <strong> nombre, apellido, día y horario de atención es visible a las vistas del público, </strong> se recomienda completar correctamente y sin errores ortográficos.<br>
                             - Los turnos serán notificados dos días previos a la fecha.<br>
                             - Solo se muestran los pacientes del especialista logueado.<br>
                             - El botón de agregar turnos está en la vista <strong>Turnos->agregar turnos de atención</strong>.<br>

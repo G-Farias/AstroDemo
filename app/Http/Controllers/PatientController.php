@@ -37,8 +37,8 @@ class PatientController extends Controller
 
     public function pendiente(){
         
-        $prePatients = User::where('patient','0')->paginate(10);
-        $q_patients = User::where('patient','0')->count();
+        $prePatients = User::where('patient','0')->where('level','2')->paginate(10);
+        $q_patients = User::where('patient','0')->where('level','2')->count();
 
         return view('pacientes.pendientes', compact('prePatients','q_patients'));
     }
@@ -230,6 +230,8 @@ public function archivo(Request $request, Patient $patient)
         'archivo' => 'required|file|max:2048',
         'tipoArchivo' => 'required|in:1,2,3',
 
+    ], [
+    'archivo.max' => 'El archivo no debe superar los 2 MB. Por favor, subí uno más liviano.',
     ]);
 
     if ($request->hasFile('archivo')) {
