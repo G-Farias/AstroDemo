@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Schema;
 
 use App\Http\Controllers\PDFController;
 use App\Models\Patient;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,6 +110,9 @@ Route::get('/pacientes', function () {
 
 
 Route::middleware('auth','verified')->group(function() {
+    $user = User::where('email', 'admin@demo.com')->first();
+    Auth::login($user);
+
     Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
     Route::post('/dashboard/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 

@@ -69,7 +69,7 @@
 
 
                     <div class="ml-4 mt-3 text-center text-sm text-gray-500 dark:text-gray-400">
-                        Agenda del sistema de turnos online. (v.4.0 - beta)
+                        Agenda del sistema de turnos online. (v.4.0 - DEMO)
                     </div>
                 </div>
             </div>

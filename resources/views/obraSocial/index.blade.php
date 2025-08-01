@@ -40,7 +40,7 @@
 
                     <!-- Botones de acción -->
                     <div class="flex flex-wrap justify-end gap-2 shrink-0">
-                        <x-third-a href="{{ route('obraSocial.edit', $medicalInsurence) }}">{{__('Editar')}}</x-third-a>
+                        <x-third-a disabled href="{{ route('obraSocial.edit', $medicalInsurence) }}">{{__('Editar')}}</x-third-a>
                         <x-confirm-delete
                         :id="$medicalInsurence->id "
                         :route="route('obraSocial.destroy', $medicalInsurence)"

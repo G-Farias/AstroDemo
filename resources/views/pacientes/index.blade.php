@@ -100,7 +100,7 @@
 
         <x-third-a href="{{ route('pacientes.edit', $patient) }}">{{__('Editar')}}</x-third-a>
 
-        <x-confirm-delete
+        <x-confirm-delete 
         :id="$patient->id"
         :route="route('pacientes.destroy', $patient)"
         title="Eliminar paciente"

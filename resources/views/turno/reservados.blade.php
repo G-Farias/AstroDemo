@@ -284,7 +284,7 @@
                 <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <x-danger-button>Cancelar</x-danger-button>
+                    <x-danger-button disabled>Eliminar</x-danger-button>
                 </form>
             </div>
 

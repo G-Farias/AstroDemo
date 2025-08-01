@@ -30,7 +30,7 @@
                 <form action="{{ $route }}" method="POST" class="m-0">
                     @csrf
                     @method('DELETE')
-                    <x-danger-button class="w-100">{{ $button }}</x-danger-button>
+                    <x-danger-button class="w-100" disabled >{{ $button }}</x-danger-button>
                 </form>
             </div>
 

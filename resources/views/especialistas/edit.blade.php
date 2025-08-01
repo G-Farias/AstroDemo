@@ -132,7 +132,7 @@
                           </div>
                                            
                           <div class="col d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                            <x-success-button>{{ __('Guardar') }}</x-success-button>
+                            <x-success-button disabled>{{ __('Guardar') }}</x-success-button>
                           </div>
 
                     </form>

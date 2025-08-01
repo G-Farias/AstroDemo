@@ -129,7 +129,7 @@
                              <textarea class="form-control" name="observacion" id="observacion" aria-label="observacion">{{ $patient->observacion }}</textarea>
                           </div>
                           <div class="col d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                            <x-success-button>{{ __('Actualizar datos') }}</x-success-button>
+                            <x-success-button disabled>{{ __('Actualizar datos') }}</x-success-button>
                           </div>
                     </form>
                 </div>

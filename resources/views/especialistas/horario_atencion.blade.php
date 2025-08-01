@@ -179,7 +179,7 @@
                 </div>
 
                 <div class="col d-grid gap-2 d-md-flex justify-content-md-end mt-3">
-                    <x-success-button>{{ __('Guardar') }}</x-success-button>
+                    <x-success-button disabled>{{ __('Guardar') }}</x-success-button>
                 </div>
                 </form>
                 </div>
@@ -243,7 +243,7 @@
         <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             Cancelar
         </x-primary-button>
-        <x-danger-button type="submit" form="formEliminarTurnos">Eliminar</x-danger-button>
+        <x-danger-button disabled type="submit" form="formEliminarTurnos">Eliminar</x-danger-button>
       </div>
 
     </div>

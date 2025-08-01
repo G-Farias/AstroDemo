@@ -107,7 +107,7 @@
                 </select>
 
             <div class="flex justify-end gap-2 pt-4">
-                <x-success-button type="submit">{{ __('Subir') }}</x-success-button> 
+                <x-success-button disabled type="submit">{{ __('Subir') }}</x-success-button> 
             </div>
                 </form>
 
