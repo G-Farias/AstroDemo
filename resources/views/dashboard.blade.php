@@ -152,7 +152,7 @@
                 <form class="mb-0 " action="{{ route('turno.destroy', $reservedTurn) }}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <x-danger-button>Cancelar</x-danger-button>
+                    <x-danger-button disabled>Cancelar</x-danger-button>
                 </form>
             </div>
 
@@ -207,17 +207,36 @@
                               <p class="card-text mb-3"><i class="bi bi-clock"></i> <strong>Hora de atención: </strong>{{date("H:i",strtotime($schedule->hr_atencion))}}hs</p>
 
                               <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <form class="mb-0 " action="{{route('reservarTurno.destroy',$reservedTurn )}}" method="POST">
-                                    @csrf
-                                    @method('DELETE')
+                                <!-- Modal Bootstrap -->
+<div class="modal fade" id="cancelarTurno{{$reservedTurn->id}}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h5 class="modal-title font-bold text-xl mb-2">Cancelar turno reservado</h5>
+                <p>¿Estás seguro de que deseas cancelar el turno del día <br> {{ date("d-m-y",strtotime($reservedTurn->schedule?->fecha_atencion)) }} a las {{ date("H:i",strtotime($reservedTurn->schedule?->hr_atencion)) }}hs?</p>
+            </div>
+            <div class="modal-footer border-0">
+                <x-primary-button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </x-primary-button>
+                <form class="mb-0 " action="{{ route('reservarTurno.destroy',$reservedTurn ) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <x-danger-button disabled >Eliminar</x-danger-button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>    
                                     @if($reservedTurn->estado == '1')
-                                    <x-danger-button onclick="return confirm('¿Estás seguro que quieres cancelar el turno seleccionado?')">{{ __('Cancelar turno') }}</x-danger-button>
+                                    <x-danger-button data-bs-toggle="modal" data-bs-target="#cancelarTurno{{$reservedTurn->id}}" >{{ __('Cancelar turno') }}</x-danger-button>
                                     @elseif($reservedTurn->estado == '3')
                                      <x-grey-anunnce  type="button" class="btn btn-dark" disabled>{{__('Turno ya asistido')}}</x-grey-anunnce> 
                                     @else
                                      <x-grey-anunnce  type="button" class="btn btn-dark" disabled>{{__('Ausente')}}</x-grey-anunnce>
                                     @endif
-                                </form>
+
                               </div>
                             </div>                        
                         </div>

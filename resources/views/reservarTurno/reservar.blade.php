@@ -100,7 +100,7 @@
                     </div>
                     
                     <div class="d-grid gap-2 flex-wrap justify-content-end mt-4">                                                        
-                        <x-success-button>{{ __('Reservar') }}</x-success-button>
+                        <x-success-button disabled >{{ __('Reservar') }}</x-success-button>
                     </div>
                 
                     </form>
