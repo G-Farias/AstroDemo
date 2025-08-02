@@ -55,7 +55,19 @@
                     @if (Route::has('login'))
                     <div class="">
                         @auth
-                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500">Inicio</a>
+                         <!--   <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500">Inicio</a> -->
+                        
+                        <form method="POST" action="{{ route('demo.login', '2') }}">
+                            @csrf
+                            <button class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 underline underline-offset-4">Entrar en modo paciente </button>
+                        </form>
+
+                        <form method="POST" action="{{ route('demo.login', '3') }}">
+                            @csrf
+                            <button class="mt-3 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500 underline underline-offset-4"> Entrar en modo administrativo </button>
+
+                        </form>
+
                         @else
                             <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-gray-500">Ingresar</a>
     

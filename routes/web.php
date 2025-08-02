@@ -108,15 +108,34 @@ Route::get('/pacientes', function () {
     return view('pacientes\pacientes');
 })->middleware(['auth', 'verified'])->name('pacientes');
 
-
+/*
 Route::middleware('auth','verified')->group(function() {
-    $user = User::where('email', 'admin@demo.com')->first();
-    Auth::login($user);
-
+   $user = User::where('email', 'admin@demo.com')->first();
+   Auth::login($user);
+    
     Route::get('/dashboard', [ReservedTurnController::class, 'dashboard'])->name('dashboard');
     Route::post('/dashboard/{reservedturn}', [ReservedTurnController::class, 'turnos_reservados_update'])->name('turno.actualizar');
 
-});
+}); */
+
+Route::get('/dashboard', function () {
+    $role = auth()->user()->user;
+
+    if ($role === '3') {
+        return view('dashboard');
+    }
+
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+Route::post('/demo-login/{role}', function ($role) {
+    $email = $role === '3' ? 'admin@demo.com' : 'pacienteejemplo@gmail.com';
+    $user = User::where('email', $email)->first();
+
+    Auth::login($user);
+
+    return redirect()->route('dashboard');
+})->name('demo.login');
 
 
 
