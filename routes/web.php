@@ -147,13 +147,13 @@ Route::middleware(['can:isAdmin-or-isUser','verified'])->group(function () {
     Route::get('/pacientes/pendientes/{prePatient}/save', [PatientController::class, 'pendiente_save'])->name('pacientes.pendiente_save');
 
   //  Route::post('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
-    Route::get('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar');
+    Route::get('/pacientes/buscar', [PatientController::class, 'buscar'])->name('pacientes.buscar')->middleware('throttle:200,1');
 
-    Route::get('/pacientes/create', [PatientController::class, 'create'])->name('pacientes.create');
+    Route::get('/pacientes/create', [PatientController::class, 'create'])->name('pacientes.create')->middleware('throttle:200,1');
     Route::post('/pacientes', [PatientController::class, 'store'])->name('pacientes.store');
     Route::get('/pacientes/{patient}', [PatientController::class, 'show'])->name('pacientes.show');
     Route::get('/pacientes/{patient}/edit', [PatientController::class, 'edit'])->name('pacientes.edit');
-    Route::put('/pacientes/{patient}', [PatientController::class, 'update'])->name('pacientes.update');
+    Route::put('/pacientes/{patient}', [PatientController::class, 'update'])->name('pacientes.update')->middleware('throttle:200,1');
     Route::delete('/pacientes/{patient}', [PatientController::class, 'destroy'])->name('pacientes.destroy');
     
     Route::get('/pacientes/archivos/{patient}', [PatientController::class, 'archivo'])->name('pacientes.archivos');
@@ -169,23 +169,23 @@ Route::middleware(['can:isAdmin-or-isUser','verified'])->group(function () {
 
 
 Route::middleware('can:isAdmin', 'verified')->group(function (){
-    Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create');
+    Route::get('/especialistas/create', [SpecialistController::class, 'create'])->name('especialistas.create')->middleware('throttle:200,1');
 });
 Route::middleware(['can:isAdmin-or-isUser'])->group(function () {
     Route::get('/especialistas', [SpecialistController::class, 'index'])->name('especialistas.index');
-    Route::post('/especialistas', [SpecialistController::class, 'store'])->name('especialistas.store');
+    Route::post('/especialistas', [SpecialistController::class, 'store'])->name('especialistas.store')->middleware('throttle:200,1');
     Route::get('/especialistas/{specialist}', [SpecialistController::class, 'show'])->name('especialistas.show');
     Route::get('/especialistas/{specialist}/edit', [SpecialistController::class, 'edit'])->name('especialistas.edit');
-    Route::put('/especialistas/{specialist}', [SpecialistController::class, 'update'])->name('especialistas.update');
+    Route::put('/especialistas/{specialist}', [SpecialistController::class, 'update'])->name('especialistas.update')->middleware('throttle:200,1');
     Route::delete('/especialistas/{specialist}', [SpecialistController::class, 'destroy'])->name('especialistas.destroy');
 
     Route::get('especialistas/{specialist}/obras_sociales', [SpecialistController::class, 'obras_sociales'])->name('especialistas.obras_sociales');
-    Route::post('especialistas/{specialist}/store_obras_sociales', [SpecialistController::class, 'store_obras_sociales'])->name('especialistas.store_obras_sociales');
+    Route::post('especialistas/{specialist}/store_obras_sociales', [SpecialistController::class, 'store_obras_sociales'])->name('especialistas.store_obras_sociales')->middleware('throttle:200,1');
     Route::delete('/especialistas/obra_social/{medicalInsurenceSpecialist}', [SpecialistController::class, 'destroy_obras_sociales'])->name('especialistas.obra_social_destroy');
 
     Route::get('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion');
     Route::post('especialistas/{specialist}/horario_atencion', [SpecialistController::class, 'horario_atencion'])->name('especialistas.horario_atencion'); 
-    Route::post('especialistas/store_horario_atencion', [ScheduleController::class, 'store'])->name('especialistas.store_horario_atencion');
+    Route::post('especialistas/store_horario_atencion', [ScheduleController::class, 'store'])->name('especialistas.store_horario_atencion')->middleware('throttle:200,1');
     Route::delete('/especialistas/horario_atencion/{schedule}', [ScheduleController::class, 'destroy_horario_atencion'])->name('especialistas.horario_atencion_destroy');
     Route::post('/especialistas/horariosDeAtencion/{specialist}', [ScheduleController::class, 'destroy_horario_all_atencion'])->name('especialistas.horariosDeAtencion_destroy');
 
@@ -224,48 +224,48 @@ Route::middleware(['can:isAdmin-or-isUser', 'verified'])->group(function() {
 Route::middleware('can:isAdmin', 'verified')->group(function () {
 
     Route::get('/obraSocial', [MedicalInsurenceController::class, 'index'])->name('obraSocial.index');
-    Route::get('/obraSocial/create', [MedicalInsurenceController::class, 'create'])->name('obraSocial.create');
+    Route::get('/obraSocial/create', [MedicalInsurenceController::class, 'create'])->name('obraSocial.create')->middleware('throttle:200,1');
     Route::post('/obraSocial', [MedicalInsurenceController::class, 'store'])->name('obraSocial.store');
     Route::get('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'show'])->name('obraSocial.show');
     Route::get('/obraSocial/{medicalInsurence}/edit', [MedicalInsurenceController::class, 'edit'])->name('obraSocial.edit');
-    Route::put('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'update'])->name('obraSocial.update');
+    Route::put('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'update'])->name('obraSocial.update')->middleware('throttle:200,1');
     Route::delete('/obraSocial/{medicalInsurence}', [MedicalInsurenceController::class, 'destroy'])->name('obraSocial.destroy');
 
 });
 
-Route::middleware('can:isAdmin', 'verified')->group(function () {
+Route::middleware('can:isAdmin', 'verified', 'throttle:60,1')->group(function () {
     Route::get('/especialidad', [SpecialtyController::class, 'index'])->name('especialidad.index');
     Route::get('/especialidad/create', [SpecialtyController::class, 'create'])->name('especialidad.create');
-    Route::post('/especialidad', [SpecialtyController::class, 'store'])->name('especialidad.store');
+    Route::post('/especialidad', [SpecialtyController::class, 'store'])->name('especialidad.store')->middleware('throttle:200,1');
     Route::get('/especialidad/{specialty}', [SpecialtyController::class, 'show'])->name('especialidad.show');
     Route::get('/especialidad/{specialty}/edit', [SpecialtyController::class, 'edit'])->name('especialidad.edit');
-    Route::put('/especialidad/{specialty}', [SpecialtyController::class, 'update'])->name('especialidad.update');
+    Route::put('/especialidad/{specialty}', [SpecialtyController::class, 'update'])->name('especialidad.update')->middleware('throttle:200,1');
     Route::delete('/especialidad/{specialty}', [SpecialtyController::class, 'destroy'])->name('especialidad.destroy');
 
     
     Route::get('/admin/registrar',[ProfileController::class, 'admin'])->name('admin.registrar');
-    Route::post ('/admin/registrar',[ProfileController::class, 'admin_store'])->name('admin.store');
+    Route::post ('/admin/registrar',[ProfileController::class, 'admin_store'])->name('admin.store')->middleware('throttle:200,1');
 });
 
 
 
 Route::middleware('auth', 'verified')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update')->middleware('throttle:200,1');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
 
 
     Route::get('/reservarTurno', [PublicUserController::class, 'index'])->name('reservarTurno.especialidades');
-    Route::get('/reservarTurno/especialista/{STY}', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas');
-    Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos');
-    Route::get('/reservarTurno/turnos_fecha/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos_fecha');
+    Route::get('/reservarTurno/especialista/{STY}', [PublicUserController::class, 'especialista'])->name('reservarTurno.especialistas')->middleware('throttle:200,1');
+    Route::get('/reservarTurno/turnos/{SST}', [PublicUserController::class, 'turnos'])->name('reservarTurno.turnos')->middleware('throttle:200,1');
+    Route::get('/reservarTurno/turnos_fecha/{SST}', [PublicUserController::class, 'buscar_turno_fecha'])->name('reservarTurno.turnos_fecha')->middleware('throttle:200,1');
     
     Route::middleware(['auth','can:isAll', 'verified'])->group(function () {
 
     Route::get('/reservarTurno/reservar/{SLE}',[PublicUserController::class,'reservar'])->name('reservarTurno.reservar');
-    Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store');
+    Route::post('/reservarTurno', [PublicUserController::class, 'store'])->name('reservarTurno.store')->middleware('throttle:200,1');
     Route::get('/reservarTurno/turnoReservado/{RT}',[PublicUserController::class,'turno_reservado'])->name('reservarTurno.turnoReservado');
 
     Route::get('/reservarTurno/misTurnos', [PublicUserController::class, 'mis_turnos'])->name('reservarTurno.misTurnos');
